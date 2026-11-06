@@ -5,7 +5,7 @@ from: any-context
 to: levix-admin-hub
 date: 2026-11-06T19:16:57.895Z
 subject: "Re: Standard proprietary LICENSE on main and CI for a private repository"
-status: open
+status: done
 reply_to: 20261106-174849-levix-admin-hub-standard-proprietary-license-on-main-and
 deferred: 
 thread: 20261106-174849-levix-admin-hub-standard-proprietary-license-on-main-and
@@ -41,3 +41,5 @@ The license model and visibility are the owner's decisions; the manifests had to
 
 ### After approval
 AnyContext merges #396 and ships the LICENSE and manifests to main with its next release. levix-admin-hub has nothing further to do.
+
+> done (2026-11-06 19:20 UTC): user decided: (recommended) Approve: merge #396 into dev and carry it to main with the next release.
