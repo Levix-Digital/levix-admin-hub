@@ -58,6 +58,36 @@ jobs:
         with:
           command: check advisories licenses bans sources
 
+  contract:
+    name: Contract (breaking changes)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate the channel specification (AsyncAPI 3.0)
+        run: |
+          npx --yes @asyncapi/cli@2.16.0 config analytics --disable
+          npx --yes @asyncapi/cli@2.16.0 validate docs/contracts/channel/v1/asyncapi.json --fail-severity error
+      - name: Compare the API contract with the last release
+        env:
+          # oasdiff v1.34.1, pinned by digest.
+          OASDIFF: tufin/oasdiff@sha256:67a23cfea7d251e2ae34ee703ac8733c5d96bc2e7b90fd0f4d475ec99367b85f
+          CONTRACT: docs/contracts/api/openapi.json
+        run: |
+          base_tag=$(git tag --list 'v*' --sort=-v:refname | grep -v -- '-rc' | head -n 1)
+          if [ -z "$base_tag" ] || ! git cat-file -e "$base_tag:$CONTRACT" 2>/dev/null; then
+            echo "No released contract yet: nothing to compare."
+            exit 0
+          fi
+          git show "$base_tag:$CONTRACT" > base.json
+          major() { python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["info"]["version"].split(".")[0])' "$1"; }
+          if [ "$(major base.json)" != "$(major "$CONTRACT")" ]; then
+            echo "Contract major version changed since $base_tag: breaking changes are allowed."
+            exit 0
+          fi
+          docker run --rm -v "$PWD:/w" -w /w "$OASDIFF" breaking base.json "$CONTRACT" --fail-on ERR
+
   container:
     name: Container smoke test
     runs-on: ubuntu-latest

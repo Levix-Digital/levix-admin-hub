@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://levix.digital/contracts/channel/v1/schemas/hello.schema.json",
+  "title": "Hello (device to Hub)",
+  "description": "First message of a connection: who the device is and which minor versions it speaks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "device_id",
+    "versions",
+    "product",
+    "hub_key"
+  ],
+  "properties": {
+    "device_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "Identifier the Hub assigned at enrollment."
+    },
+    "versions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^1\\.(0|[1-9][0-9]*)$",
+        "description": "Minor version within major 1, as MAJOR.MINOR."
+      },
+      "description": "Minor versions of major 1 the device supports."
+    },
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,62}$",
+          "description": "Product identifier from its signed manifest."
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.-]+)?$",
+          "description": "Semantic version of the product build."
+        }
+      }
+    },
+    "hub_key": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Fingerprint of the Hub key the device pinned at enrollment."
+    }
+  }
+}

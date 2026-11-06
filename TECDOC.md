@@ -33,6 +33,16 @@ key that they pinned at enrollment. The policy model, signatures and formats com
 and the contract is public and versioned
 ([ADR-0006](docs/adr/0006-public-versioned-contract-for-the-api-and-the-device-channel.md)).
 
+## Contract
+
+The public contract lives in [docs/contracts/](docs/contracts/CHANGELOG.md): the REST API as
+OpenAPI generated from the handlers ([openapi.json](docs/contracts/api/openapi.json), also
+served at `/api/v1/openapi.json`), the device channel as AsyncAPI with JSON Schemas
+([channel v1](docs/contracts/channel/v1/README.md)) and the
+[permission matrix](docs/contracts/permissions.md). Tests fail when the committed document
+differs from the code or an example breaks its schema; CI refuses a breaking API change within
+one major contract version.
+
 ## Security
 
 The threat model of every trust boundary, with the status of each threat, is in

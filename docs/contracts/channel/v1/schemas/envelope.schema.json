@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://levix.digital/contracts/channel/v1/schemas/envelope.schema.json",
+  "title": "Envelope",
+  "description": "Every message of the device channel. Unknown members are refused, so no content can travel by accident.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "v",
+    "type",
+    "id",
+    "ts",
+    "payload"
+  ],
+  "properties": {
+    "v": {
+      "const": 1,
+      "description": "Major version of the channel; equals the version in the endpoint path (/ws/device/v1)."
+    },
+    "type": {
+      "enum": [
+        "hello",
+        "challenge",
+        "authenticate",
+        "welcome",
+        "error"
+      ],
+      "description": "Message type; selects the schema of payload."
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "Unique message identifier (UUID v7); a receiver refuses an identifier it has already seen in the session."
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the sender created the message (RFC 3339, UTC)."
+    },
+    "payload": {
+      "type": "object",
+      "description": "The message body, defined by the schema of its type."
+    },
+    "sig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alg",
+        "key",
+        "value"
+      ],
+      "description": "Signature of the Hub over the envelope without this member. Required on every message from the Hub.",
+      "properties": {
+        "alg": {
+          "const": "Ed25519"
+        },
+        "key": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "description": "SHA-256 of the raw 32-byte Ed25519 public key, lowercase hex, prefixed with sha256:."
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{86}$",
+          "description": "Ed25519 signature (64 bytes), base64url without padding."
+        }
+      }
+    }
+  }
+}

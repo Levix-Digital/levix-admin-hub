@@ -11,6 +11,7 @@ mod health;
 mod instance;
 mod limiter;
 mod me;
+mod openapi;
 mod organizations;
 
 use std::future::Future;
@@ -32,6 +33,7 @@ use tower_http::trace::TraceLayer;
 pub use caller::{CSRF_HEADER, SESSION_COOKIE};
 pub use error::{ApiError, ErrorBody};
 pub use limiter::{RateLimiter, UNAUTHENTICATED_PER_MINUTE};
+pub use openapi::{document as openapi_document, document_json as openapi_json, CONTRACT_VERSION};
 
 /// Largest request body accepted, in bytes.
 pub const MAX_BODY_BYTES: usize = 1024 * 1024;
@@ -83,6 +85,7 @@ impl<B: Backend> Clone for AppState<B> {
 
 fn api<B: Backend>() -> Router<AppState<B>> {
     Router::new()
+        .route("/openapi.json", get(openapi_file))
         .route("/instance", get(instance::status::<B>))
         .route(
             "/instance/settings",
@@ -145,6 +148,14 @@ fn api<B: Backend>() -> Router<AppState<B>> {
         .route("/audit", get(audit::list::<B>))
         .route("/audit/verify", get(audit::verify::<B>))
         .fallback(error::not_found)
+}
+
+/// The published contract, served so integrators read exactly what this Hub accepts.
+async fn openapi_file() -> impl axum::response::IntoResponse {
+    (
+        [(header::CONTENT_TYPE, "application/json")],
+        openapi::document_json(),
+    )
 }
 
 /// The complete router of the Hub, with its middleware.

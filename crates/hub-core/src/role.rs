@@ -8,6 +8,7 @@ use crate::{CoreError, CoreResult};
 /// Role of an administrator in one organization.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub enum Role {
     Owner,
     Administrator,

@@ -6,14 +6,15 @@ use axum::Json;
 use hub_core::hub::error_code;
 use hub_core::CoreError;
 use serde::Serialize;
+use utoipa::ToSchema;
 
 /// Body of every error response.
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, ToSchema)]
 pub struct ErrorBody {
     pub error: ErrorDetail,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, ToSchema)]
 pub struct ErrorDetail {
     /// Stable, machine-readable code.
     pub code: &'static str,

@@ -28,6 +28,7 @@ const TOKEN_DISPLAY_CHARS: usize = 12;
 /// Where a session was opened.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub enum SessionKind {
     /// Browser: cookie plus CSRF token.
     Console,
@@ -56,6 +57,7 @@ impl SessionKind {
 
 /// A stored session.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct Session {
     pub id: Uuid,
     pub administrator_id: Uuid,
@@ -85,6 +87,7 @@ pub struct IssuedSession {
 
 /// A personal API token as stored.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct ApiToken {
     pub id: Uuid,
     pub administrator_id: Uuid,

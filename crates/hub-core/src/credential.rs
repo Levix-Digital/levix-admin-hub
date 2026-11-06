@@ -24,6 +24,7 @@ pub const RECOVERY_CODES: usize = 10;
 /// Why a link exists, which sets its validity.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub enum LinkPurpose {
     /// The instance owner's first credentials (24 hours).
     Setup,
@@ -83,6 +84,7 @@ pub struct IssuedLink {
 
 /// What the holder of a valid link may see before using it.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct LinkInfo {
     pub purpose: LinkPurpose,
     pub email: String,
@@ -92,6 +94,7 @@ pub struct LinkInfo {
 
 /// A TOTP secret to scan, returned once per enrollment start.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct TotpEnrollment {
     /// Base32 secret for manual entry.
     pub secret: String,

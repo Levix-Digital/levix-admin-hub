@@ -47,6 +47,8 @@ tower-http = { version = "0.6", features = ["request-id", "trace", "limit", "tim
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
 uuid = { version = "1", features = ["v7", "serde"] }
+utoipa = { version = "5.5", features = ["time", "uuid", "preserve_order", "preserve_path_order"] }
+jsonschema = { version = "0.33", default-features = false }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

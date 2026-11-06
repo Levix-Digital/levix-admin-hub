@@ -10,13 +10,14 @@ use hub_core::credential::{IssuedLink, LinkCompletion, LinkInfo, LinkPurpose, To
 use hub_core::session::{IssuedSession, Session, SessionKind, SignIn};
 use serde::{Deserialize, Serialize};
 use time::OffsetDateTime;
+use utoipa::ToSchema;
 
 use crate::body::JsonBody;
 use crate::caller::{cleared_cookie, session_cookie, user_agent, Caller, Source};
-use crate::{ApiError, AppState, Backend};
+use crate::{ApiError, AppState, Backend, ErrorBody};
 
 /// Which client opens the session: the console gets a cookie, the CLI a bearer token.
-#[derive(Debug, Clone, Copy, Default, Deserialize)]
+#[derive(Debug, Clone, Copy, Default, Deserialize, ToSchema)]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum Client {
     #[default]
@@ -33,7 +34,7 @@ impl From<Client> for SessionKind {
     }
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct LoginRequest {
     email: String,
@@ -45,7 +46,7 @@ pub(crate) struct LoginRequest {
 }
 
 /// A credential link as shown once to whoever must deliver it.
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, ToSchema)]
 pub(crate) struct LinkBody {
     pub token: String,
     pub purpose: LinkPurpose,
@@ -63,7 +64,7 @@ impl From<IssuedLink> for LinkBody {
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, ToSchema)]
 #[serde(tag = "status", rename_all = "snake_case")]
 pub(crate) enum SignInBody {
     SignedIn {
@@ -100,6 +101,19 @@ fn signed_in(issued: IssuedSession, recovery_codes: Option<Vec<String>>) -> Resp
     response
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/v1/auth/login",
+    tag = "auth",
+    summary = "Sign in with e-mail, password and a TOTP or recovery code",
+    request_body = LoginRequest,
+    responses(
+        (status = 200, description = "Signed in (console: Set-Cookie) or must re-enroll", body = SignInBody),
+        (status = 401, description = "Not signed in", body = ErrorBody),
+        (status = 422, description = "Invalid input or unknown field", body = ErrorBody),
+        (status = 429, description = "Too many requests; see Retry-After", body = ErrorBody)
+    )
+)]
 pub(crate) async fn login<B: Backend>(
     State(state): State<AppState<B>>,
     source: Source,
@@ -126,6 +140,18 @@ pub(crate) async fn login<B: Backend>(
     })
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/v1/auth/logout",
+    tag = "auth",
+    summary = "End the current session",
+    responses(
+        (status = 204, description = "Done"),
+        (status = 401, description = "Not signed in", body = ErrorBody),
+        (status = 403, description = "Missing permission or CSRF token", body = ErrorBody)
+    ),
+    security(("session_cookie" = [], "csrf_token" = []), ("bearer" = []))
+)]
 pub(crate) async fn logout<B: Backend>(
     State(state): State<AppState<B>>,
     caller: Caller,
@@ -138,12 +164,25 @@ pub(crate) async fn logout<B: Backend>(
     Ok(response)
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct LinkRequest {
     token: String,
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/v1/auth/links/inspect",
+    tag = "auth",
+    summary = "What a credential link is for",
+    request_body = LinkRequest,
+    responses(
+        (status = 200, description = "OK", body = LinkInfo),
+        (status = 404, description = "Not found or not visible", body = ErrorBody),
+        (status = 422, description = "Invalid input or unknown field", body = ErrorBody),
+        (status = 429, description = "Too many requests; see Retry-After", body = ErrorBody)
+    )
+)]
 pub(crate) async fn inspect_link<B: Backend>(
     State(state): State<AppState<B>>,
     source: Source,
@@ -158,6 +197,19 @@ pub(crate) async fn inspect_link<B: Backend>(
     ))
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/v1/auth/links/enrollment",
+    tag = "auth",
+    summary = "Start TOTP enrollment with a link",
+    request_body = LinkRequest,
+    responses(
+        (status = 200, description = "OK", body = TotpEnrollment),
+        (status = 404, description = "Not found or not visible", body = ErrorBody),
+        (status = 422, description = "Invalid input or unknown field", body = ErrorBody),
+        (status = 429, description = "Too many requests; see Retry-After", body = ErrorBody)
+    )
+)]
 pub(crate) async fn begin_enrollment<B: Backend>(
     State(state): State<AppState<B>>,
     source: Source,
@@ -172,7 +224,7 @@ pub(crate) async fn begin_enrollment<B: Backend>(
     ))
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct CompleteRequest {
     token: String,
@@ -184,6 +236,20 @@ pub(crate) struct CompleteRequest {
     client: Client,
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/v1/auth/links/complete",
+    tag = "auth",
+    summary = "Set the password, confirm TOTP and sign in",
+    request_body = CompleteRequest,
+    responses(
+        (status = 200, description = "Signed in, with new recovery codes", body = SignInBody),
+        (status = 404, description = "Not found or not visible", body = ErrorBody),
+        (status = 409, description = "Conflicts with the current state", body = ErrorBody),
+        (status = 422, description = "Invalid input or unknown field", body = ErrorBody),
+        (status = 429, description = "Too many requests; see Retry-After", body = ErrorBody)
+    )
+)]
 pub(crate) async fn complete_link<B: Backend>(
     State(state): State<AppState<B>>,
     source: Source,

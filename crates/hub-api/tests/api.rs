@@ -534,3 +534,12 @@ async fn sessions_list_marks_the_current_one_and_settings_are_owner_only() {
         .await;
     assert_eq!(invalid.status, StatusCode::UNPROCESSABLE_ENTITY);
 }
+
+#[tokio::test]
+async fn every_hub_serves_its_contract() {
+    let fixture = Fixture::new().await;
+    let response = fixture.get("/api/v1/openapi.json", &Auth::None).await;
+    assert_eq!(response.status, StatusCode::OK);
+    assert_eq!(response.body["openapi"], "3.1.0");
+    assert_eq!(response.body["info"]["version"], hub_api::CONTRACT_VERSION);
+}
