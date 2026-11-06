@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://levix.digital/contracts/channel/v1/schemas/challenge.schema.json",
+  "title": "Challenge (Hub to device, signed)",
+  "description": "The Hub picks the version and asks the device to prove its identity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "nonce",
+    "version",
+    "hub_key"
+  ],
+  "properties": {
+    "nonce": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$",
+      "description": "32 random bytes, base64url without padding; used once."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.(0|[1-9][0-9]*)$",
+      "description": "Highest minor version both sides support; the rest of the session uses it."
+    },
+    "hub_key": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Fingerprint of the key that signed this message; must equal the pinned key."
+    }
+  }
+}

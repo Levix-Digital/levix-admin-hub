@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://levix.digital/contracts/channel/v1/schemas/error.schema.json",
+  "title": "Error (Hub to device, signed)",
+  "description": "Why the Hub refuses; the Hub closes the connection after sending it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "code",
+    "message"
+  ],
+  "properties": {
+    "code": {
+      "enum": [
+        "unsupported_version",
+        "unknown_device",
+        "bad_signature",
+        "revoked",
+        "rate_limited",
+        "invalid_message"
+      ]
+    },
+    "message": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Human-readable explanation, without internals."
+    },
+    "retry_after_secs": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "With rate_limited: seconds before the device may reconnect."
+    }
+  }
+}

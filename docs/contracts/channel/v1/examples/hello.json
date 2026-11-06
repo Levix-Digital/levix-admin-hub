@@ -1,0 +1,17 @@
+{
+  "v": 1,
+  "type": "hello",
+  "id": "0193f6c2-8a00-7000-8000-000000000001",
+  "ts": "2026-11-06T12:00:00Z",
+  "payload": {
+    "device_id": "0193f6c2-7b1e-7a4c-9d2f-5b8e1c0a4d21",
+    "versions": [
+      "1.0"
+    ],
+    "product": {
+      "id": "docmapper",
+      "version": "2.4.0"
+    },
+    "hub_key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+  }
+}

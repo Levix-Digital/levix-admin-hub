@@ -17,6 +17,7 @@ const NAME_MAX_CHARS: usize = 120;
 /// Lifecycle of an organization. Archived organizations are read-only and never deleted.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub enum OrganizationStatus {
     Active,
     Archived,
@@ -43,6 +44,7 @@ impl OrganizationStatus {
 
 /// A customer organization.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct Organization {
     pub id: Uuid,
     pub slug: String,

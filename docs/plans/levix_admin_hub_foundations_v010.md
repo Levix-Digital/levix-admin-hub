@@ -7,7 +7,7 @@ version: v0.1.0
 status: in_progress
 author: LeviGuilherme
 created_at: '2026-11-06T16:20:08'
-updated_at: '2026-11-06T18:35:30'
+updated_at: '2026-11-06T22:44:21'
 session_id: null
 tags: []
 supersedes: null
@@ -35,7 +35,9 @@ milestones:
   done_at: '2026-11-06'
   by: LeviGuilherme
 - name: M4 Public contract
-  done: false
+  done: true
+  done_at: '2026-11-06'
+  by: LeviGuilherme
 - name: M5 Administration CLI
   done: false
 - name: M6 Web console
@@ -64,6 +66,9 @@ status_log:
 - at: '2026-11-06T18:35:30'
   by: LeviGuilherme
   note: 'Milestone ''M3 Administrators roles and TOTP'' completed: Administrators, roles, TOTP, sessions, API tokens, hash-chained audit, recover-owner; 72 tests'
+- at: '2026-11-06T22:44:21'
+  by: LeviGuilherme
+  note: 'Milestone ''M4 Public contract'' completed: OpenAPI from utoipa committed and tested, oasdiff breaking check, channel v1 AsyncAPI with schemas and examples, contract CHANGELOG 1.0.0, permission matrix published'
 ---
 
 ---

@@ -1,0 +1,16 @@
+{
+  "v": 1,
+  "type": "welcome",
+  "id": "0193f6c2-8a00-7000-8000-000000000004",
+  "ts": "2026-11-06T12:00:01Z",
+  "payload": {
+    "session": "0193f6c2-8a00-7000-8000-0000000000aa",
+    "version": "1.0",
+    "heartbeat_secs": 60
+  },
+  "sig": {
+    "alg": "Ed25519",
+    "key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+  }
+}

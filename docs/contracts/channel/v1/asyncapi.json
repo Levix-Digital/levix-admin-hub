@@ -1,0 +1,254 @@
+{
+  "asyncapi": "3.0.0",
+  "info": {
+    "title": "Levix Admin Hub device channel",
+    "version": "1.0.0",
+    "description": "WebSocket channel between devices (and product servers) and the Admin Hub. Devices connect out to the Hub; the Hub never connects to them. Every message is an envelope (schemas/envelope.schema.json) whose payload follows the schema of its type. Every message from the Hub is signed with the Hub key the device pinned at enrollment. Served from Hub v0.2.0 (enrollment); specified now so products can build their client. See README.md for the handshake, the signature format and versioning.",
+    "license": {
+      "name": "Proprietary, source available to customers"
+    }
+  },
+  "defaultContentType": "application/json",
+  "servers": {
+    "hub": {
+      "host": "{hub}",
+      "protocol": "wss",
+      "pathname": "/ws/device/v1",
+      "description": "The customer's Hub, TLS only.",
+      "variables": {
+        "hub": {
+          "description": "Host and port of the Hub, for example hub.example:8443."
+        }
+      }
+    }
+  },
+  "channels": {
+    "device": {
+      "address": "/ws/device/v1",
+      "title": "Device channel, major version 1",
+      "messages": {
+        "hello": {
+          "name": "hello",
+          "title": "Hello",
+          "summary": "Device introduces itself and its versions.",
+          "contentType": "application/json",
+          "payload": {
+            "$ref": "schemas/envelope.schema.json"
+          },
+          "x-payload-schema": {
+            "$ref": "schemas/hello.schema.json"
+          },
+          "examples": [
+            {
+              "name": "hello",
+              "payload": {
+                "v": 1,
+                "type": "hello",
+                "id": "0193f6c2-8a00-7000-8000-000000000001",
+                "ts": "2026-11-06T12:00:00Z",
+                "payload": {
+                  "device_id": "0193f6c2-7b1e-7a4c-9d2f-5b8e1c0a4d21",
+                  "versions": [
+                    "1.0"
+                  ],
+                  "product": {
+                    "id": "docmapper",
+                    "version": "2.4.0"
+                  },
+                  "hub_key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+                }
+              }
+            }
+          ]
+        },
+        "challenge": {
+          "name": "challenge",
+          "title": "Challenge",
+          "summary": "Hub picks the version and sends a nonce (signed).",
+          "contentType": "application/json",
+          "payload": {
+            "$ref": "schemas/envelope.schema.json"
+          },
+          "x-payload-schema": {
+            "$ref": "schemas/challenge.schema.json"
+          },
+          "examples": [
+            {
+              "name": "challenge",
+              "payload": {
+                "v": 1,
+                "type": "challenge",
+                "id": "0193f6c2-8a00-7000-8000-000000000002",
+                "ts": "2026-11-06T12:00:00Z",
+                "payload": {
+                  "nonce": "q3JxBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+                  "version": "1.0",
+                  "hub_key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+                },
+                "sig": {
+                  "alg": "Ed25519",
+                  "key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+                  "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              }
+            }
+          ]
+        },
+        "authenticate": {
+          "name": "authenticate",
+          "title": "Authenticate",
+          "summary": "Device proves its identity.",
+          "contentType": "application/json",
+          "payload": {
+            "$ref": "schemas/envelope.schema.json"
+          },
+          "x-payload-schema": {
+            "$ref": "schemas/authenticate.schema.json"
+          },
+          "examples": [
+            {
+              "name": "authenticate",
+              "payload": {
+                "v": 1,
+                "type": "authenticate",
+                "id": "0193f6c2-8a00-7000-8000-000000000003",
+                "ts": "2026-11-06T12:00:01Z",
+                "payload": {
+                  "device_id": "0193f6c2-7b1e-7a4c-9d2f-5b8e1c0a4d21",
+                  "signature": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+                }
+              }
+            }
+          ]
+        },
+        "welcome": {
+          "name": "welcome",
+          "title": "Welcome",
+          "summary": "Session open (signed).",
+          "contentType": "application/json",
+          "payload": {
+            "$ref": "schemas/envelope.schema.json"
+          },
+          "x-payload-schema": {
+            "$ref": "schemas/welcome.schema.json"
+          },
+          "examples": [
+            {
+              "name": "welcome",
+              "payload": {
+                "v": 1,
+                "type": "welcome",
+                "id": "0193f6c2-8a00-7000-8000-000000000004",
+                "ts": "2026-11-06T12:00:01Z",
+                "payload": {
+                  "session": "0193f6c2-8a00-7000-8000-0000000000aa",
+                  "version": "1.0",
+                  "heartbeat_secs": 60
+                },
+                "sig": {
+                  "alg": "Ed25519",
+                  "key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+                  "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              }
+            }
+          ]
+        },
+        "error": {
+          "name": "error",
+          "title": "Error",
+          "summary": "Refusal; the Hub closes the connection (signed).",
+          "contentType": "application/json",
+          "payload": {
+            "$ref": "schemas/envelope.schema.json"
+          },
+          "x-payload-schema": {
+            "$ref": "schemas/error.schema.json"
+          },
+          "examples": [
+            {
+              "name": "error",
+              "payload": {
+                "v": 1,
+                "type": "error",
+                "id": "0193f6c2-8a00-7000-8000-000000000005",
+                "ts": "2026-11-06T12:00:01Z",
+                "payload": {
+                  "code": "unsupported_version",
+                  "message": "no common minor version; this Hub speaks 1.0"
+                },
+                "sig": {
+                  "alg": "Ed25519",
+                  "key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+                  "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operations": {
+    "receiveHello": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/device"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/device/messages/hello"
+        }
+      ],
+      "summary": "The Hub receives the device's hello."
+    },
+    "sendChallenge": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/device"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/device/messages/challenge"
+        }
+      ],
+      "summary": "The Hub answers hello with a challenge."
+    },
+    "receiveAuthenticate": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/device"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/device/messages/authenticate"
+        }
+      ],
+      "summary": "The Hub receives the signed challenge."
+    },
+    "sendWelcome": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/device"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/device/messages/welcome"
+        }
+      ],
+      "summary": "The Hub opens the session."
+    },
+    "sendError": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/device"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/device/messages/error"
+        }
+      ],
+      "summary": "The Hub refuses and closes."
+    }
+  }
+}

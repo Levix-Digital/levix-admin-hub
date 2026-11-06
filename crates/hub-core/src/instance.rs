@@ -17,6 +17,7 @@ const ABSOLUTE_HOURS_RANGE: std::ops::RangeInclusive<u32> = 1..=24;
 /// Instance-wide settings, changed by the instance owner.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct InstanceSettings {
     /// Sessions end after this many minutes without activity (5 to 60).
     pub session_inactivity_minutes: u32,
@@ -61,6 +62,7 @@ impl InstanceSettings {
 
 /// The single instance record, created by `levix-hub init` on the host.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct Instance {
     pub id: Uuid,
     #[serde(with = "time::serde::rfc3339")]
@@ -70,6 +72,7 @@ pub struct Instance {
 
 /// What any caller, signed in or not, may learn about the instance.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct InstanceStatus {
     pub initialized: bool,
 }

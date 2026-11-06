@@ -20,6 +20,7 @@ pub const GENESIS_HASH: &str = "000000000000000000000000000000000000000000000000
 /// Outcome of the audited action.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub enum AuditResult {
     Success,
     Denied,
@@ -49,6 +50,7 @@ impl AuditResult {
 
 /// One event to record. Field order is part of the hash: never reorder.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct AuditEvent {
     #[serde(with = "time::serde::rfc3339")]
     pub at: OffsetDateTime,
@@ -100,6 +102,7 @@ impl AuditEvent {
 
 /// A stored record.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct AuditRecord {
     pub seq: i64,
     pub id: Uuid,
@@ -144,6 +147,7 @@ pub fn seal(seq: i64, id: Uuid, event: AuditEvent, prev_hash: &str) -> CoreResul
 
 /// Result of a chain verification.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct ChainReport {
     pub records: u64,
     pub intact: bool,

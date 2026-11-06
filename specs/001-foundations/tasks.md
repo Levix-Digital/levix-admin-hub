@@ -41,10 +41,10 @@
 
 ## Phase 4: Public contract (M4)
 
-- [ ] T025 [US5] Describe every endpoint with `utoipa`; generate `docs/contracts/api/openapi.json`; CI check that it matches
-- [ ] T026 [P] [US5] CI breaking-change check with `oasdiff` against the last release tag
-- [ ] T027 [P] [US5] Channel specification v1 in `docs/contracts/channel/v1/` (AsyncAPI 3.0, JSON Schemas for envelope, hello, challenge, authenticate, error; Hub signature format; version negotiation) with validated examples
-- [ ] T028 [US5] `docs/contracts/CHANGELOG.md` (contract 1.0.0) and the permission matrix published from contracts/permissions.md
+- [x] T025 [US5] Describe every endpoint with `utoipa`; generate `docs/contracts/api/openapi.json`; CI check that it matches
+- [x] T026 [P] [US5] CI breaking-change check with `oasdiff` against the last release tag
+- [x] T027 [P] [US5] Channel specification v1 in `docs/contracts/channel/v1/` (AsyncAPI 3.0, JSON Schemas for envelope, hello, challenge, authenticate, welcome, error; Hub signature format; version negotiation) with validated examples
+- [x] T028 [US5] `docs/contracts/CHANGELOG.md` (contract 1.0.0) and the permission matrix published from contracts/permissions.md (`docs/contracts/permissions.md`; the API also serves its document at `/api/v1/openapi.json`)
 
 ## Phase 5: Administration CLI (M5)
 

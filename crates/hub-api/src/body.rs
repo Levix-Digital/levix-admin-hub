@@ -28,7 +28,12 @@ impl<S: Send + Sync, T: DeserializeOwned> FromRequest<S> for JsonBody<T> {
                 "unsupported_media_type",
                 "send the body as application/json",
             )),
-            Err(other) => Err(ApiError::bad_request(other.body_text())),
+            // Keeps Axum's status (413 for a body over the limit, 400 for malformed JSON).
+            Err(other) => Err(ApiError::new(
+                other.status(),
+                "bad_request",
+                other.body_text(),
+            )),
         }
     }
 }

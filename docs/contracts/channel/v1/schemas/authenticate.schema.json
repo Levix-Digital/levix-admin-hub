@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://levix.digital/contracts/channel/v1/schemas/authenticate.schema.json",
+  "title": "Authenticate (device to Hub)",
+  "description": "The device signs the challenge with its Ed25519 identity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "device_id",
+    "signature"
+  ],
+  "properties": {
+    "device_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{86}$",
+      "description": "Ed25519 signature by the device key over the UTF-8 bytes of levix-channel-v1|authenticate|<nonce>|<device_id>|<hub_key>."
+    }
+  }
+}

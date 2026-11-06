@@ -1,0 +1,15 @@
+{
+  "v": 1,
+  "type": "error",
+  "id": "0193f6c2-8a00-7000-8000-000000000005",
+  "ts": "2026-11-06T12:00:01Z",
+  "payload": {
+    "code": "unsupported_version",
+    "message": "no common minor version; this Hub speaks 1.0"
+  },
+  "sig": {
+    "alg": "Ed25519",
+    "key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+  }
+}

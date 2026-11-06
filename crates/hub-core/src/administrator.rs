@@ -30,6 +30,7 @@ static COMMON_PASSWORDS: &str = include_str!("common-passwords.txt");
 /// Lifecycle of an administrator account.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub enum AdministratorStatus {
     /// Created by an invitation or `init`; credentials not set yet.
     Invited,
@@ -127,6 +128,7 @@ impl Administrator {
 
 /// What the API shows of an administrator.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct AdministratorView {
     pub id: Uuid,
     pub email: String,
@@ -156,6 +158,7 @@ impl From<&Administrator> for AdministratorView {
 
 /// The caller's own account and roles.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct Me {
     #[serde(flatten)]
     pub administrator: AdministratorView,
@@ -164,6 +167,7 @@ pub struct Me {
 
 /// An administrator and their role in one organization.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(feature = "openapi", derive(utoipa::ToSchema))]
 pub struct Member {
     #[serde(flatten)]
     pub administrator: AdministratorView,

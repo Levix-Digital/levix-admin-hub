@@ -1,0 +1,16 @@
+{
+  "v": 1,
+  "type": "challenge",
+  "id": "0193f6c2-8a00-7000-8000-000000000002",
+  "ts": "2026-11-06T12:00:00Z",
+  "payload": {
+    "nonce": "q3JxBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "version": "1.0",
+    "hub_key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"
+  },
+  "sig": {
+    "alg": "Ed25519",
+    "key": "sha256:3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f",
+    "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+  }
+}

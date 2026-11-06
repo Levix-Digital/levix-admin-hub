@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://levix.digital/contracts/channel/v1/schemas/welcome.schema.json",
+  "title": "Welcome (Hub to device, signed)",
+  "description": "The device is authenticated; the session is open.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session",
+    "version",
+    "heartbeat_secs"
+  ],
+  "properties": {
+    "session": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "Identifier of this channel session, written in the audit."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.(0|[1-9][0-9]*)$",
+      "description": "Minor version within major 1, as MAJOR.MINOR."
+    },
+    "heartbeat_secs": {
+      "type": "integer",
+      "minimum": 10,
+      "maximum": 300,
+      "description": "Interval at which the device sends a heartbeat (defined in a later minor version)."
+    }
+  }
+}
