@@ -6,7 +6,9 @@
   "devops": {
     "branching": "trunk",
     "production_branch": "main",
-    "version_files": []
+    "version_files": [
+      "Cargo.toml"
+    ]
   },
   "architecture": {
     "style": "hexagonal",
@@ -36,5 +38,10 @@
     "version": "v1.2.3",
     "script": "sh",
     "branch_prefix": "feat"
-  }
+  },
+  "test_commands": [
+    "cargo fmt --all --check",
+    "cargo clippy --workspace --all-targets --locked -- -D warnings",
+    "cargo test --workspace --locked"
+  ]
 }

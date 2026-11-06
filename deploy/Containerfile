@@ -1,0 +1,20 @@
+# Admin Hub container image (compact profile).
+# Build from the repository root: docker build -f deploy/Containerfile -t levix-hub .
+
+FROM docker.io/library/rust:1.97-bookworm AS build
+WORKDIR /src
+COPY . .
+RUN cargo build --release --locked -p hub-server \
+    && install -D -m 0755 target/release/levix-hub /out/usr/local/bin/levix-hub \
+    && install -d -m 0700 /out/var/lib/levix-hub
+
+FROM gcr.io/distroless/cc-debian12:nonroot
+COPY --from=build /out/usr/local/bin/levix-hub /usr/local/bin/levix-hub
+COPY --from=build --chown=nonroot:nonroot /out/var/lib/levix-hub /var/lib/levix-hub
+USER nonroot:nonroot
+ENV LEVIX_HUB_DATA_DIR=/var/lib/levix-hub \
+    LEVIX_HUB_LISTEN=0.0.0.0:8443
+VOLUME ["/var/lib/levix-hub"]
+EXPOSE 8443
+ENTRYPOINT ["/usr/local/bin/levix-hub"]
+CMD ["serve"]

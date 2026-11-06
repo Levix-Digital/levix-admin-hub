@@ -7,7 +7,7 @@ version: v0.1.0
 status: in_progress
 author: LeviGuilherme
 created_at: '2026-11-06T16:20:08'
-updated_at: '2026-11-06T17:37:34'
+updated_at: '2026-11-06T18:10:18'
 session_id: null
 tags: []
 supersedes: null
@@ -27,7 +27,9 @@ milestones:
   done_at: '2026-11-06'
   by: LeviGuilherme
 - name: M2 Service skeleton and organizations
-  done: false
+  done: true
+  done_at: '2026-11-06'
+  by: LeviGuilherme
 - name: M3 Administrators roles and TOTP
   done: false
 - name: M4 Public contract
@@ -54,6 +56,9 @@ status_log:
 - at: '2026-11-06T17:37:34'
   by: LeviGuilherme
   note: 'Milestone ''M1 Threat model and security architecture'' completed: Threat model and security architecture; FEAT-044, FEAT-045, FEAT-046 captured'
+- at: '2026-11-06T18:10:18'
+  by: LeviGuilherme
+  note: 'Milestone ''M2 Service skeleton and organizations'' completed: Workspace, CI, container, server with TLS, health, logs, SQLite, init, organizations in the core'
 ---
 
 ---
