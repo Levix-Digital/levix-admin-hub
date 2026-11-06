@@ -5,7 +5,7 @@ The releases of the product in delivery order, from the MVP onwards. Each releas
 Each release: `## vX.Y.Z: <name>` with the fields `Status` (planned, in_progress, released), an optional `Target`, `Released` (the date, once released), `Goal` and `Items` (backlog ids separated by commas, `-` when empty). Edit this file with `plan-memory/roadmap.py` or by hand, and check it with `roadmap.py validate`.
 
 ## v0.1.0: Foundations
-- **Status**: planned
+- **Status**: in_progress
 - **Goal**: IT installs the Hub, creates its organization and administrators, and works through the console, the CLI and a published contract
 - **Items**: FEAT-018, FEAT-001, FEAT-019, FEAT-020, FEAT-021, FEAT-040
 
