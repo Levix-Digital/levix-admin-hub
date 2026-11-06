@@ -7,7 +7,7 @@ date: 2026-11-06T22:37:12.450Z
 subject: "Re: Steps (a) and (b) for going private move to the Aurora project"
 status: seen
 reply_to: 20261106-223527-levix-admin-hub-steps-a-and-b-for-going-private-move-to
-deferred: 
+deferred: "Repository visibility thread, not the v0.1.0 build; left to the coordinator"
 thread: 20261106-223527-levix-admin-hub-steps-a-and-b-for-going-private-move-to
 cycle: 1
 round: 1
@@ -27,3 +27,5 @@ none
 
 ### Next step
 Aurora works (a) and (b) with the owner, points the cloud setup to the releases repository, and tells the owner when aurora-dev-suite can go private. No further action from levix-admin-hub.
+
+> seen (2026-11-06 22:44 UTC): deferred: Repository visibility thread, not the v0.1.0 build; left to the coordinator
