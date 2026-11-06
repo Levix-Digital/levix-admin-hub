@@ -15,16 +15,16 @@
 
 ## Phase 2: Service skeleton and organizations (M2)
 
-- [ ] T005 Create the Cargo workspace (`Cargo.toml`, version 0.1.0) with the crates of plan.md, `rust-toolchain.toml`, `deny.toml`, `rustfmt.toml`
-- [ ] T006 [P] Add `.github/workflows/ci.yml` from the protocol template (fmt, clippy, tests, `cargo-deny`) and set `test_commands` and `devops.version_files` in `.dev-cycle.json`
-- [ ] T007 [P] Core: `CoreError`, clock, randomness and storage ports, `instance` and `organization` modules with use cases (initialize instance, create, rename, archive, list, get)
-- [ ] T008 Storage: `hub-storage-sqlite` with migration 1 (instance, organization), schema version check, refusal on newer schema, integration tests
-- [ ] T009 Crypto: `hub-crypto` file key custody (create on `init`, permissions 0600, refusal when missing)
-- [ ] T010 API base: Axum router `/api/v1`, error object, unknown-field refusal, request id, JSON logs, `/healthz`, `/readyz`
-- [ ] T011 [US1] TLS: customer certificate or generated self-signed certificate with printed fingerprint; `--insecure-behind-proxy`
-- [ ] T012 [US1] Server binary `levix-hub`: `serve`, `init` (instance, key file, setup link), `migrate`; configuration by file and environment
-- [ ] T013 [P] `deploy/Containerfile` (distroless, non-root, data volume) and a container smoke test in CI (ready in under 10 s)
-- [ ] T014 Test: no outbound socket during the end-to-end run
+- [x] T005 Create the Cargo workspace (`Cargo.toml`, version 0.1.0) with the crates of plan.md, `rust-toolchain.toml`, `deny.toml`, `rustfmt.toml`
+- [x] T006 [P] Add `.github/workflows/ci.yml` from the protocol template (fmt, clippy, tests, `cargo-deny`) and set `test_commands` and `devops.version_files` in `.dev-cycle.json`
+- [x] T007 [P] Core: `CoreError`, clock, randomness and storage ports, `instance` and `organization` modules with use cases (initialize instance, create, rename, archive, list, get)
+- [x] T008 Storage: `hub-storage-sqlite` with migration 1 (instance, organization), schema version check, refusal on newer schema, integration tests
+- [x] T009 Crypto: `hub-crypto` file key custody (create on `init`, permissions 0600, refusal when missing)
+- [x] T010 API base: Axum router `/api/v1`, error object, unknown-field refusal, request id, JSON logs, `/healthz`, `/readyz`
+- [x] T011 [US1] TLS: customer certificate or generated self-signed certificate with printed fingerprint; `--insecure-behind-proxy`
+- [x] T012 [US1] Server binary `levix-hub`: `serve`, `init` (instance, key file, certificate; the setup link comes with T016), `migrate`; configuration by flags and environment variables
+- [x] T013 [P] `deploy/Containerfile` (distroless, non-root, data volume) and a container smoke test in CI (ready in under 10 s)
+- [x] T014 Test: no outbound socket during the end-to-end run
 
 ## Phase 3: Administrators, roles and TOTP (M3)
 

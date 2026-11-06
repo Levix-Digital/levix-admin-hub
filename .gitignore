@@ -10,3 +10,6 @@
 .specify/extensions/.registry
 .specify/workflows/speckit/
 .specify/presets/dev-cycle/compat.json
+
+# Build output.
+/target/
