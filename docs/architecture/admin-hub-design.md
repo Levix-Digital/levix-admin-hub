@@ -20,7 +20,7 @@ client side of the channel, the policy model and signature verification live in
   verification and the product data definition formats are identical on both sides. (The
   initial specification planned Python/FastAPI; the products removed Python.)
 
-## 1. Common core
+## Common core
 
 - **Organizations.**
 - **Users and groups:** the Admin Hub's own directory (for customers without an identity
@@ -50,7 +50,7 @@ client side of the channel, the policy model and signature verification live in
 - **Organization recovery key** (policy option): the Admin Hub only distributes the
   organization public key; the private part stays offline under the company's control.
 
-## 2. Product data definitions and sharing
+## Product data definitions and sharing
 
 - **Groups and curators:** sharing with groups from SSO or the directory; in organization
   data units (in AnyContext, organization workspaces) the admin is the owner and appoints
@@ -61,26 +61,26 @@ client side of the channel, the policy model and signature verification live in
   hash that says "same source" without the name) as the default; or full paths when the
   company needs to audit and informs users.
 
-## 3. Update mirror
+## Update mirror
 
 The Admin Hub distributes product updates, models, domain packs and bundled components
 (e.g. Chromium) to devices without internet: IT downloads once, verified by the Levix
 signature, and controls when each version reaches the fleet.
 
-## 4. Data plane servers
+## Data plane servers
 
 Product servers in the company VPC (e.g. AnyContext Server, the shared index of deployment
 mode 3, and the Model Server of mode 2) are enrolled and governed by the Admin Hub like a
 device.
 
-## 5. Packaging
+## Packaging
 
 - **Installable package:** containers for a single server; Helm for Kubernetes.
 - **Two installation profiles, same code:** **compact** (one container with an embedded
   database — offices, clinics) and **scalable** (Postgres, Redis, replicas — large
   companies).
 
-## 6. Contract
+## Contract
 
 A documented API and WebSocket protocol: any product, in any language, talks to the Admin
 Hub through it. What goes through the channel: identities (SSO, directory, SCIM) and

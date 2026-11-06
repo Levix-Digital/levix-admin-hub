@@ -7,5 +7,34 @@
     "branching": "trunk",
     "production_branch": "main",
     "version_files": []
+  },
+  "architecture": {
+    "style": "hexagonal",
+    "core_path": "crates/hub-core",
+    "surfaces": [
+      "api",
+      "channel",
+      "console",
+      "cli"
+    ],
+    "canonical_datastore": "SQLite (compact profile) or PostgreSQL (scalable profile), one database per Hub",
+    "forbidden_core_imports": [
+      "axum",
+      "sqlx",
+      "leptos",
+      "redis",
+      "tokio_tungstenite",
+      "reqwest",
+      "hub_api",
+      "hub_channel",
+      "hub_console",
+      "hub_cli"
+    ]
+  },
+  "speckit": {
+    "enabled": true,
+    "version": "v1.2.3",
+    "script": "sh",
+    "branch_prefix": "feat"
   }
 }

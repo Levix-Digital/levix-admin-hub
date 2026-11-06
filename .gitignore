@@ -1,0 +1,12 @@
+# Tool settings: only the shared settings file that turns attribution off is committed.
+.claude/*
+!.claude/settings.json
+
+# Spec Kit files that are per-machine or name the local tool integration.
+.specify/init-options.json
+.specify/integration.json
+.specify/integrations/*.manifest.json
+!.specify/integrations/speckit.manifest.json
+.specify/extensions/.registry
+.specify/workflows/speckit/
+.specify/presets/dev-cycle/compat.json
