@@ -28,16 +28,16 @@
 
 ## Phase 3: Administrators, roles and TOTP (M3)
 
-- [ ] T015 [US2] Core: administrator, role assignment and permission matrix (table test over every action and role)
-- [ ] T016 [US2] Core: credential links (setup, invitation, recovery) single use and expiry; last-owner protection
-- [ ] T017 [US2] Crypto adapters: Argon2id hasher, TOTP (one step of drift, replay refused), recovery codes, XChaCha20-Poly1305 secret box
-- [ ] T018 [US2] Core: sign-in with password and TOTP, lockout with increasing delays, request limit per source address on unauthenticated endpoints, sessions with inactivity and absolute expiry, revocation
-- [ ] T019 [US4] Core: personal API tokens (create, list, revoke, expiry ≤ 90 days, creator's permissions at use time)
-- [ ] T020 [US2] Core and storage: append-only hash-chained administrative audit written by every use case; `levix-hub audit verify`
-- [ ] T021 Storage: migration 2 (administrator, recovery_code, role_assignment, credential_link, session, api_token, audit_record), integration tests including concurrent use of one link
-- [ ] T022 [US2] API: auth endpoints, console cookie session with CSRF, bearer sessions and API tokens, administrators, roles, audit
-- [ ] T023 [US1] `levix-hub recover-owner` on the host; audit of host actions
-- [ ] T024 Test: logs of the end-to-end run contain no password, code, token or secret
+- [x] T015 [US2] Core: administrator, role assignment and permission matrix (table test over every action and role)
+- [x] T016 [US2] Core: credential links (setup, invitation, recovery) single use and expiry; last-owner protection
+- [x] T017 [US2] Crypto adapters: Argon2id hasher, TOTP (one step of drift, replay refused), recovery codes, XChaCha20-Poly1305 secret box (TOTP is RFC 6238 on `hmac` and `sha1`, checked against the RFC test vectors, instead of `totp-rs`)
+- [x] T018 [US2] Core: sign-in with password and TOTP, lockout with increasing delays, request limit per source address on unauthenticated endpoints, sessions with inactivity and absolute expiry, revocation
+- [x] T019 [US4] Core: personal API tokens (create, list, revoke, expiry ≤ 90 days, creator's permissions at use time)
+- [x] T020 [US2] Core and storage: append-only hash-chained administrative audit written by every use case; `levix-hub audit verify`
+- [x] T021 Storage: migration 2 (administrator, recovery_code, role_assignment, credential_link, session, api_token, audit_record), integration tests including concurrent use of one link
+- [x] T022 [US2] API: auth endpoints, console cookie session with CSRF, bearer sessions and API tokens, administrators, roles, audit (link tokens travel in request bodies and in the console URL fragment, never in a path the access log records)
+- [x] T023 [US1] `levix-hub recover-owner` on the host; audit of host actions; `init --owner-email` prints the setup link (T016)
+- [x] T024 Test: logs of the end-to-end run contain no password, code, token or secret
 
 ## Phase 4: Public contract (M4)
 

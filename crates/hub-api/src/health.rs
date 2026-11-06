@@ -5,7 +5,7 @@ use axum::http::StatusCode;
 use axum::Json;
 use serde::Serialize;
 
-use crate::{ApiError, AppState, Readiness, Store};
+use crate::{ApiError, AppState, Backend, Readiness};
 
 #[derive(Serialize)]
 pub(crate) struct Health {
@@ -18,8 +18,8 @@ pub(crate) async fn live() -> Json<Health> {
 }
 
 /// The database and the key file are usable.
-pub(crate) async fn ready<S: Store, R: Readiness>(
-    State(state): State<AppState<S, R>>,
+pub(crate) async fn ready<B: Backend>(
+    State(state): State<AppState<B>>,
 ) -> Result<Json<Health>, ApiError> {
     match state.readiness.check().await {
         Ok(()) => Ok(Json(Health { status: "ready" })),

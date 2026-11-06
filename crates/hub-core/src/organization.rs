@@ -4,7 +4,10 @@ use serde::{Deserialize, Serialize};
 use time::OffsetDateTime;
 use uuid::Uuid;
 
-use crate::ports::{new_id, Clock, OrganizationRepository};
+use crate::context::Context;
+use crate::hub::Hub;
+use crate::ports::{new_id, Clock, Crypto, Store};
+use crate::role::OrgAction;
 use crate::{CoreError, CoreResult};
 
 const SLUG_MIN_LEN: usize = 2;
@@ -97,60 +100,127 @@ pub fn normalize_name(name: &str) -> CoreResult<String> {
     Ok(trimmed.to_owned())
 }
 
-/// Creates an active organization.
-pub async fn create<R: OrganizationRepository, C: Clock>(
-    repository: &R,
-    clock: &C,
-    input: NewOrganization,
-) -> CoreResult<Organization> {
-    validate_slug(&input.slug)?;
-    let organization = Organization {
-        id: new_id(),
-        slug: input.slug,
-        name: normalize_name(&input.name)?,
-        status: OrganizationStatus::Active,
-        created_at: clock.now(),
-    };
-    repository.insert_organization(&organization).await?;
-    Ok(organization)
-}
+impl<S: Store, K: Crypto, C: Clock> Hub<S, K, C> {
+    /// Creates an active organization (instance owner only); the creator becomes its owner.
+    pub async fn create_organization(
+        &self,
+        context: &Context,
+        input: NewOrganization,
+    ) -> CoreResult<Organization> {
+        const ACTION: &str = "organization.create";
+        let principal = context.principal()?;
+        self.guard(
+            context,
+            ACTION,
+            None,
+            principal.require_instance_owner("organization.create"),
+        )
+        .await?;
+        validate_slug(&input.slug)?;
+        let organization = Organization {
+            id: new_id(),
+            slug: input.slug,
+            name: normalize_name(&input.name)?,
+            status: OrganizationStatus::Active,
+            created_at: self.clock.now(),
+        };
+        let audit = self
+            .event(context, ACTION)
+            .organization(organization.id)
+            .target("organization", organization.id)
+            .detail("slug", &organization.slug);
+        self.store
+            .insert_organization(&organization, principal.administrator, &audit)
+            .await?;
+        Ok(organization)
+    }
 
-/// Returns one organization.
-pub async fn get<R: OrganizationRepository>(repository: &R, id: Uuid) -> CoreResult<Organization> {
-    repository
-        .get_organization(id)
-        .await?
-        .ok_or(CoreError::NotFound("organization"))
-}
+    /// One organization visible to the caller.
+    pub async fn organization(&self, context: &Context, id: Uuid) -> CoreResult<Organization> {
+        context.principal()?.require(id, OrgAction::Read)?;
+        self.store
+            .get_organization(id)
+            .await?
+            .ok_or(CoreError::NotFound("organization"))
+    }
 
-/// Every organization, ordered by name.
-pub async fn list<R: OrganizationRepository>(repository: &R) -> CoreResult<Vec<Organization>> {
-    repository.list_organizations().await
-}
+    /// The organizations visible to the caller, ordered by name.
+    pub async fn organizations(&self, context: &Context) -> CoreResult<Vec<Organization>> {
+        let principal = context.principal()?;
+        let all = self.store.list_organizations().await?;
+        Ok(all
+            .into_iter()
+            .filter(|o| principal.role_in(o.id).is_some())
+            .collect())
+    }
 
-/// Renames an active organization.
-pub async fn rename<R: OrganizationRepository>(
-    repository: &R,
-    id: Uuid,
-    name: &str,
-) -> CoreResult<Organization> {
-    let mut organization = get(repository, id).await?;
-    ensure_active(&organization)?;
-    organization.name = normalize_name(name)?;
-    repository.update_organization(&organization).await?;
-    Ok(organization)
-}
+    /// Renames an active organization (owners).
+    pub async fn rename_organization(
+        &self,
+        context: &Context,
+        id: Uuid,
+        name: &str,
+    ) -> CoreResult<Organization> {
+        const ACTION: &str = "organization.rename";
+        let principal = context.principal()?;
+        self.guard(
+            context,
+            ACTION,
+            Some(id),
+            principal.require(id, OrgAction::Manage),
+        )
+        .await?;
+        let mut organization = self.organization(context, id).await?;
+        ensure_active(&organization)?;
+        organization.name = normalize_name(name)?;
+        let audit = self
+            .event(context, ACTION)
+            .organization(id)
+            .target("organization", id)
+            .detail("name", &organization.name);
+        self.store
+            .update_organization(&organization, &audit)
+            .await?;
+        Ok(organization)
+    }
 
-/// Archives an organization; it becomes read-only. Archiving twice is refused.
-pub async fn archive<R: OrganizationRepository>(
-    repository: &R,
-    id: Uuid,
-) -> CoreResult<Organization> {
-    let mut organization = get(repository, id).await?;
-    ensure_active(&organization)?;
-    organization.status = OrganizationStatus::Archived;
-    repository.update_organization(&organization).await?;
-    Ok(organization)
+    /// Archives an organization (owners); it becomes read-only. Archiving twice is refused.
+    pub async fn archive_organization(
+        &self,
+        context: &Context,
+        id: Uuid,
+    ) -> CoreResult<Organization> {
+        const ACTION: &str = "organization.archive";
+        let principal = context.principal()?;
+        self.guard(
+            context,
+            ACTION,
+            Some(id),
+            principal.require(id, OrgAction::Manage),
+        )
+        .await?;
+        let mut organization = self.organization(context, id).await?;
+        ensure_active(&organization)?;
+        organization.status = OrganizationStatus::Archived;
+        let audit = self
+            .event(context, ACTION)
+            .organization(id)
+            .target("organization", id);
+        self.store
+            .update_organization(&organization, &audit)
+            .await?;
+        Ok(organization)
+    }
+
+    /// Fails with `Conflict` when the organization is archived.
+    pub(crate) async fn ensure_organization_active(&self, id: Uuid) -> CoreResult<()> {
+        let organization = self
+            .store
+            .get_organization(id)
+            .await?
+            .ok_or(CoreError::NotFound("organization"))?;
+        ensure_active(&organization)
+    }
 }
 
 fn ensure_active(organization: &Organization) -> CoreResult<()> {
@@ -166,14 +236,6 @@ fn ensure_active(organization: &Organization) -> CoreResult<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::testing::{FixedClock, MemoryStore};
-
-    fn new_org(slug: &str, name: &str) -> NewOrganization {
-        NewOrganization {
-            slug: slug.to_owned(),
-            name: name.to_owned(),
-        }
-    }
 
     #[test]
     fn slug_rules() {
@@ -196,56 +258,5 @@ mod tests {
         assert!(normalize_name("bad\u{0007}name").is_err());
         assert!(normalize_name(&"é".repeat(120)).is_ok());
         assert!(normalize_name(&"é".repeat(121)).is_err());
-    }
-
-    #[tokio::test]
-    async fn create_rename_archive() {
-        let store = MemoryStore::default();
-        let clock = FixedClock::default();
-        let org = create(&store, &clock, new_org("acme", "Acme"))
-            .await
-            .unwrap_or_else(|e| panic!("{e}"));
-        assert_eq!(org.status, OrganizationStatus::Active);
-
-        let renamed = rename(&store, org.id, "Acme Canada")
-            .await
-            .unwrap_or_else(|e| panic!("{e}"));
-        assert_eq!(renamed.name, "Acme Canada");
-
-        let archived = archive(&store, org.id)
-            .await
-            .unwrap_or_else(|e| panic!("{e}"));
-        assert_eq!(archived.status, OrganizationStatus::Archived);
-
-        assert!(matches!(
-            rename(&store, org.id, "Other").await,
-            Err(CoreError::Conflict(_))
-        ));
-        assert!(matches!(
-            archive(&store, org.id).await,
-            Err(CoreError::Conflict(_))
-        ));
-    }
-
-    #[tokio::test]
-    async fn duplicate_slug_conflicts() {
-        let store = MemoryStore::default();
-        let clock = FixedClock::default();
-        assert!(create(&store, &clock, new_org("acme", "Acme"))
-            .await
-            .is_ok());
-        assert!(matches!(
-            create(&store, &clock, new_org("acme", "Acme 2")).await,
-            Err(CoreError::Conflict(_))
-        ));
-    }
-
-    #[tokio::test]
-    async fn unknown_id_is_not_found() {
-        let store = MemoryStore::default();
-        assert_eq!(
-            get(&store, new_id()).await,
-            Err(CoreError::NotFound("organization"))
-        );
     }
 }

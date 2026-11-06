@@ -2,6 +2,7 @@
 //! the server or a host command. Nothing here holds a business rule.
 
 pub mod cli;
+pub mod hub;
 pub mod init;
 pub mod logging;
 pub mod migrate;

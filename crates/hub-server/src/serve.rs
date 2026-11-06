@@ -8,29 +8,35 @@ use std::time::{Duration, Instant};
 use anyhow::Context;
 use axum::Router;
 use axum_server::Handle;
-use hub_api::{router, AppState};
+use hub_api::{router, AppState, Backend};
+use hub_core::ports::SystemClock;
+use hub_crypto::HubCrypto;
 use hub_storage_sqlite::SqliteStore;
 
 use crate::cli::ServeArgs;
 use crate::readiness::HubReadiness;
-use crate::{paths, tls};
+use crate::{hub, paths, tls};
+
+/// The production adapters.
+pub struct Server;
+
+impl Backend for Server {
+    type Store = SqliteStore;
+    type Crypto = HubCrypto;
+    type Clock = SystemClock;
+    type Readiness = HubReadiness;
+}
 
 const SHUTDOWN_GRACE: Duration = Duration::from_secs(10);
 
 /// Builds the router of a Hub whose data lives in `data_dir`.
 pub async fn build(data_dir: &Path) -> anyhow::Result<Router> {
-    paths::create_data_dir(data_dir)?;
-    let store = SqliteStore::open(&paths::database(data_dir))
-        .await
-        .context("opening the database")?;
+    let (hub, store) = hub::open(data_dir).await?;
     let readiness = HubReadiness {
-        store: store.clone(),
+        store,
         secret_key: paths::secret_key(data_dir),
     };
-    Ok(router(AppState {
-        store,
-        readiness: Arc::new(readiness),
-    }))
+    Ok(router(AppState::<Server>::new(hub, Arc::new(readiness))))
 }
 
 pub async fn run(data_dir: &Path, args: ServeArgs) -> anyhow::Result<()> {

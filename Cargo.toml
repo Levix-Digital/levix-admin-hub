@@ -23,6 +23,11 @@ hub-crypto = { path = "crates/hub-crypto" }
 hub-api = { path = "crates/hub-api" }
 
 anyhow = "1"
+argon2 = "0.5"
+chacha20poly1305 = "0.10"
+data-encoding = "2"
+hmac = "0.12"
+sha1 = "0.10"
 axum = "0.8"
 axum-server = { version = "0.8", features = ["tls-rustls-no-provider"] }
 clap = { version = "4", features = ["derive", "env"] }
@@ -49,6 +54,13 @@ unsafe_code = "forbid"
 [workspace.lints.clippy]
 unwrap_used = "deny"
 expect_used = "warn"
+
+# Password hashing is far too slow unoptimized for the test suite.
+[profile.dev.package.argon2]
+opt-level = 3
+
+[profile.dev.package.blake2]
+opt-level = 3
 
 [profile.release]
 lto = "thin"

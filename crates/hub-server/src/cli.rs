@@ -30,10 +30,81 @@ pub struct Cli {
 pub enum Command {
     /// Run the Hub.
     Serve(ServeArgs),
-    /// Initialize the Hub on this host (once): instance, secret key and certificate.
-    Init(TlsArgs),
+    /// Initialize the Hub on this host (once): instance, secret key, certificate and the
+    /// instance owner's setup link.
+    Init(InitArgs),
+    /// Issue a recovery link for the instance owner who lost their password or authenticator.
+    RecoverOwner(RecoverArgs),
     /// Apply pending database migrations and exit.
     Migrate,
+    /// Commands on the administrative audit.
+    #[command(subcommand)]
+    Audit(AuditCommand),
+}
+
+#[derive(Debug, Subcommand)]
+pub enum AuditCommand {
+    /// Check the hash chain of the whole audit.
+    Verify,
+}
+
+#[derive(Debug, Clone, Args)]
+pub struct PublicUrl {
+    /// Address administrators open, used in printed links (default: the first host name on
+    /// port 8443).
+    #[arg(long, env = "LEVIX_HUB_PUBLIC_URL")]
+    pub public_url: Option<String>,
+}
+
+#[derive(Debug, Clone, Args)]
+pub struct InitArgs {
+    /// E-mail of the instance owner, who claims the Hub with the printed setup link.
+    #[arg(long, env = "LEVIX_HUB_OWNER_EMAIL")]
+    pub owner_email: String,
+
+    #[command(flatten)]
+    pub url: PublicUrl,
+
+    #[command(flatten)]
+    pub tls: TlsArgs,
+}
+
+impl InitArgs {
+    pub fn public_url(&self) -> String {
+        public_url(&self.url, &self.tls.hostnames)
+    }
+}
+
+#[derive(Debug, Clone, Args)]
+pub struct RecoverArgs {
+    /// E-mail of the instance owner to recover.
+    #[arg(long)]
+    pub email: String,
+
+    #[command(flatten)]
+    pub url: PublicUrl,
+
+    /// Host names of the generated certificate, used for the default public address.
+    #[arg(
+        long,
+        env = "LEVIX_HUB_HOSTNAMES",
+        value_delimiter = ',',
+        default_value = "localhost"
+    )]
+    pub hostnames: Vec<String>,
+}
+
+impl RecoverArgs {
+    pub fn public_url(&self) -> String {
+        public_url(&self.url, &self.hostnames)
+    }
+}
+
+fn public_url(url: &PublicUrl, hostnames: &[String]) -> String {
+    url.public_url.clone().unwrap_or_else(|| {
+        let host = hostnames.first().map_or("localhost", String::as_str);
+        format!("https://{host}:8443")
+    })
 }
 
 #[derive(Debug, Clone, Args)]
