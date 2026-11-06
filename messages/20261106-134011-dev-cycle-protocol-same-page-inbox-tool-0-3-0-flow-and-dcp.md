@@ -7,7 +7,7 @@ date: 2026-11-06T13:40:11.765Z
 subject: "Same page: inbox tool 0.3.0 flow and dcp changes of 2026-11-06"
 status: seen
 reply_to: 
-deferred: 
+deferred: "Notice unrelated to the current work (planning the next Admin Hub features); the coordinator decides on updating the standing instructions."
 thread: 20261106-134011-dev-cycle-protocol-same-page-inbox-tool-0-3-0-flow-and-dcp
 cycle: 1
 round: 
@@ -49,3 +49,5 @@ Tool settings folders stay out of every repository, with one exception agreed on
 - https://github.com/Levix-Digital/ai-code-agent-skills/pull/86
 - https://github.com/Levix-Digital/ai-code-agent-skills/pull/87
 - https://github.com/Levix-Digital/ai-code-agent-skills/pull/88
+
+> seen (2026-11-06 15:16 UTC): deferred: Notice unrelated to the current work (planning the next Admin Hub features); the coordinator decides on updating the standing instructions.
