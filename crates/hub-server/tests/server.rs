@@ -167,3 +167,24 @@ mod outbound {
         remotes
     }
 }
+
+#[tokio::test]
+async fn init_resumes_after_an_interruption_before_the_instance() {
+    let dir = ok(tempfile::tempdir());
+    // An earlier init created the key file and stopped.
+    ok(hub_crypto::key_file::create(
+        &dir.path().join("keys/secret.key"),
+    ));
+    assert!(init::initialize(dir.path(), &tls_args()).await.is_ok());
+}
+
+#[cfg(unix)]
+#[tokio::test]
+async fn data_directory_is_owner_only() {
+    use std::os::unix::fs::PermissionsExt;
+    let dir = ok(tempfile::tempdir());
+    let data = dir.path().join("data");
+    ok(init::initialize(&data, &tls_args()).await);
+    let mode = ok(std::fs::metadata(&data)).permissions().mode();
+    assert_eq!(mode & 0o077, 0);
+}

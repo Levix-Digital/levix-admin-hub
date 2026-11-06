@@ -19,8 +19,7 @@ const SHUTDOWN_GRACE: Duration = Duration::from_secs(10);
 
 /// Builds the router of a Hub whose data lives in `data_dir`.
 pub async fn build(data_dir: &Path) -> anyhow::Result<Router> {
-    std::fs::create_dir_all(data_dir)
-        .with_context(|| format!("creating the data directory {}", data_dir.display()))?;
+    paths::create_data_dir(data_dir)?;
     let store = SqliteStore::open(&paths::database(data_dir))
         .await
         .context("opening the database")?;
