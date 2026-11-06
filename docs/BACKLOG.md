@@ -356,6 +356,13 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 
 ## Adjustments
 
+### ADJ-001: [license] One license text shared by every proprietary Levix product
+- **Priority**: medium
+- **Status**: open
+- **Found**: 2026-11-06, cross-project decision 20261106-161526
+- **Plan**: -
+- **Description**: Owner decision 2026-11-06 (cross-project thread with AnyContext): the LICENSE is byte-identical in every proprietary Levix product; section 2 allows a free edition only where Levix Digital publishes one (the Admin Hub publishes none), section 7 covers termination without an Agreement. A change is proposed by one product and applied by all.
+
 ## Epics
 
 ### EPIC-001: Organizations and administration
