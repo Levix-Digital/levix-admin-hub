@@ -5,9 +5,9 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-06T15:13:46.140Z
 subject: "Set up .aurora/integrations.json for Aurora v0.3.0 messages"
-status: seen
+status: done
 reply_to: 
-deferred: "Not part of the current planning work; offered to the owner as a repository setup option, to be done only if chosen."
+deferred: 
 thread: 20261106-151346-aurora-dev-suite-set-up-aurora-integrations-json-for-auro
 cycle: 1
 round: 1
