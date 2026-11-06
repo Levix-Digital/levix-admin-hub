@@ -33,6 +33,13 @@ key that they pinned at enrollment. The policy model, signatures and formats com
 and the contract is public and versioned
 ([ADR-0006](docs/adr/0006-public-versioned-contract-for-the-api-and-the-device-channel.md)).
 
+## Security
+
+The threat model of every trust boundary, with the status of each threat, is in
+[docs/security/threat-model.md](docs/security/threat-model.md); the controls that answer them
+(claiming, authentication, authorization, secrets, audit, transport, supply chain) are in
+[docs/security/security-architecture.md](docs/security/security-architecture.md).
+
 ## Subsystems
 
 <!-- architecture-docs:subsystems:start -->

@@ -3,7 +3,9 @@
 The control plane of the Levix products (AnyContext, DocMapper and future ones). This is the
 Admin Hub's slice of the design decided in the AnyContext v2 redesign (October 2026). The
 client side of the channel, the policy model and signature verification live in
-`levix-platform`; the products keep their own content and data.
+`levix-platform`; the products keep their own content and data. The threats and the security
+controls are in [threat-model.md](../security/threat-model.md) and
+[security-architecture.md](../security/security-architecture.md).
 
 ## Principles
 
@@ -35,8 +37,9 @@ client side of the channel, the policy model and signature verification live in
   which the device pins; each device has an Ed25519 identity. Outbound-only WebSocket from
   the device, heartbeat and **kill-switch**.
 - **License and seats per product:** a license signed by Levix (seats, validity), verified
-  **offline** by the Admin Hub. Seats per device or per user is an open commercial decision;
-  the architecture supports both.
+  **offline** by the Admin Hub. Seats are per named user by default and per device as an
+  option for shop floors and OT where there is no named user (VISION, Business Model); the
+  seat model of each product is declared in its manifest.
 - **Policy distribution and signing:** each product registers its **policy schema** (for
   AnyContext: models and trust levels, web search, MCP server, connectors and account
   domains, sources, quotas…); the core signs, distributes and audits without knowing the
