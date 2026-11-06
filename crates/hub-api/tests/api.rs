@@ -543,3 +543,14 @@ async fn every_hub_serves_its_contract() {
     assert_eq!(response.body["openapi"], "3.1.0");
     assert_eq!(response.body["info"]["version"], hub_api::CONTRACT_VERSION);
 }
+
+#[tokio::test]
+async fn oversized_and_malformed_bodies_use_the_error_object() {
+    let fixture = Fixture::new().await;
+    let huge = "x".repeat(hub_api::MAX_BODY_BYTES + 1);
+    let response = fixture
+        .post("/api/v1/auth/login", &Auth::None, json!({ "email": huge }))
+        .await;
+    assert_eq!(response.status, StatusCode::PAYLOAD_TOO_LARGE);
+    assert_eq!(response.body["error"]["code"], "bad_request");
+}

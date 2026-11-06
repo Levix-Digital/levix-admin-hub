@@ -56,9 +56,6 @@ impl ApiError {
         CoreError::Unauthenticated.into()
     }
 
-    pub(crate) fn bad_request(message: impl Into<String>) -> Self {
-        Self::new(StatusCode::BAD_REQUEST, "bad_request", message)
-    }
 }
 
 impl From<CoreError> for ApiError {
