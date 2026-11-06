@@ -1,0 +1,11 @@
+{
+  "project_name": "levix-admin-hub",
+  "docs": {
+    "user_doc": "README.md"
+  },
+  "devops": {
+    "branching": "trunk",
+    "production_branch": "main",
+    "version_files": []
+  }
+}
