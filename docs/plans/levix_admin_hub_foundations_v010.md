@@ -7,7 +7,7 @@ version: v0.1.0
 status: in_progress
 author: LeviGuilherme
 created_at: '2026-11-06T16:20:08'
-updated_at: '2026-11-06T22:44:21'
+updated_at: '2026-11-06T23:08:05'
 session_id: null
 tags: []
 supersedes: null
@@ -39,7 +39,9 @@ milestones:
   done_at: '2026-11-06'
   by: LeviGuilherme
 - name: M5 Administration CLI
-  done: false
+  done: true
+  done_at: '2026-11-06'
+  by: LeviGuilherme
 - name: M6 Web console
   done: false
 - name: M7 Release readiness
@@ -69,6 +71,9 @@ status_log:
 - at: '2026-11-06T22:44:21'
   by: LeviGuilherme
   note: 'Milestone ''M4 Public contract'' completed: OpenAPI from utoipa committed and tested, oasdiff breaking check, channel v1 AsyncAPI with schemas and examples, contract CHANGELOG 1.0.0, permission matrix published'
+- at: '2026-11-06T23:08:05'
+  by: LeviGuilherme
+  note: 'Milestone ''M5 Administration CLI'' completed: levix-hub-cli over the public API only: login with TOTP, CA or fingerprint trust, 0600 session file, one command per API operation (parity test with the OpenAPI), JSON output and stable exit codes, end-to-end tests against a TLS Hub'
 ---
 
 ---

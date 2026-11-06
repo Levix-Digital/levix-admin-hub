@@ -6,6 +6,7 @@ members = [
     "crates/hub-crypto",
     "crates/hub-api",
     "crates/hub-server",
+    "crates/hub-cli",
 ]
 
 [workspace.package]
@@ -21,6 +22,7 @@ hub-core = { path = "crates/hub-core" }
 hub-storage-sqlite = { path = "crates/hub-storage-sqlite" }
 hub-crypto = { path = "crates/hub-crypto" }
 hub-api = { path = "crates/hub-api" }
+hub-server = { path = "crates/hub-server" }
 
 anyhow = "1"
 argon2 = "0.5"
@@ -32,6 +34,9 @@ axum = "0.8"
 axum-server = { version = "0.8", features = ["tls-rustls-no-provider"] }
 clap = { version = "4", features = ["derive", "env"] }
 rand = "0.8"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls-manual-roots-no-provider"] }
+rustls-native-certs = "0.8"
+rpassword = "7"
 rcgen = "0.13"
 rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
 serde = { version = "1", features = ["derive"] }
