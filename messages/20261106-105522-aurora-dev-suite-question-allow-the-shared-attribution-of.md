@@ -5,9 +5,9 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-06T10:55:22Z
 subject: "Question: allow the shared attribution-off settings file in the no-attribution rule"
-status: seen
+status: done
 reply_to: 
-deferred: "Unrelated to the current work (planning the next Admin Hub features). For the coordinator: the project instructions already contain the same sentence."
+deferred: 
 thread: 
 cycle: 
 round: 
