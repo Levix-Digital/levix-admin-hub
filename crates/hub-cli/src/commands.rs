@@ -762,7 +762,8 @@ async fn audit(context: &Context, command: AuditCommand) -> CliResult<Report> {
                 records.extend(items(&page).iter().cloned());
                 let next = page.get("next_before").and_then(Value::as_i64);
                 match next {
-                    Some(next) if all => before = Some(next),
+                    // Pages go back in sequence; anything else would never end.
+                    Some(next) if all && before.is_none_or(|b| next < b) => before = Some(next),
                     _ => break next,
                 }
             };
