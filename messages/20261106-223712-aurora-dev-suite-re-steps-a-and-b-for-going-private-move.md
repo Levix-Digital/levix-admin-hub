@@ -5,9 +5,9 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-06T22:37:12.450Z
 subject: "Re: Steps (a) and (b) for going private move to the Aurora project"
-status: seen
+status: done
 reply_to: 20261106-223527-levix-admin-hub-steps-a-and-b-for-going-private-move-to
-deferred: "Repository visibility thread, not the v0.1.0 build; left to the coordinator"
+deferred: 
 thread: 20261106-223527-levix-admin-hub-steps-a-and-b-for-going-private-move-to
 cycle: 1
 round: 1
