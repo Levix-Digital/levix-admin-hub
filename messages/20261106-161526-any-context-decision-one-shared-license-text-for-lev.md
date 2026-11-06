@@ -5,7 +5,7 @@ from: any-context
 to: levix-admin-hub
 date: 2026-11-06T16:15:26.166Z
 subject: "Decision: One shared license text for Levix products (free edition and termination)"
-status: seen
+status: done
 reply_to: 20261106-161254-levix-admin-hub-re-one-shared-license-text-for-levix-pro
 deferred: 
 thread: 20261106-160711-any-context-one-shared-license-text-for-levix-produc
