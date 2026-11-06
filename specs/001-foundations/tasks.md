@@ -8,10 +8,10 @@
 
 ## Phase 1: Threat model and security architecture (M1)
 
-- [ ] T001 [P] [US5] Write `docs/security/threat-model.md`: assets, actors, trust boundaries of every release (browser, CLI, host, database and key file; device channel, IdP, ITSM, SIEM, mirror), STRIDE threats per boundary, each with a status (mitigated in v0.1.0, planned with a backlog id, accepted with a reason)
-- [ ] T002 [P] [US5] Write `docs/security/security-architecture.md`: authentication, authorization matrix, sessions, secrets and keys, audit chain, transport, zero knowledge, supply chain
-- [ ] T003 [P] Edit `docs/architecture/admin-hub-design.md`: seats per user by default, per device for OT; link the security documents
-- [ ] T004 Capture as backlog items the threats planned for later releases that no item covers yet
+- [x] T001 [P] [US5] Write `docs/security/threat-model.md`: assets, actors, trust boundaries of every release (browser, CLI, host, database and key file; device channel, IdP, ITSM, SIEM, mirror), STRIDE threats per boundary, each with a status (mitigated in v0.1.0, planned with a backlog id, accepted with a reason)
+- [x] T002 [P] [US5] Write `docs/security/security-architecture.md`: authentication, authorization matrix, sessions, secrets and keys, audit chain, transport, zero knowledge, supply chain
+- [x] T003 [P] Edit `docs/architecture/admin-hub-design.md`: seats per user by default, per device for OT; link the security documents
+- [x] T004 Capture as backlog items the threats planned for later releases that no item covers yet
 
 ## Phase 2: Service skeleton and organizations (M2)
 
@@ -31,7 +31,7 @@
 - [ ] T015 [US2] Core: administrator, role assignment and permission matrix (table test over every action and role)
 - [ ] T016 [US2] Core: credential links (setup, invitation, recovery) single use and expiry; last-owner protection
 - [ ] T017 [US2] Crypto adapters: Argon2id hasher, TOTP (one step of drift, replay refused), recovery codes, XChaCha20-Poly1305 secret box
-- [ ] T018 [US2] Core: sign-in with password and TOTP, lockout with increasing delays, sessions with inactivity and absolute expiry, revocation
+- [ ] T018 [US2] Core: sign-in with password and TOTP, lockout with increasing delays, request limit per source address on unauthenticated endpoints, sessions with inactivity and absolute expiry, revocation
 - [ ] T019 [US4] Core: personal API tokens (create, list, revoke, expiry ≤ 90 days, creator's permissions at use time)
 - [ ] T020 [US2] Core and storage: append-only hash-chained administrative audit written by every use case; `levix-hub audit verify`
 - [ ] T021 Storage: migration 2 (administrator, recovery_code, role_assignment, credential_link, session, api_token, audit_record), integration tests including concurrent use of one link

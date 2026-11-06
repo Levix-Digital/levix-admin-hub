@@ -11,7 +11,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 ### FEAT-001: [core] Rust service skeleton with organizations and the shared platform crates
 - **Priority**: high
 - **Epic**: EPIC-001
-- **Status**: planned
+- **Status**: in_progress
 - **Found**: 2026-10-23, initial backlog, from the AnyContext v2 rebuild
 - **Plan**: levix_admin_hub_foundations_v010
 - **Description**: Design: docs/architecture/admin-hub-design.md, Principles, and section Common core. The Admin Hub as a Rust service with organizations, sharing the policy model, signature verification and data definition formats with levix-platform, so client and server are identical.
@@ -147,7 +147,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 ### FEAT-018: [contract] Documented API and WebSocket protocol
 - **Priority**: high
 - **Epic**: EPIC-013
-- **Status**: planned
+- **Status**: in_progress
 - **Found**: 2026-10-23, initial backlog, from the AnyContext v2 rebuild
 - **Plan**: levix_admin_hub_foundations_v010
 - **Description**: Design: docs/architecture/admin-hub-design.md, section Contract. A versioned, documented contract for everything that goes through the channel, so any product in any language can talk to the Admin Hub.
@@ -155,7 +155,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 ### FEAT-019: [admin] Administrator accounts, roles and second factor
 - **Priority**: high
 - **Epic**: EPIC-001
-- **Status**: planned
+- **Status**: in_progress
 - **Found**: 2026-11-06, Phase 0, 2026-11-06
 - **Plan**: levix_admin_hub_foundations_v010
 - **Description**: Organization owner, administrator, approver, auditor and read-only roles per organization and product; SSO or local accounts with Argon2id and mandatory TOTP (TECH_SPEC, Security and Privacy).
@@ -163,7 +163,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 ### FEAT-020: [console] Web console served by the Hub
 - **Priority**: high
 - **Epic**: EPIC-001
-- **Status**: planned
+- **Status**: in_progress
 - **Found**: 2026-11-06, Phase 0, 2026-11-06
 - **Plan**: levix_admin_hub_foundations_v010
 - **Description**: Leptos console embedded in the binary, no external assets, WCAG 2.1 AA, English, Canadian French and Brazilian Portuguese (ADR-0002).
@@ -171,7 +171,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 ### FEAT-021: [cli] Administration CLI
 - **Priority**: high
 - **Epic**: EPIC-001
-- **Status**: planned
+- **Status**: in_progress
 - **Found**: 2026-11-06, Phase 0, 2026-11-06
 - **Plan**: levix_admin_hub_foundations_v010
 - **Description**: Rust CLI over the public API for every administrative action, scripts and automation.
@@ -323,7 +323,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 ### FEAT-040: [security] Threat model and security architecture document
 - **Priority**: high
 - **Epic**: EPIC-013
-- **Status**: planned
+- **Status**: in_progress
 - **Found**: 2026-11-06, Phase 0, 2026-11-06
 - **Plan**: levix_admin_hub_foundations_v010
 - **Description**: Published threat model and security architecture of the Hub, kept current with each release.
@@ -351,6 +351,30 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Found**: 2026-11-06, Phase 0, 2026-11-06
 - **Plan**: -
 - **Description**: Import and validate product manifests signed by Levix (identifier, client kinds, policy schema, data definition formats, seat model, telemetry counters, commands); the license lists the products a Hub governs; adding a product needs no Hub release. The manifest format lives in levix-platform (ADR-0005, ADR-0008).
+
+### FEAT-044: [security] Hardware key custody (PKCS#11) for the Hub signing key and the secret key
+- **Priority**: medium
+- **Epic**: EPIC-013
+- **Status**: open
+- **Found**: 2026-11-06, threat model, v0.1.0 plan
+- **Plan**: -
+- **Description**: Threat model T-21 and T-33; TECH_SPEC open question. A key custody adapter for HSMs and cloud KMS through PKCS#11, so the keys never sit in a file on the data volume.
+
+### FEAT-045: [devices] Hub signing key rotation and compromise recovery
+- **Priority**: high
+- **Epic**: EPIC-003
+- **Status**: open
+- **Found**: 2026-11-06, threat model, v0.1.0 plan
+- **Plan**: -
+- **Description**: Threat model T-33. Rotate the Hub signing key with a re-pinning message signed by the previous key; after a compromise, re-enroll devices through a recovery path the customer controls; audited.
+
+### FEAT-046: [products] Levix signing key revocation for manifests and licenses
+- **Priority**: high
+- **Epic**: EPIC-015
+- **Status**: open
+- **Found**: 2026-11-06, threat model, v0.1.0 plan
+- **Plan**: -
+- **Description**: Threat model T-41. Offline key ceremony for the Levix keys that sign product manifests and licenses, and a signed revocation list delivered in Hub updates and through the mirror, so a compromised key stops being accepted.
 
 ## Improvements
 
