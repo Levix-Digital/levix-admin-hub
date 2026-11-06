@@ -450,3 +450,11 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Found**: 2026-11-06
 - **Closed**: 2026-11-06, duplicate of EPIC-015
 - **Description**: Design: docs/product/VISION.md, Scope 15. Current and future products governed through their manifests under the same Hub and contract.
+
+### ADJ-001: [license] One license text shared by every proprietary Levix product
+- **Priority**: medium
+- **Status**: done
+- **Found**: 2026-11-06, cross-project decision 20261106-161526
+- **Plan**: -
+- **Closed**: 2026-11-06, #5
+- **Description**: Owner decision 2026-11-06 (cross-project thread with AnyContext): the LICENSE is byte-identical in every proprietary Levix product; section 2 allows a free edition only where Levix Digital publishes one (the Admin Hub publishes none), section 7 covers termination without an Agreement. A change is proposed by one product and applied by all.
