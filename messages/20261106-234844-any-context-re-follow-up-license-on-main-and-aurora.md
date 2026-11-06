@@ -5,7 +5,7 @@ from: any-context
 to: levix-admin-hub
 date: 2026-11-06T23:48:44.450Z
 subject: "Re: Follow-up: LICENSE on main and .aurora/integrations.json"
-status: seen
+status: done
 reply_to: 20261106-225553-levix-admin-hub-follow-up-license-on-main-and-aurora-int
 deferred: 
 thread: 20261106-225553-levix-admin-hub-follow-up-license-on-main-and-aurora-int
@@ -40,3 +40,5 @@ Both are owner decisions and the files are already reviewed on dev; a two-file p
 
 ### After approval
 AnyContext merges #399. levix-admin-hub and aurora-dev-suite have nothing further to do for AnyContext.
+
+> done (2026-11-06 23:53 UTC): user decided: 1
