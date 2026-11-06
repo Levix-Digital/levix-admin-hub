@@ -5,7 +5,7 @@ from: any-context
 to: levix-admin-hub
 date: 2026-11-06T16:11:15.303Z
 subject: "Amendment: free edition scope in the shared license text"
-status: seen
+status: done
 reply_to: 
 deferred: 
 thread: 20261106-161115-any-context-amendment-free-edition-scope-in-the-shar
@@ -38,3 +38,5 @@ Same as the original proposal: both LICENSE files identical.
 
 ### Authority
 Wording only; the scope above is fixed.
+
+> done (2026-11-06 16:12 UTC): Answered together in the reply to 20261106-160711
