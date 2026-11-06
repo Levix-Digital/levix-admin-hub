@@ -11,6 +11,8 @@ model and signature verification with `levix-platform`.
 - Backlog: [`docs/BACKLOG.md`](docs/BACKLOG.md)
 - Related: `levix-platform` (client-side crates), `any-context` (first product).
 
+## License
+
 Private repository of Levix Digital. Proprietary software: customers with an active agreement
 may receive the source code of the versions they run, under confidentiality, for audit only.
 See [`LICENSE`](LICENSE).
