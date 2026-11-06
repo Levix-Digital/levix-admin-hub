@@ -48,10 +48,10 @@
 
 ## Phase 5: Administration CLI (M5)
 
-- [ ] T029 [US4] `levix-hub-cli`: configuration, `login` (password, TOTP, CA or `--fingerprint`), session file 0600, `logout`
-- [ ] T030 [US4] Commands for every API operation: organizations, administrators, roles, invitations, sessions, tokens, audit, own profile and TOTP
-- [ ] T031 [US4] `--output json`, stable error object and exit codes
-- [ ] T032 [US4] End-to-end tests of stories 1 to 4 against a spawned server; SC-004 parity test (every API operation has a command)
+- [x] T029 [US4] `levix-hub-cli`: configuration, `login` (password, TOTP, CA or `--fingerprint`), session file 0600, `logout`
+- [x] T030 [US4] Commands for every API operation: organizations, administrators, roles, invitations, sessions, tokens, audit, own profile and TOTP
+- [x] T031 [US4] `--output json`, stable error object and exit codes
+- [x] T032 [US4] End-to-end tests of stories 1 to 4 against a spawned server; SC-004 parity test (every API operation has a command)
 
 ## Phase 6: Web console (M6)
 

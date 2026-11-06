@@ -43,6 +43,17 @@ served at `/api/v1/openapi.json`), the device channel as AsyncAPI with JSON Sche
 differs from the code or an example breaks its schema; CI refuses a breaking API change within
 one major contract version.
 
+## CLI
+
+`levix-hub-cli` (crate `hub-cli`) administers a Hub over the public API only: it depends on no
+Hub crate, so it can do exactly what the API allows. Every API operation has one command, and a
+test compares that table with the committed OpenAPI document. The CLI trusts the Hub through
+the system certificate authorities, a CA file, or the SHA-256 fingerprint that `levix-hub init`
+prints; it keeps the session token in a file readable by the user only, and a personal API
+token in `LEVIX_HUB_TOKEN` replaces the session for scripts. `--output json` prints the API's
+JSON, and exit codes are stable (3 not signed in, 4 not allowed, 5 not found, 6 conflict,
+7 invalid input, 8 throttled, 9 unreachable or untrusted Hub, 10 Hub error).
+
 ## Security
 
 The threat model of every trust boundary, with the status of each threat, is in

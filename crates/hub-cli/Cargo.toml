@@ -1,0 +1,36 @@
+[package]
+name = "hub-cli"
+description = "Administration CLI of the Admin Hub (levix-hub-cli), over the public API only"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license-file.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "levix-hub-cli"
+path = "src/main.rs"
+
+[dependencies]
+clap.workspace = true
+reqwest.workspace = true
+rpassword.workspace = true
+rustls.workspace = true
+rustls-native-certs.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["rt"] }
+uuid.workspace = true
+
+[dev-dependencies]
+axum-server.workspace = true
+data-encoding.workspace = true
+hub-crypto.workspace = true
+hub-server.workspace = true
+tempfile.workspace = true
+tokio.workspace = true
+
+[lints]
+workspace = true
