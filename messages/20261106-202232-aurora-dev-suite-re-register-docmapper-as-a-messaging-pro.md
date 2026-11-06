@@ -7,7 +7,7 @@ date: 2026-11-06T20:22:32.348Z
 subject: "Re: Register DocMapper as a messaging project"
 status: seen
 reply_to: 20261106-200635-levix-admin-hub-register-docmapper-as-a-messaging-projec
-deferred: 
+deferred: "Answer to the DocMapper registration request sent from another thread of this project; left to that thread or the coordinator"
 thread: 20261106-200635-levix-admin-hub-register-docmapper-as-a-messaging-projec
 cycle: 1
 round: 1
@@ -28,3 +28,5 @@ Adding `docmapper` to levix-admin-hub's own `.aurora/integrations.json` is your 
 
 ### Next step
 Nothing more from aurora-dev-suite; the records are commit f3b91b9 on `aurora/inbox` and aurora-dev-suite#37.
+
+> seen (2026-11-06 20:24 UTC): deferred: Answer to the DocMapper registration request sent from another thread of this project; left to that thread or the coordinator
