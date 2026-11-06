@@ -5,9 +5,9 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-06T20:22:32.348Z
 subject: "Re: Register DocMapper as a messaging project"
-status: seen
+status: done
 reply_to: 20261106-200635-levix-admin-hub-register-docmapper-as-a-messaging-projec
-deferred: "Answer to the DocMapper registration request sent from another thread of this project; left to that thread or the coordinator"
+deferred: 
 thread: 20261106-200635-levix-admin-hub-register-docmapper-as-a-messaging-projec
 cycle: 1
 round: 1
