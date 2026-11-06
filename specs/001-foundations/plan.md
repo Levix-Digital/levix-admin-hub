@@ -99,7 +99,7 @@ FEAT-018, FEAT-001, FEAT-019, FEAT-020, FEAT-021, FEAT-040; release v0.1.0 Found
 
 ### Tests (quality-assurance)
 
-- Unit: permission matrix (every action × role, generated table test), password rules, TOTP window and replay refusal, recovery codes single use, link expiry and single use, lockout delays, last-owner protection, audit hash chain and its verifier.
+- Unit: permission matrix (every action × role, generated table test), password rules, TOTP window and replay refusal, recovery codes single use, link expiry and single use, lockout delays, request limit per source address, last-owner protection, audit hash chain and its verifier.
 - Integration: storage adapter on a temporary SQLite file (migrations from empty, constraints, concurrent single-use links); HTTP API for every endpoint including CSRF, cookie flags, unknown-field refusal, session expiry; startup refusal on read-only volume and on a newer schema.
 - Contract: generated OpenAPI equals `docs/contracts/api/openapi.json`; `oasdiff breaking` against the last release; AsyncAPI document and JSON Schemas validate; example messages validate against the schemas.
 - End to end: CLI scripts covering stories 1 to 4 against a spawned server; a check that the server opens no outbound socket.
