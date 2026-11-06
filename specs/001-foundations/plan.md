@@ -12,7 +12,7 @@ The first working Admin Hub: a Rust service in a container that IT claims from t
 
 **Language/Version**: Rust stable (1.97 at planning time), edition 2021; console compiled to `wasm32-unknown-unknown`.
 
-**Primary Dependencies**: Tokio, Axum, axum-server with rustls, SQLx (SQLite), utoipa, argon2, totp-rs, chacha20poly1305, sha2, tracing, clap, reqwest with rustls (CLI), Leptos (CSR), fluent-bundle, rust-embed.
+**Primary Dependencies**: Tokio, Axum, axum-server with rustls, SQLx (SQLite), utoipa, argon2, hmac and sha1 (TOTP), chacha20poly1305, sha2, tracing, clap, reqwest with rustls (CLI), Leptos (CSR), fluent-bundle, rust-embed.
 
 **Storage**: SQLite 3 file per Hub (compact profile); secret key file beside it.
 

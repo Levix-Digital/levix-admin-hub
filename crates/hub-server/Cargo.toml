@@ -23,11 +23,14 @@ hub-storage-sqlite.workspace = true
 rcgen.workspace = true
 rustls.workspace = true
 sha2.workspace = true
+time.workspace = true
 tokio.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
 
 [dev-dependencies]
+data-encoding.workspace = true
+serde_json.workspace = true
 hub-crypto.workspace = true
 tempfile.workspace = true
 

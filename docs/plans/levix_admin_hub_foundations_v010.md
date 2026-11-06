@@ -7,7 +7,7 @@ version: v0.1.0
 status: in_progress
 author: LeviGuilherme
 created_at: '2026-11-06T16:20:08'
-updated_at: '2026-11-06T18:10:18'
+updated_at: '2026-11-06T18:35:30'
 session_id: null
 tags: []
 supersedes: null
@@ -31,7 +31,9 @@ milestones:
   done_at: '2026-11-06'
   by: LeviGuilherme
 - name: M3 Administrators roles and TOTP
-  done: false
+  done: true
+  done_at: '2026-11-06'
+  by: LeviGuilherme
 - name: M4 Public contract
   done: false
 - name: M5 Administration CLI
@@ -59,6 +61,9 @@ status_log:
 - at: '2026-11-06T18:10:18'
   by: LeviGuilherme
   note: 'Milestone ''M2 Service skeleton and organizations'' completed: Workspace, CI, container, server with TLS, health, logs, SQLite, init, organizations in the core'
+- at: '2026-11-06T18:35:30'
+  by: LeviGuilherme
+  note: 'Milestone ''M3 Administrators roles and TOTP'' completed: Administrators, roles, TOTP, sessions, API tokens, hash-chained audit, recover-owner; 72 tests'
 ---
 
 ---

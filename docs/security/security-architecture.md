@@ -12,7 +12,7 @@ How the Admin Hub protects what it governs: who can do what, how they prove it, 
 ## Claiming a new Hub
 
 1. The container starts uninitialized; the console only explains how to initialize it.
-2. On the host, `levix-hub init` creates the instance, the secret key file and a single-use setup link valid for 24 hours, and prints the TLS certificate fingerprint.
+2. On the host, `levix-hub init --owner-email <e-mail>` creates the instance and a single-use setup link valid for 24 hours, and prints the link with the TLS certificate fingerprint. The link carries its token in the URL fragment, which browsers never send to a server.
 3. Whoever opens the link sets a password, enrolls TOTP and becomes the instance owner. Using the link consumes it.
 
 Holding the host is the trust anchor: the same person who can run the container can claim it. `levix-hub recover-owner` uses the same anchor when the instance owner loses every factor.
@@ -24,9 +24,9 @@ Holding the host is the trust anchor: the same person who can run the container 
 | Passwords | Argon2id (19 MiB, 2 iterations, parallelism 1, tunable); at least 12 characters; refused when in the bundled list of common passwords. |
 | Second factor | TOTP (RFC 6238, SHA-1, 6 digits, 30 s), mandatory before any action; one step of clock drift accepted; each step accepted once. |
 | Recovery | 10 single-use recovery codes stored as hashes; owners reset other administrators' TOTP; host recovery for the instance owner. |
-| Brute force | Increasing delays per account after failures; request limit per source address on unauthenticated endpoints. |
+| Brute force | After 5 failures, a delay per account starting at 30 s and doubling up to 15 minutes; 20 requests per minute per source address on the unauthenticated endpoints (sign-in, links); unknown e-mails cost the same hashing time as known ones. |
 | Invitations | Single-use links valid 72 hours, shown once to the inviting owner, delivered by them through a separate channel (the Hub sends no e-mail). |
-| Console sessions | Random token in an `HttpOnly`, `Secure`, `SameSite=Strict` cookie with a per-session CSRF token; 15 minutes of inactivity, 12 hours absolute; stored server-side and revocable. |
+| Console sessions | Random token in the `__Host-lvx_session` cookie (`HttpOnly`, `Secure`, `SameSite=Strict`) with a per-session CSRF token required in `X-CSRF-Token` on every write; 15 minutes of inactivity, 12 hours absolute (the instance owner tunes both within 5–60 minutes and 1–24 hours); stored server-side as hashes and revocable. |
 | CLI sessions | Bearer token stored in a file readable only by the user; same expiry rules. |
 | API tokens | Personal, named, prefixed `lvxh_`, 256 random bits, stored as SHA-256, expiry at most 90 days, revocable; they act with the creator's current permissions. |
 | Single sign-on | OIDC and SAML 2.0 for administrators arrive with FEAT-004; the local instance owner remains as a break-glass administrator. |
@@ -42,7 +42,7 @@ Holding the host is the trust anchor: the same person who can run the container 
 
 | Secret | Where it lives |
 |---|---|
-| Secret key (256-bit) | File `keys/secret.key` on the data volume, owner-only permissions, created by `init`, never in the database; behind the key custody port, which a hardware adapter will implement (FEAT-044). |
+| Secret key (256-bit) | File `keys/secret.key` on the data volume, owner-only permissions, created at the first start (or by `init`), never in the database; behind the key custody port, which a hardware adapter will implement (FEAT-044). |
 | TOTP secrets | Encrypted with XChaCha20-Poly1305 under the secret key. |
 | Passwords, tokens, links, recovery codes | Hashes only (Argon2id for passwords, SHA-256 for random tokens); compared in constant time. |
 | Hub signing key (Ed25519) | Created with enrollment (FEAT-006) on the key custody port; its fingerprint travels in enrollment codes. |

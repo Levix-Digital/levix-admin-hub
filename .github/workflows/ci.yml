@@ -79,9 +79,11 @@ jobs:
           done
           echo "Ready after $(( $(date +%s) - start )) s"
           curl -skf https://127.0.0.1:8443/api/v1/instance | grep -q '"initialized":false'
-          docker exec hub levix-hub init
+          docker exec hub levix-hub init --owner-email owner@example.com | tee init.txt
+          grep -q '#/link/lvxl_' init.txt
           curl -skf https://127.0.0.1:8443/api/v1/instance | grep -q '"initialized":true'
           curl -skf https://127.0.0.1:8443/readyz | grep -q '"ready"'
+          docker exec hub levix-hub audit verify
       - name: Logs
         if: always()
         run: docker logs hub || true

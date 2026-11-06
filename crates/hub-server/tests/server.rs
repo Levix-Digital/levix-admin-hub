@@ -2,7 +2,7 @@
 
 use std::path::Path;
 
-use hub_server::cli::TlsArgs;
+use hub_server::cli::{InitArgs, PublicUrl, TlsArgs};
 use hub_server::{init, serve};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
@@ -11,11 +11,15 @@ fn ok<T, E: std::fmt::Display>(result: Result<T, E>) -> T {
     result.unwrap_or_else(|e| panic!("{e}"))
 }
 
-fn tls_args() -> TlsArgs {
-    TlsArgs {
-        tls_cert: None,
-        tls_key: None,
-        hostnames: vec!["localhost".to_owned()],
+fn init_args() -> InitArgs {
+    InitArgs {
+        owner_email: "owner@example.com".to_owned(),
+        url: PublicUrl { public_url: None },
+        tls: TlsArgs {
+            tls_cert: None,
+            tls_key: None,
+            hostnames: vec!["hub.example".to_owned()],
+        },
     }
 }
 
@@ -43,12 +47,17 @@ async fn spawn(data_dir: &Path) -> std::net::SocketAddr {
 #[tokio::test]
 async fn init_runs_once_and_creates_the_key_and_certificate() {
     let dir = ok(tempfile::tempdir());
-    let first = ok(init::initialize(dir.path(), &tls_args()).await);
+    let first = ok(init::initialize(dir.path(), &init_args()).await);
     assert!(!first.fingerprint.is_empty());
+    assert!(first.setup_link.token.starts_with("lvxl_"));
+    assert_eq!(
+        init::link_url(&init_args().public_url(), "lvxl_x"),
+        "https://hub.example:8443/#/link/lvxl_x"
+    );
     assert!(dir.path().join("keys/secret.key").exists());
     assert!(dir.path().join("tls/certificate.pem").exists());
 
-    let second = init::initialize(dir.path(), &tls_args()).await;
+    let second = init::initialize(dir.path(), &init_args()).await;
     assert!(second.is_err());
 }
 
@@ -64,14 +73,14 @@ async fn serves_before_and_after_init() {
         .await
         .starts_with("HTTP/1.1 200"));
 
-    ok(init::initialize(dir.path(), &tls_args()).await);
+    ok(init::initialize(dir.path(), &init_args()).await);
     let response = http_get(address, "/api/v1/instance").await;
     assert!(response.contains(r#""initialized":true"#), "{response}");
     assert!(http_get(address, "/readyz")
         .await
         .starts_with("HTTP/1.1 200"));
 
-    // Readiness reports a missing key file once the Hub is initialized.
+    // Readiness reports a missing key file.
     ok(std::fs::remove_file(dir.path().join("keys/secret.key")));
     assert!(http_get(address, "/readyz")
         .await
@@ -85,7 +94,7 @@ async fn serves_before_and_after_init() {
 async fn opens_no_outbound_connection() {
     let dir = ok(tempfile::tempdir());
     let address = spawn(dir.path()).await;
-    ok(init::initialize(dir.path(), &tls_args()).await);
+    ok(init::initialize(dir.path(), &init_args()).await);
     for path in ["/healthz", "/readyz", "/api/v1/instance"] {
         let _ = http_get(address, path).await;
     }
@@ -171,11 +180,11 @@ mod outbound {
 #[tokio::test]
 async fn init_resumes_after_an_interruption_before_the_instance() {
     let dir = ok(tempfile::tempdir());
-    // An earlier init created the key file and stopped.
+    // An earlier start created the key file before the instance existed.
     ok(hub_crypto::key_file::create(
         &dir.path().join("keys/secret.key"),
     ));
-    assert!(init::initialize(dir.path(), &tls_args()).await.is_ok());
+    assert!(init::initialize(dir.path(), &init_args()).await.is_ok());
 }
 
 #[cfg(unix)]
@@ -184,7 +193,20 @@ async fn data_directory_is_owner_only() {
     use std::os::unix::fs::PermissionsExt;
     let dir = ok(tempfile::tempdir());
     let data = dir.path().join("data");
-    ok(init::initialize(&data, &tls_args()).await);
+    ok(init::initialize(&data, &init_args()).await);
     let mode = ok(std::fs::metadata(&data)).permissions().mode();
     assert_eq!(mode & 0o077, 0);
+}
+
+#[tokio::test]
+async fn the_host_recovers_the_owner_and_verifies_the_audit() {
+    let dir = ok(tempfile::tempdir());
+    ok(init::initialize(dir.path(), &init_args()).await);
+    ok(init::recover_owner(dir.path(), "owner@example.com", "https://hub.example:8443").await);
+    assert!(
+        init::recover_owner(dir.path(), "nobody@example.com", "https://hub.example:8443")
+            .await
+            .is_err()
+    );
+    ok(init::verify_audit(dir.path()).await);
 }

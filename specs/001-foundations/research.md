@@ -51,7 +51,7 @@ Each decision lists what was chosen, why, and what was rejected. Decisions that 
 
 ## R9. Secrets at rest
 
-- **Decision**: TOTP secrets are encrypted with XChaCha20-Poly1305 under a 256-bit key kept in a file outside the database (`keys/secret.key`, created by `init`), behind the key custody port. The Hub signing key arrives with enrollment (v0.2.0) on the same port. PKCS#11 stays an open question of the TECH_SPEC.
+- **Decision**: TOTP secrets are encrypted with XChaCha20-Poly1305 under a 256-bit key kept in a file outside the database (`keys/secret.key`, created at the first start), behind the key custody port. The Hub signing key arrives with enrollment (v0.2.0) on the same port. PKCS#11 stays an open question of the TECH_SPEC.
 
 ## R10. Console
 
@@ -69,4 +69,4 @@ Each decision lists what was chosen, why, and what was rejected. Decisions that 
 
 ## R13. Dependencies (all permissive)
 
-`tokio`, `axum`, `axum-server` with `rustls`, `tower-http`, `sqlx` (SQLite), `serde`, `utoipa`, `argon2`, `totp-rs`, `chacha20poly1305`, `sha2`, `rand`, `tracing`, `clap`, `reqwest` with `rustls` (CLI only), `leptos`, `fluent-bundle`, `rust-embed`. `cargo-deny` enforces the license list of the TECH_SPEC.
+`tokio`, `axum`, `axum-server` with `rustls`, `tower-http`, `sqlx` (SQLite), `serde`, `utoipa`, `argon2`, `hmac` and `sha1` (TOTP), `chacha20poly1305`, `sha2`, `rand`, `tracing`, `clap`, `reqwest` with `rustls` (CLI only), `leptos`, `fluent-bundle`, `rust-embed`. `cargo-deny` enforces the license list of the TECH_SPEC.

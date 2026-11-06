@@ -9,14 +9,18 @@ publish.workspace = true
 
 [dependencies]
 hub-core.workspace = true
+serde_json.workspace = true
+tokio = { workspace = true, features = ["sync"] }
 sqlx.workspace = true
 thiserror.workspace = true
 time.workspace = true
 uuid.workspace = true
 
 [dev-dependencies]
-tempfile.workspace = true
+data-encoding.workspace = true
+hub-crypto.workspace = true
 tokio.workspace = true
+tempfile.workspace = true
 
 [lints]
 workspace = true

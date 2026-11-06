@@ -20,6 +20,15 @@ pub enum CoreError {
     /// The instance was already initialized; initialization runs once.
     #[error("the Hub is already initialized")]
     AlreadyInitialized,
+    /// The caller is not authenticated, or the credentials are wrong. Deliberately vague.
+    #[error("authentication required or failed")]
+    Unauthenticated,
+    /// The caller is authenticated but lacks the permission named.
+    #[error("missing permission: {permission}")]
+    Forbidden { permission: &'static str },
+    /// Too many failed attempts; retry after the given number of seconds.
+    #[error("too many failed attempts; retry in {retry_after_secs} s")]
+    Throttled { retry_after_secs: u64 },
     /// A port failed (database, key file); the message carries the adapter's context.
     #[error("storage failure: {0}")]
     Storage(String),
