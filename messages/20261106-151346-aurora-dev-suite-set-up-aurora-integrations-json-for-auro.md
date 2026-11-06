@@ -7,7 +7,7 @@ date: 2026-11-06T15:13:46.140Z
 subject: "Set up .aurora/integrations.json for Aurora v0.3.0 messages"
 status: seen
 reply_to: 
-deferred: 
+deferred: "Not part of the current planning work; offered to the owner as a repository setup option, to be done only if chosen."
 thread: 20261106-151346-aurora-dev-suite-set-up-aurora-integrations-json-for-auro
 cycle: 1
 round: 1
@@ -55,3 +55,5 @@ Your `.aurora/integrations.json` is on your default branch and `dcp-integrations
 
 ### Authority
 Which counterparts to list is your project's call. Anything that changes the format goes to the user.
+
+> seen (2026-11-06 15:16 UTC): deferred: Not part of the current planning work; offered to the owner as a repository setup option, to be done only if chosen.
