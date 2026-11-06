@@ -1,7 +1,7 @@
 <!-- dev-cycle-constitution
 generated-by: dev-cycle-protocol/constitution.py (do not edit; change a source and regenerate)
-sources-sha256: 0521b9870597b926365c226123ba227ca93406040ed1190b003897e88b5b6e8f
-content-sha256: 7565bca3fcb4c34d82b618ca08e464049dd7a214f0b8cfad23ab607c654c8db1
+sources-sha256: d249af53de32308f7f82c72bc4bf107bcd69543a8e30d3bf851b45a3a7f658b6
+content-sha256: 7ed5ee0f72ae82961bddbef3bc184de2a288fcfd47d28fc98eddb322ee4fda0e
 -->
 # levix-admin-hub Constitution
 
@@ -204,7 +204,13 @@ Adapters depend on the core; the core depends on nothing outside itself except p
 Accepted decisions; a plan that contradicts one needs a new ADR that supersedes it.
 
 - ADR-0001: Hexagonal architecture with a modular core (`docs/adr/0001-hexagonal-architecture-with-a-modular-core.md`)
+- ADR-0002: Rust service on Tokio and Axum with a Leptos web console (`docs/adr/0002-rust-service-on-tokio-and-axum-with-a-leptos-web-console.md`)
+- ADR-0003: One codebase, two installation profiles: SQLite and in-process bus or PostgreSQL and Redis (`docs/adr/0003-one-codebase-two-installation-profiles-sqlite-and-in-process.md`)
+- ADR-0004: Always hosted by the customer, zero knowledge, no call home (`docs/adr/0004-always-hosted-by-the-customer-zero-knowledge-no-call-home.md`)
+- ADR-0005: Shared policy model, signatures and formats from levix-platform by version tag (`docs/adr/0005-shared-policy-model-signatures-and-formats-from-levix-platfo.md`)
+- ADR-0006: Public, versioned contract for the API and the device channel (`docs/adr/0006-public-versioned-contract-for-the-api-and-the-device-channel.md`)
 - ADR-0007: Proprietary license with source access for customers (`docs/adr/0007-proprietary-license-with-source-access-for-customers.md`)
+- ADR-0008: Products registered by signed manifests, no product code in the Hub (`docs/adr/0008-products-registered-by-signed-manifests-no-product-code-in-t.md`)
 
 ## Governance
 
@@ -212,4 +218,4 @@ Accepted decisions; a plan that contradicts one needs a new ADR that supersedes 
 - Amendments change the source, not this file: an ADR for decisions, the technical specification for requirements and constraints, `.dev-cycle.json` for the architecture style, the skills for principles. Then run `constitution.py generate` and commit the result with the change.
 - Gate 3 of the development cycle blocks a plan while this file is stale or edited by hand.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-06 | **Last Amended**: 2026-11-06
+**Version**: 1.1.0 | **Ratified**: 2026-11-06 | **Last Amended**: 2026-11-06
