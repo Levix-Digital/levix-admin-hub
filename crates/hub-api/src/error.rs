@@ -55,7 +55,6 @@ impl ApiError {
     pub(crate) fn unauthenticated() -> Self {
         CoreError::Unauthenticated.into()
     }
-
 }
 
 impl From<CoreError> for ApiError {
