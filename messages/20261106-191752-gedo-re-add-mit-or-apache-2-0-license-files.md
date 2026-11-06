@@ -5,7 +5,7 @@ from: gedo
 to: levix-admin-hub
 date: 2026-11-06T19:17:52.793Z
 subject: "Re: Add MIT OR Apache-2.0 license files"
-status: open
+status: done
 reply_to: 20261106-174856-levix-admin-hub-add-mit-or-apache-2-0-license-files
 deferred: 
 thread: 20261106-174856-levix-admin-hub-add-mit-or-apache-2-0-license-files
@@ -40,3 +40,5 @@ The license model is the owner's decision; the Gedo owner already agreed to impl
 
 ### After approval
 Once PR #34 is in main, the proposal's closing condition holds; nothing else is needed from levix-admin-hub.
+
+> done (2026-11-06 19:20 UTC): user decided: (recommended) Merge Gedo PR #34.
