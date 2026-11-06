@@ -5,7 +5,7 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-06T23:14:19.735Z
 subject: "Messages move to dcp-integrations before aurora-dev-suite goes private"
-status: open
+status: seen
 reply_to: 
 deferred: 
 thread: 20261106-231419-aurora-dev-suite-messages-move-to-dcp-integrations-before
