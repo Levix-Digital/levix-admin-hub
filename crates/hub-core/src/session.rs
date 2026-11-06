@@ -181,11 +181,29 @@ impl<S: Store, K: Crypto, C: Clock> Hub<S, K, C> {
                 self.store.update_administrator(administrator, None).await
             }
             None => {
-                administrator.register_failure(now);
-                self.store.update_administrator(administrator, None).await?;
+                self.register_failed_attempt(administrator, now).await?;
                 Err(CoreError::Unauthenticated)
             }
         }
+    }
+
+    /// Counts a failure atomically in storage, so concurrent attempts cannot reuse one count
+    /// (threat model T-02), and locks the account once the free attempts are spent.
+    async fn register_failed_attempt(
+        &self,
+        administrator: &mut Administrator,
+        now: OffsetDateTime,
+    ) -> CoreResult<()> {
+        let count = self
+            .store
+            .increment_failed_attempts(administrator.id)
+            .await?;
+        administrator.failed_attempts = count;
+        if let Some(until) = crate::administrator::lock_until(count, now) {
+            self.store.extend_lock(administrator.id, until).await?;
+            administrator.locked_until = Some(until);
+        }
+        Ok(())
     }
 
     /// The matching TOTP step, refusing a step already used (replay).
@@ -300,8 +318,7 @@ impl<S: Store, K: Crypto, C: Clock> Hub<S, K, C> {
                 )
                 .await?;
         if !code_ok {
-            administrator.register_failure(now);
-            self.store.update_administrator(administrator, None).await?;
+            self.register_failed_attempt(administrator, now).await?;
             let error = CoreError::Unauthenticated;
             return Err(self.record_refusal(context, ACTION, None, error).await);
         }

@@ -495,3 +495,37 @@ async fn completing_a_link_needs_a_matching_code_and_a_good_password() {
         .await
         .is_ok());
 }
+
+#[tokio::test]
+async fn concurrent_failures_are_all_counted() {
+    let fixture = Fixture::new().await;
+    let owner = fixture.owner().await;
+    let anonymous = fixture.anonymous();
+    let code = fixture.current_code(&owner.secret);
+    let wrong = || {
+        fixture.hub.sign_in(
+            &anonymous,
+            "owner@example.com",
+            "wrong password here",
+            &code,
+            SessionKind::Cli,
+            None,
+        )
+    };
+    let _ = tokio::join!(wrong(), wrong(), wrong(), wrong(), wrong());
+    let locked = fixture
+        .hub
+        .sign_in(
+            &anonymous,
+            "owner@example.com",
+            PASSWORD,
+            &code,
+            SessionKind::Cli,
+            None,
+        )
+        .await;
+    assert!(
+        matches!(locked, Err(CoreError::Throttled { .. })),
+        "{locked:?}"
+    );
+}

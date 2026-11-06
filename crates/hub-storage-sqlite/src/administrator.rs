@@ -202,6 +202,43 @@ impl AdministratorRepository for SqliteStore {
         write.commit().await
     }
 
+    async fn increment_failed_attempts(&self, id: Uuid) -> CoreResult<u32> {
+        let mut write = self.write().await?;
+        let count: Option<i64> = sqlx::query_scalar(
+            "UPDATE administrator SET failed_attempts = failed_attempts + 1 WHERE id = ? \
+             RETURNING failed_attempts",
+        )
+        .bind(id.to_string())
+        .fetch_optional(&mut *write.tx)
+        .await
+        .map_err(query_error)?;
+        write.commit().await?;
+        let count = count.ok_or(CoreError::NotFound("administrator"))?;
+        Ok(u32::try_from(count).unwrap_or(u32::MAX))
+    }
+
+    async fn extend_lock(&self, id: Uuid, until: OffsetDateTime) -> CoreResult<()> {
+        // Read and write inside one write transaction: no other writer runs in between.
+        let mut write = self.write().await?;
+        let current: Option<Option<String>> =
+            sqlx::query_scalar("SELECT locked_until FROM administrator WHERE id = ?")
+                .bind(id.to_string())
+                .fetch_optional(&mut *write.tx)
+                .await
+                .map_err(query_error)?;
+        let current = current.ok_or(CoreError::NotFound("administrator"))?;
+        if parse_optional_time(current)?.is_some_and(|locked| locked >= until) {
+            return Ok(());
+        }
+        sqlx::query("UPDATE administrator SET locked_until = ? WHERE id = ?")
+            .bind(time_text(until)?)
+            .bind(id.to_string())
+            .execute(&mut *write.tx)
+            .await
+            .map_err(query_error)?;
+        write.commit().await
+    }
+
     async fn roles_of(&self, administrator: Uuid) -> CoreResult<BTreeMap<Uuid, Role>> {
         sqlx::query("SELECT organization_id, role FROM role_assignment WHERE administrator_id = ?")
             .bind(administrator.to_string())

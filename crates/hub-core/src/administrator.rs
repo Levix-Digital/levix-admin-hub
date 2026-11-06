@@ -104,10 +104,8 @@ impl Administrator {
     /// Records a failed sign-in and returns the lock deadline, if any.
     pub fn register_failure(&mut self, now: OffsetDateTime) {
         self.failed_attempts = self.failed_attempts.saturating_add(1);
-        if self.failed_attempts >= FREE_ATTEMPTS {
-            let doublings = (self.failed_attempts - FREE_ATTEMPTS).min(10);
-            let secs = (FIRST_DELAY_SECS << doublings).min(MAX_DELAY_SECS);
-            self.locked_until = Some(now + Duration::seconds(secs));
+        if let Some(until) = lock_until(self.failed_attempts, now) {
+            self.locked_until = Some(until);
         }
     }
 
@@ -180,6 +178,15 @@ pub struct Added {
 }
 
 /// Trimmed, lowercased e-mail with a minimal shape check.
+/// End of the lock after `failed_attempts` consecutive failures, if the account is locked:
+/// none for the first free attempts, then 30 s doubling up to 15 minutes.
+pub fn lock_until(failed_attempts: u32, now: OffsetDateTime) -> Option<OffsetDateTime> {
+    (failed_attempts >= FREE_ATTEMPTS).then(|| {
+        let doublings = (failed_attempts - FREE_ATTEMPTS).min(10);
+        now + Duration::seconds((FIRST_DELAY_SECS << doublings).min(MAX_DELAY_SECS))
+    })
+}
+
 pub fn normalize_email(email: &str) -> CoreResult<String> {
     let email = email.trim().to_lowercase();
     let invalid = |reason: &str| CoreError::Invalid {

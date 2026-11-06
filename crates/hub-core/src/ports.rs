@@ -137,6 +137,14 @@ pub trait AdministratorRepository: Send + Sync {
         administrator: &Administrator,
         audit: Option<&AuditEvent>,
     ) -> impl Future<Output = CoreResult<()>> + Send;
+    /// Adds one failed attempt in a single atomic write and returns the new count.
+    fn increment_failed_attempts(&self, id: Uuid) -> impl Future<Output = CoreResult<u32>> + Send;
+    /// Sets the lock end to `until` unless the account is already locked longer.
+    fn extend_lock(
+        &self,
+        id: Uuid,
+        until: OffsetDateTime,
+    ) -> impl Future<Output = CoreResult<()>> + Send;
     /// Roles of one administrator, by organization.
     fn roles_of(
         &self,
