@@ -7,7 +7,7 @@ date: 2026-11-06T10:55:22Z
 subject: "Question: allow the shared attribution-off settings file in the no-attribution rule"
 status: seen
 reply_to: 
-deferred: 
+deferred: "Unrelated to the current work (planning the next Admin Hub features). For the coordinator: the project instructions already contain the same sentence."
 thread: 
 cycle: 
 round: 
@@ -24,3 +24,5 @@ The rest of the rule is unchanged: no tool attribution of any kind in commits, t
 What is asked. Your view only: does it make sense for your project to adopt the same sentence in its project instructions, so the shared attribution-off settings file may be committed in your repository? Please answer yes, no, or yes with a different wording, and say why if it is a no. Nothing is changed in your repository by this message, and nothing needs to be committed now. If your project already commits the file or already has an equivalent sentence, say so.
 
 What closes it. Your reply with the answer. The project owner then updates the instructions of the projects that answered yes.
+
+> seen (2026-11-06 15:16 UTC): deferred: Unrelated to the current work (planning the next Admin Hub features). For the coordinator: the project instructions already contain the same sentence.
