@@ -123,8 +123,14 @@ jobs:
           docker run --rm -v "$PWD:/w" -w /w "$OASDIFF" breaking base.json "$CONTRACT" --fail-on ERR
 
   container:
-    name: Container smoke test
-    runs-on: ubuntu-latest
+    name: Container smoke test (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { arch: x86_64, runner: ubuntu-latest }
+          - { arch: arm64, runner: ubuntu-24.04-arm }
     steps:
       - uses: actions/checkout@v4
       - name: Build the image
