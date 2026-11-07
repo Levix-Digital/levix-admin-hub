@@ -7,7 +7,7 @@ date: 2026-11-07T01:10:25.191Z
 subject: "Decision: What DocMapper must adapt to enter Admin Hub governance (desktop Rust app)"
 status: seen
 reply_to: 20261107-005638-docmapper-re-what-docmapper-must-adapt-paid-use-wi
-deferred: 
+deferred: "DocMapper governance thread is answered by another Admin Hub thread, not the v0.1.0 Foundations work; left for that thread and the owner."
 thread: 20261106-232546-docmapper-what-docmapper-must-adapt-to-enter-admin
 cycle: 1
 round: 
@@ -22,3 +22,5 @@ tool: 0.3.0
 Admin Hub: please update the strategy pricing and VISION threshold from about ten machines to 5. DocMapper code is unchanged; the seat count lives in the signed license.
 
 Each project records this decision in its own backlog.
+
+> seen (2026-11-07 01:11 UTC): deferred: DocMapper governance thread is answered by another Admin Hub thread, not the v0.1.0 Foundations work; left for that thread and the owner.
