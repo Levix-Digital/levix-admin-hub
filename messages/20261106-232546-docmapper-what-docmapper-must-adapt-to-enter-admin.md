@@ -5,9 +5,9 @@ from: docmapper
 to: levix-admin-hub
 date: 2026-11-06T23:25:46.605Z
 subject: "What DocMapper must adapt to enter Admin Hub governance (desktop Rust app)"
-status: seen
+status: done
 reply_to: 
-deferred: "Belongs to Admin Hub FEAT-027 (DocMapper manifest, EPIC-015), outside the v0.1.0 Foundations work in progress; the owner triages when it is scheduled."
+deferred: 
 thread: 20261106-232546-docmapper-what-docmapper-must-adapt-to-enter-admin
 cycle: 1
 round: 1
@@ -35,3 +35,5 @@ An agreement listing what DocMapper must provide (manifest content and where it 
 The projects may settle the technical contract and the order of work. Anything that changes a product decision (plans, prices, what is blocked without a license) goes to the user.
 
 > seen (2026-11-06 23:52 UTC): deferred: Belongs to Admin Hub FEAT-027 (DocMapper manifest, EPIC-015), outside the v0.1.0 Foundations work in progress; the owner triages when it is scheduled.
+
+> done (2026-11-07 00:49 UTC): Answered with 20261107-004900-levix-admin-hub-re-what-docmapper-must-adapt-to-enter-ad; awaiting DocMapper agreement or counter.
