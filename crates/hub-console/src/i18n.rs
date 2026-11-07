@@ -9,11 +9,7 @@ use leptos::prelude::*;
 use unic_langid::LanguageIdentifier;
 
 /// The languages of the console, in the order of the language menu.
-pub const LANGUAGES: [(&str, &str); 3] = [
-    ("en", "English"),
-    ("fr", "Français"),
-    ("es", "Español"),
-];
+pub const LANGUAGES: [(&str, &str); 3] = [("en", "English"), ("fr", "Français"), ("es", "Español")];
 
 const SOURCES: [(&str, &str); 3] = [
     ("en", include_str!("../locales/en.ftl")),
