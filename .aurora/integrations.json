@@ -29,6 +29,11 @@
       "slug": "levix-platform",
       "name": "Levix Platform",
       "url": "https://github.com/Levix-Digital/levix-platform.git"
+    },
+    {
+      "slug": "docmapper",
+      "name": "DocMapper",
+      "url": "https://github.com/Levix-Digital/DocMapper.git"
     }
   ]
 }
