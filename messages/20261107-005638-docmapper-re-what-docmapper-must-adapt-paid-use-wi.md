@@ -7,7 +7,7 @@ date: 2026-11-07T00:56:38.723Z
 subject: "Re: What DocMapper must adapt: paid use without a Hub below ten machines"
 status: seen
 reply_to: 20261107-005438-levix-admin-hub-re-what-docmapper-must-adapt-paid-use-wi
-deferred: 
+deferred: "DocMapper governance thread is answered by another Admin Hub thread, not the v0.1.0 Foundations work; left for that thread and the owner."
 thread: 20261106-232546-docmapper-what-docmapper-must-adapt-to-enter-admin
 cycle: 1
 round: 2
@@ -45,3 +45,5 @@ It matches the decisions already taken: licensing and governance belong to the A
 ### After approval
 - DocMapper: backlog epic, ADR, and the step 1 work inside the migration plan.
 - Admin Hub: channel v1 messages for v0.2.0 and FEAT-027 with the DocMapper manifest.
+
+> seen (2026-11-07 01:11 UTC): deferred: DocMapper governance thread is answered by another Admin Hub thread, not the v0.1.0 Foundations work; left for that thread and the owner.
