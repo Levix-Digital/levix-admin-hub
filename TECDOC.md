@@ -54,6 +54,19 @@ token in `LEVIX_HUB_TOKEN` replaces the session for scripts. `--output json` pri
 JSON, and exit codes are stable (3 not signed in, 4 not allowed, 5 not found, 6 conflict,
 7 invalid input, 8 throttled, 9 unreachable or untrusted Hub, 10 Hub error).
 
+## Console
+
+The web console (crate `hub-console`) is a Leptos application compiled to WebAssembly with
+`trunk` and embedded in the server binary; like the CLI it calls only the public API. It signs
+in with the `HttpOnly` session cookie and sends the CSRF token on every write. `index.html` is
+served with a strict Content Security Policy: only the console's own files, WebAssembly, and
+the hashes of trunk's inline loader script. Pages live in the URL fragment (`#/link/<token>`
+is the address `init` and invitations print), so link tokens never reach a server log. Texts
+are Fluent files in `en`, `fr` and `es`; the language comes from the profile, else from
+the browser. The console signs out after the instance's inactivity limit and warns a minute
+before. Browser flows and an axe-core scan of every page in the three languages run in CI
+(`console-tests/`).
+
 ## Security
 
 The threat model of every trust boundary, with the status of each threat, is in

@@ -55,7 +55,7 @@ Each decision lists what was chosen, why, and what was rejected. Decisions that 
 
 ## R10. Console
 
-- **Decision**: Leptos in client-side rendering, compiled to WASM with `trunk`, the build output embedded in the server binary; strict Content Security Policy (`default-src 'self'`, WASM allowed); translations in Fluent files (`en`, `fr-CA`, `pt-BR`); accessibility checked by axe-core through Playwright in CI on every page and language.
+- **Decision**: Leptos in client-side rendering, compiled to WASM with `trunk`, the build output embedded in the server binary; strict Content Security Policy (`default-src 'self'`, WASM allowed); translations in Fluent files (`en`, `fr`, `es`); accessibility checked by axe-core through Playwright in CI on every page and language.
 - **Alternatives**: server-side rendering with hydration (more moving parts for an admin console); a JavaScript framework (second language and toolchain, against ADR-0002).
 
 ## R11. TLS and network

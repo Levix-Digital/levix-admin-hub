@@ -6,6 +6,7 @@ mod audit;
 mod auth;
 mod body;
 mod caller;
+mod console;
 mod error;
 mod health;
 mod instance;
@@ -172,7 +173,8 @@ pub fn router<B: Backend>(state: AppState<B>) -> Router {
             header::X_CONTENT_TYPE_OPTIONS,
             HeaderValue::from_static("nosniff"),
         ))
-        .layer(SetResponseHeaderLayer::overriding(
+        // The console's files set their own caching; everything else is never stored.
+        .layer(SetResponseHeaderLayer::if_not_present(
             header::CACHE_CONTROL,
             HeaderValue::from_static("no-store"),
         ))
@@ -189,7 +191,7 @@ pub fn router<B: Backend>(state: AppState<B>) -> Router {
         .route("/healthz", get(health::live))
         .route("/readyz", get(health::ready::<B>))
         .nest("/api/v1", api::<B>())
-        .fallback(error::not_found)
+        .fallback(console::serve)
         .with_state(state)
         .layer(DefaultBodyLimit::max(MAX_BODY_BYTES))
         .layer(middleware)

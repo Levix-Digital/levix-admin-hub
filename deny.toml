@@ -7,6 +7,11 @@ all-features = false
 [advisories]
 version = 2
 yanked = "deny"
+ignore = [
+    # `paste` (macro crate, compile time only) is unmaintained but has no vulnerability; it
+    # reaches the console through Leptos. Revisit when Leptos drops it.
+    { id = "RUSTSEC-2024-0436", reason = "unmaintained compile-time macro, no known vulnerability" },
+]
 
 [licenses]
 version = 2
@@ -21,6 +26,11 @@ allow = [
     "Unicode-3.0",
 ]
 confidence-threshold = 0.9
+# Permissive licenses accepted only for the crates that need them (the web console's framework).
+exceptions = [
+    { allow = ["BSL-1.0"], crate = "xxhash-rust" },
+    { allow = ["CC0-1.0"], crate = "base16" },
+]
 
 [licenses.private]
 # The workspace crates are proprietary (LICENSE) and never published.
