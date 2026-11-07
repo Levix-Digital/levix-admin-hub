@@ -57,7 +57,7 @@
 
 - [x] T033 [US3] `hub-console` Leptos CSR app with `trunk`; embedded in `hub-api` with strict CSP; not-initialized page
 - [x] T034 [US3] Pages: setup link, sign-in with TOTP, TOTP enrollment and recovery codes, organizations, administrators and roles, invitations, own profile, sessions, API tokens, audit
-- [x] T035 [P] [US3] Translations `en`, `fr-CA`, `pt-BR` (Fluent), browser language detection, profile choice
+- [x] T035 [P] [US3] Translations `en`, `fr`, `es` (Fluent), browser language detection, profile choice
 - [x] T036 [US3] Playwright flows and axe-core scan of every page in the three languages in CI
 - [x] T037 [US3] Inactivity sign-out and session expiry handling in the UI
 

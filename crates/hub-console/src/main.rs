@@ -40,9 +40,10 @@ mod tests {
     #[test]
     fn languages_match_browser_tags() {
         use crate::i18n::supported;
-        assert_eq!(supported("pt-BR"), Some("pt-BR"));
-        assert_eq!(supported("pt-PT"), Some("pt-BR"));
-        assert_eq!(supported("fr"), Some("fr-CA"));
+        assert_eq!(supported("fr"), Some("fr"));
+        assert_eq!(supported("fr-CA"), Some("fr"));
+        assert_eq!(supported("es-MX"), Some("es"));
+        assert_eq!(supported("pt-BR"), None);
         assert_eq!(supported("en-GB"), Some("en"));
         assert_eq!(supported("de"), None);
     }

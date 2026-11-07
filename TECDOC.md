@@ -62,7 +62,7 @@ in with the `HttpOnly` session cookie and sends the CSRF token on every write. `
 served with a strict Content Security Policy: only the console's own files, WebAssembly, and
 the hashes of trunk's inline loader script. Pages live in the URL fragment (`#/link/<token>`
 is the address `init` and invitations print), so link tokens never reach a server log. Texts
-are Fluent files in `en`, `fr-CA` and `pt-BR`; the language comes from the profile, else from
+are Fluent files in `en`, `fr` and `es`; the language comes from the profile, else from
 the browser. The console signs out after the instance's inactivity limit and warns a minute
 before. Browser flows and an axe-core scan of every page in the three languages run in CI
 (`console-tests/`).

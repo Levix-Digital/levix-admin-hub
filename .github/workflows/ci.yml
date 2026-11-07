@@ -80,7 +80,7 @@ jobs:
         run: |
           npm ci --no-audit --no-fund
           npx playwright install --with-deps chromium
-      - name: Browser flows and axe-core in en, fr-CA and pt-BR
+      - name: Browser flows and axe-core in en, fr and es
         run: console-tests/run.sh target/debug/levix-hub
 
   supply-chain:

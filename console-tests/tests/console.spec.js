@@ -8,8 +8,8 @@ const AUDITOR = 'auditor@example.com';
 const PASSWORD = 'a long and unusual passphrase 42';
 const LANGUAGES = [
   ['en', 'English'],
-  ['fr-CA', 'Français (Canada)'],
-  ['pt-BR', 'Português (Brasil)'],
+  ['fr', 'Français'],
+  ['es', 'Español'],
 ];
 
 test.describe.configure({ mode: 'serial' });

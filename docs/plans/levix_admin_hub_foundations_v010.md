@@ -78,7 +78,7 @@ status_log:
   note: 'Milestone ''M5 Administration CLI'' completed: levix-hub-cli over the public API only: login with TOTP, CA or fingerprint trust, 0600 session file, one command per API operation (parity test with the OpenAPI), JSON output and stable exit codes, end-to-end tests against a TLS Hub'
 - at: '2026-11-07T00:27:18'
   by: LeviGuilherme
-  note: 'Milestone ''M6 Web console'' completed: Leptos console embedded in the binary under a strict CSP, every page in en, fr-CA and pt-BR, inactivity sign-out, Playwright flows and axe-core on every page in CI'
+  note: 'Milestone ''M6 Web console'' completed: Leptos console embedded in the binary under a strict CSP, every page in en, fr and es, inactivity sign-out, Playwright flows and axe-core on every page in CI'
 ---
 
 ---

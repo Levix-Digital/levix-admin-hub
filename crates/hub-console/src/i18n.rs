@@ -1,4 +1,4 @@
-//! Translations in Fluent (`en`, `fr-CA`, `pt-BR`), chosen from the profile, else from the
+//! Translations in Fluent (`en`, `fr`, `es`), chosen from the profile, else from the
 //! browser's languages, else English.
 
 use std::cell::RefCell;
@@ -11,14 +11,14 @@ use unic_langid::LanguageIdentifier;
 /// The languages of the console, in the order of the language menu.
 pub const LANGUAGES: [(&str, &str); 3] = [
     ("en", "English"),
-    ("fr-CA", "Français (Canada)"),
-    ("pt-BR", "Português (Brasil)"),
+    ("fr", "Français"),
+    ("es", "Español"),
 ];
 
 const SOURCES: [(&str, &str); 3] = [
     ("en", include_str!("../locales/en.ftl")),
-    ("fr-CA", include_str!("../locales/fr-CA.ftl")),
-    ("pt-BR", include_str!("../locales/pt-BR.ftl")),
+    ("fr", include_str!("../locales/fr.ftl")),
+    ("es", include_str!("../locales/es.ftl")),
 ];
 
 thread_local! {
@@ -49,7 +49,7 @@ fn build(language: &'static str) -> FluentBundle<FluentResource> {
     bundle
 }
 
-/// The supported language matching a browser or profile tag (`pt`, `pt-PT` → `pt-BR`).
+/// The supported language matching a browser or profile tag (`fr-CA` → `fr`, `es-MX` → `es`).
 pub fn supported(tag: &str) -> Option<&'static str> {
     let tag = tag.trim();
     LANGUAGES

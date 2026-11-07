@@ -23,7 +23,7 @@ pub const FREE_ATTEMPTS: u32 = 5;
 const FIRST_DELAY_SECS: i64 = 30;
 const MAX_DELAY_SECS: i64 = 15 * 60;
 /// Languages of the console.
-pub const LOCALES: [&str; 3] = ["en", "fr-CA", "pt-BR"];
+pub const LOCALES: [&str; 3] = ["en", "fr", "es"];
 
 static COMMON_PASSWORDS: &str = include_str!("common-passwords.txt");
 
