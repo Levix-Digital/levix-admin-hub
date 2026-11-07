@@ -68,6 +68,7 @@ and an update mirror for air-gapped fleets.
   work without it.
 - **Annual license per Hub instance**, signed by Levix and verified offline, which carries the
   licenses of each governed product. One account, one invoice, one renewal.
+- **Hub required above five machines:** paid use on up to five machines works without a Hub, through a Levix-signed license file imported on the device and verified offline; above five, the Hub carries the licenses.
 - **Product licenses per seat** (named user) by default; **per device** as an option for shop
   floors and OT where there is no named user. Never per usage, token or document.
 - **Price reference, to validate with pilots:** the Hub below the yearly cost of a junior
@@ -154,7 +155,7 @@ The complete product, as capabilities:
 | Building SSO/SCIM, ITSM and break-glass before the first sale delays the first sellable version | Strategy assumed a smaller first scope and one person with tooling | Clear build order in the roadmap; generic webhooks before specific ITSM adapters; product-neutral contract so each piece is built once |
 | On-premises support is expensive | Heterogeneous environments consume a small team | Standardized compact profile, built-in diagnostics and exportable logs, deployment guide IT follows alone, partners for first-level support |
 | Assumption: products adopt the shared crates of `levix-platform` | Client and server must share the policy model, signatures and formats | Crates built in `levix-platform` as the products need them; the Hub depends on them by version |
-| Assumption: the first paid pilots convert into contracts that need the Hub | The Hub has no entry door of its own | Hub required above ten machines in every contract; DocMapper and AnyContext as entry products |
+| Assumption: the first paid pilots convert into contracts that need the Hub | The Hub has no entry door of its own | Hub required above five machines in every contract, with a Levix-signed license file on the device below that (decided 2026-11-07); DocMapper and AnyContext as entry products |
 | Customers want to audit the code | Regulated buyers do not trust what they cannot read | Proprietary license with source access for customers: under NDA, each customer with an active contract receives the exact source of the versions it runs to read, build and analyze, never to redistribute, modify for production or compete; reproducible builds to check the delivered binary; optional third-party source escrow for large and public-sector customers; signed builds and SBOM |
 
 ## Open Questions
