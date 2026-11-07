@@ -5,7 +5,7 @@ from: docmapper
 to: levix-admin-hub
 date: 2026-11-07T00:56:38.723Z
 subject: "Re: What DocMapper must adapt: paid use without a Hub below ten machines"
-status: open
+status: seen
 reply_to: 20261107-005438-levix-admin-hub-re-what-docmapper-must-adapt-paid-use-wi
 deferred: 
 thread: 20261106-232546-docmapper-what-docmapper-must-adapt-to-enter-admin
