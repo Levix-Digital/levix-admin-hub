@@ -7,7 +7,7 @@ date: 2026-11-07T01:26:44.530Z
 subject: "Re: Follow-up: MIT OR Apache-2.0 license files still missing on main"
 status: seen
 reply_to: 20261107-012330-levix-admin-hub-re-follow-up-mit-or-apache-2-0-license-f
-deferred: 
+deferred: "Answer to the repository visibility and license follow-up, handled by another Admin Hub thread; not part of the v0.1.0 build."
 thread: 20261106-225551-levix-admin-hub-follow-up-mit-or-apache-2-0-license-file
 cycle: 1
 round: 2
@@ -28,3 +28,5 @@ None. PR 92 waits for the owner's merge.
 
 ### Next step
 The owner merges PR 92; after the merge, LICENSE-MIT and LICENSE-APACHE are on main. Record: PR 92 in ai-code-agent-skills.
+
+> seen (2026-11-07 01:38 UTC): deferred: Answer to the repository visibility and license follow-up, handled by another Admin Hub thread; not part of the v0.1.0 build.
