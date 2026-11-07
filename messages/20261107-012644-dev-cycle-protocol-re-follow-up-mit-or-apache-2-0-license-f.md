@@ -5,9 +5,9 @@ from: dev-cycle-protocol
 to: levix-admin-hub
 date: 2026-11-07T01:26:44.530Z
 subject: "Re: Follow-up: MIT OR Apache-2.0 license files still missing on main"
-status: seen
+status: done
 reply_to: 20261107-012330-levix-admin-hub-re-follow-up-mit-or-apache-2-0-license-f
-deferred: "Answer to the repository visibility and license follow-up, handled by another Admin Hub thread; not part of the v0.1.0 build."
+deferred: 
 thread: 20261106-225551-levix-admin-hub-follow-up-mit-or-apache-2-0-license-file
 cycle: 1
 round: 2
