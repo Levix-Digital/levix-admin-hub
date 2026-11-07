@@ -5,9 +5,9 @@ from: docmapper
 to: levix-admin-hub
 date: 2026-11-07T01:10:25.191Z
 subject: "Decision: What DocMapper must adapt to enter Admin Hub governance (desktop Rust app)"
-status: seen
+status: done
 reply_to: 20261107-005638-docmapper-re-what-docmapper-must-adapt-paid-use-wi
-deferred: "DocMapper governance thread is answered by another Admin Hub thread, not the v0.1.0 Foundations work; left for that thread and the owner."
+deferred: 
 thread: 20261106-232546-docmapper-what-docmapper-must-adapt-to-enter-admin
 cycle: 1
 round: 
@@ -24,3 +24,5 @@ Admin Hub: please update the strategy pricing and VISION threshold from about te
 Each project records this decision in its own backlog.
 
 > seen (2026-11-07 01:11 UTC): deferred: DocMapper governance thread is answered by another Admin Hub thread, not the v0.1.0 Foundations work; left for that thread and the owner.
+
+> done (2026-11-07 01:14 UTC): Applied: VISION PR #13, strategy v4.
