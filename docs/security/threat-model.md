@@ -65,7 +65,7 @@ Method: STRIDE per trust boundary (Spoofing, Tampering, Repudiation, Information
 | T-03 | S | Phishing of password and TOTP code (real-time relay) | TOTP limits the window but does not stop a live relay. Phishing-resistant factors (WebAuthn) and SSO with the customer's IdP policies answer it. | Planned (FEAT-004); WebAuthn: Accepted for v0.1.0, revisited at the penetration test (FEAT-041) |
 | T-04 | S | Session theft through the browser (cross-site scripting, cookie leakage) | `HttpOnly`, `Secure`, `SameSite=Strict` cookies; strict Content Security Policy with no external origin and no inline script other than the console loader, allowed by its SHA-256 hash; output encoding by the console framework. | Mitigated (v0.1.0) |
 | T-05 | T | Cross-site request forgery against the console | `SameSite=Strict` plus a per-session CSRF token on every state-changing request. | Mitigated (v0.1.0) |
-| T-06 | S | Replay of a used TOTP code or of a setup, invitation or recovery link | Each TOTP time step accepted once per account; links are single use, expire (24 h setup, 72 h invitation) and are stored hashed. | Mitigated (v0.1.0) |
+| T-06 | S | Replay of a used TOTP code or of a setup, invitation or recovery link | Each TOTP time step accepted once per account; links are single use, expire (24 h for setup and host recovery, 72 h for invitations and resets), a newer link for the same person replaces the older one, and they are stored hashed. | Mitigated (v0.1.0) |
 | T-07 | I | Interception on the network | TLS 1.2 or later on every endpoint; the CLI verifies the CA chain or the pinned SHA-256 fingerprint; plain HTTP only when explicitly configured behind a TLS-terminating proxy. | Mitigated (v0.1.0) |
 | T-08 | E | An administrator acts outside their role or organization | One permission matrix enforced in the core for every surface; every request checked against the role in the organization it targets; table tests over every action and role. | Mitigated (v0.1.0) |
 | T-09 | E | An API token outlives or exceeds its creator's rights | Tokens act with the creator's current permissions at use time, expire within 90 days, are revocable and stored hashed; suspending the creator stops its tokens. | Mitigated (v0.1.0) |
@@ -75,6 +75,7 @@ Method: STRIDE per trust boundary (Spoofing, Tampering, Repudiation, Information
 | T-13 | I | Content sent to the Hub by mistake or by design | The contract refuses unknown fields; the Hub has no field for content (zero knowledge). | Mitigated (v0.1.0) |
 | T-14 | D | Flooding the API or the authentication endpoints | Request limits per source address on unauthenticated endpoints; body size limits; timeouts. Large-scale denial of service is left to the customer's network controls. | Mitigated (v0.1.0) for the application; network flooding Accepted (customer perimeter) |
 | T-15 | S | Lost authenticator locks an administrator out, or recovery is abused | Ten single-use recovery codes; an owner resets another administrator's TOTP; the instance owner is recovered only from the host (`recover-owner`); all audited. | Mitigated (v0.1.0) |
+| T-16 | D | Behind a TLS-terminating proxy, every client shares the proxy's address, so one client exhausting the per-address limit on sign-in and links blocks the others, and the audit records the proxy's address | Documented in the README; per-account delays still apply. Trusted proxy addresses whose forwarded client address is honoured. | Accepted for v0.1.0 (direct TLS is the default); Planned (IMP-001) |
 
 ### TB3 and TB4: host, database, key files and backups
 
@@ -108,7 +109,7 @@ Method: STRIDE per trust boundary (Spoofing, Tampering, Repudiation, Information
 |---|---|---|---|---|
 | T-40 | T | A forged product manifest or license | Manifests and licenses signed by Levix and verified offline against keys shipped with the Hub. | Planned (FEAT-043, FEAT-007) |
 | T-41 | E | Compromise of a Levix signing key | Offline key ceremony, revocation list delivered in Hub updates and the mirror. | Planned (FEAT-046) |
-| T-42 | T | A malicious dependency or a tampered build | `cargo-deny` advisories and licenses and a CycloneDX SBOM per release; signed images and reproducible builds. | Mitigated (v0.1.0) for advisories and SBOM; Planned (FEAT-039) for signatures and reproducibility |
+| T-42 | T | A malicious dependency or a tampered build | `cargo-deny` advisories and licenses in CI and a CycloneDX SBOM attached to every release, with SHA-256 sums of every artifact; signed images and reproducible builds. | Mitigated (v0.1.0) for advisories and SBOM; Planned (FEAT-039) for signatures and reproducibility |
 
 ### TB7 to TB11: integrations opened by later releases
 

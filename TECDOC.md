@@ -79,7 +79,11 @@ The threat model of every trust boundary, with the status of each threat, is in
 <!-- architecture-docs:subsystems:start -->
 | Subsystem | Summary |
 |---|---|
+| [Administration and access](docs/architecture/administration-and-access.md) | Who may govern the Hub, how they prove it, and how every action is recorded. The use cases live in `hub-core` and are the same for the console, the CLI and a... |
+| [Administration CLI](docs/architecture/cli.md) | `levix-hub-cli` (crate `hub-cli`) administers a Hub from a terminal or a script. It depends on no Hub crate and talks only to the public API, so it can do ex... |
 | [Levix Admin Hub — design](docs/architecture/admin-hub-design.md) | The control plane of the Levix products (AnyContext, DocMapper and future ones). This is the Admin Hub's slice of the design decided in the AnyContext v2 red... |
+| [Service and storage](docs/architecture/service-and-storage.md) | The `levix-hub` binary: one Rust process (crate `hub-server`) that serves the API and the web console over TLS, and keeps its state in one SQLite database in... |
+| [Web console](docs/architecture/console.md) | The browser interface of the Hub (crate `hub-console`), embedded in the `levix-hub` binary. It calls only the public API, so it can do nothing the API does n... |
 <!-- architecture-docs:subsystems:end -->
 
 ## Architecture Decision Records

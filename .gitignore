@@ -14,3 +14,4 @@
 # Build output.
 /target/
 crates/hub-console/dist/
+*.cdx.json
