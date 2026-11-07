@@ -7,6 +7,11 @@ client side of the channel, the policy model and signature verification live in
 controls are in [threat-model.md](../security/threat-model.md) and
 [security-architecture.md](../security/security-architecture.md).
 
+What is built today is described per subsystem: [service and storage](service-and-storage.md),
+[administration and access](administration-and-access.md), the [web console](console.md) and
+the [administration CLI](cli.md). This page keeps the design of the whole product, including
+what later releases build.
+
 ## Principles
 
 - **Always hosted by the customer** (VPC or on-premises) — never a Levix SaaS. (The initial

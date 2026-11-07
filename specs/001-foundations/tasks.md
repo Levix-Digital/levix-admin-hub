@@ -63,11 +63,11 @@
 
 ## Phase 7: Release readiness (M7)
 
-- [ ] T038 README: Installation, Quick Start, Requirements, Configuration, CLI, Troubleshooting, Documentation; `check_readme` zero errors
-- [ ] T039 [P] Subsystem pages `service-and-storage.md`, `administration-and-access.md`, `console.md`, `cli.md`; `build_index`, `check_docs`
-- [ ] T040 [P] `tests/MANUAL_TESTS.md` suite for this release; `manual_tests validate`
-- [ ] T041 [P] `.github/workflows/release.yml` (images x86_64 and arm64, CLI binaries, CycloneDX SBOM, pre-release for `-rc`) and `promote.yml`; `check_ci_policy` zero errors
-- [ ] T042 Update the threat model statuses to what was delivered; measure SC-002 and SC-003 and record them in the pull request
+- [x] T038 README: Installation, Quick Start, Requirements, Configuration, CLI, Troubleshooting, Documentation; `check_readme` zero errors
+- [x] T039 [P] Subsystem pages `service-and-storage.md`, `administration-and-access.md`, `console.md`, `cli.md`; `build_index`, `check_docs`
+- [x] T040 [P] `tests/MANUAL_TESTS.md` suite for this release; `manual_tests validate`
+- [x] T041 [P] `.github/workflows/release.yml` (images x86_64 and arm64, CLI binaries, CycloneDX SBOM, pre-release for `-rc`) and `promote.yml`; `check_ci_policy` zero errors
+- [x] T042 Update the threat model statuses to what was delivered; measure SC-002 and SC-003 and record them in the pull request
 
 ## Dependencies
 

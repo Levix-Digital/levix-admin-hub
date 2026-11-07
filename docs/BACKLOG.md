@@ -8,14 +8,6 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 
 ## Features
 
-### FEAT-001: [core] Rust service skeleton with organizations and the shared platform crates
-- **Priority**: high
-- **Epic**: EPIC-001
-- **Status**: in_progress
-- **Found**: 2026-10-23, initial backlog, from the AnyContext v2 rebuild
-- **Plan**: levix_admin_hub_foundations_v010
-- **Description**: Design: docs/architecture/admin-hub-design.md, Principles, and section Common core. The Admin Hub as a Rust service with organizations, sharing the policy model, signature verification and data definition formats with levix-platform, so client and server are identical.
-
 ### FEAT-002: [packaging] Container package with compact and scalable profiles
 - **Priority**: high
 - **Epic**: EPIC-012
@@ -143,38 +135,6 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Found**: 2026-10-23, initial backlog, from the AnyContext v2 rebuild
 - **Plan**: -
 - **Description**: Design: docs/architecture/admin-hub-design.md, section Data plane servers. Product servers in the company VPC (AnyContext Server, Model Server) are enrolled and governed like devices.
-
-### FEAT-018: [contract] Documented API and WebSocket protocol
-- **Priority**: high
-- **Epic**: EPIC-013
-- **Status**: in_progress
-- **Found**: 2026-10-23, initial backlog, from the AnyContext v2 rebuild
-- **Plan**: levix_admin_hub_foundations_v010
-- **Description**: Design: docs/architecture/admin-hub-design.md, section Contract. A versioned, documented contract for everything that goes through the channel, so any product in any language can talk to the Admin Hub.
-
-### FEAT-019: [admin] Administrator accounts, roles and second factor
-- **Priority**: high
-- **Epic**: EPIC-001
-- **Status**: in_progress
-- **Found**: 2026-11-06, Phase 0, 2026-11-06
-- **Plan**: levix_admin_hub_foundations_v010
-- **Description**: Organization owner, administrator, approver, auditor and read-only roles per organization and product; SSO or local accounts with Argon2id and mandatory TOTP (TECH_SPEC, Security and Privacy).
-
-### FEAT-020: [console] Web console served by the Hub
-- **Priority**: high
-- **Epic**: EPIC-001
-- **Status**: in_progress
-- **Found**: 2026-11-06, Phase 0, 2026-11-06
-- **Plan**: levix_admin_hub_foundations_v010
-- **Description**: Leptos console embedded in the binary, no external assets, WCAG 2.1 AA, English, Canadian French and Brazilian Portuguese (ADR-0002).
-
-### FEAT-021: [cli] Administration CLI
-- **Priority**: high
-- **Epic**: EPIC-001
-- **Status**: in_progress
-- **Found**: 2026-11-06, Phase 0, 2026-11-06
-- **Plan**: levix_admin_hub_foundations_v010
-- **Description**: Rust CLI over the public API for every administrative action, scripts and automation.
 
 ### FEAT-022: [install] Guided installation
 - **Priority**: high
@@ -320,14 +280,6 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Plan**: -
 - **Description**: Signed container images, a CycloneDX SBOM per release, reproducible build instructions and the source bundle for customers with an active agreement (ADR-0007).
 
-### FEAT-040: [security] Threat model and security architecture document
-- **Priority**: high
-- **Epic**: EPIC-013
-- **Status**: in_progress
-- **Found**: 2026-11-06, Phase 0, 2026-11-06
-- **Plan**: levix_admin_hub_foundations_v010
-- **Description**: Published threat model and security architecture of the Hub, kept current with each release.
-
 ### FEAT-041: [security] Vulnerability disclosure policy
 - **Priority**: high
 - **Epic**: EPIC-013
@@ -377,6 +329,14 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Description**: Threat model T-41. Offline key ceremony for the Levix keys that sign product manifests and licenses, and a signed revocation list delivered in Hub updates and through the mirror, so a compromised key stops being accepted.
 
 ## Improvements
+
+### IMP-001: [network] Trusted proxy addresses for per-client request limits and audit
+- **Priority**: medium
+- **Epic**: EPIC-012
+- **Status**: open
+- **Found**: 2026-11-07, threat model, v0.1.0 release readiness
+- **Plan**: -
+- **Description**: Threat model T-16. Behind a TLS-terminating proxy every client reaches the Hub from the proxy's address, so the per-address limit on sign-in and links is shared by all administrators and the audit records the proxy's address. A configured list of trusted proxy addresses lets the Hub read the client address from Forwarded or X-Forwarded-For only when the connection comes from one of them.
 
 ## Adjustments
 
@@ -482,3 +442,57 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Plan**: -
 - **Closed**: 2026-11-06, #5
 - **Description**: Owner decision 2026-11-06 (cross-project thread with AnyContext): the LICENSE is byte-identical in every proprietary Levix product; section 2 allows a free edition only where Levix Digital publishes one (the Admin Hub publishes none), section 7 covers termination without an Agreement. A change is proposed by one product and applied by all.
+
+### FEAT-018: [contract] Documented API and WebSocket protocol
+- **Priority**: high
+- **Epic**: EPIC-013
+- **Status**: done
+- **Found**: 2026-10-23, initial backlog, from the AnyContext v2 rebuild
+- **Plan**: levix_admin_hub_foundations_v010
+- **Closed**: 2026-11-07, plan levix_admin_hub_foundations_v010
+- **Description**: Design: docs/architecture/admin-hub-design.md, section Contract. A versioned, documented contract for everything that goes through the channel, so any product in any language can talk to the Admin Hub.
+
+### FEAT-001: [core] Rust service skeleton with organizations and the shared platform crates
+- **Priority**: high
+- **Epic**: EPIC-001
+- **Status**: done
+- **Found**: 2026-10-23, initial backlog, from the AnyContext v2 rebuild
+- **Plan**: levix_admin_hub_foundations_v010
+- **Closed**: 2026-11-07, plan levix_admin_hub_foundations_v010
+- **Description**: Design: docs/architecture/admin-hub-design.md, Principles, and section Common core. The Admin Hub as a Rust service with organizations, sharing the policy model, signature verification and data definition formats with levix-platform, so client and server are identical.
+
+### FEAT-019: [admin] Administrator accounts, roles and second factor
+- **Priority**: high
+- **Epic**: EPIC-001
+- **Status**: done
+- **Found**: 2026-11-06, Phase 0, 2026-11-06
+- **Plan**: levix_admin_hub_foundations_v010
+- **Closed**: 2026-11-07, plan levix_admin_hub_foundations_v010
+- **Description**: Organization owner, administrator, approver, auditor and read-only roles per organization and product; SSO or local accounts with Argon2id and mandatory TOTP (TECH_SPEC, Security and Privacy).
+
+### FEAT-020: [console] Web console served by the Hub
+- **Priority**: high
+- **Epic**: EPIC-001
+- **Status**: done
+- **Found**: 2026-11-06, Phase 0, 2026-11-06
+- **Plan**: levix_admin_hub_foundations_v010
+- **Closed**: 2026-11-07, plan levix_admin_hub_foundations_v010
+- **Description**: Leptos console embedded in the binary, no external assets, WCAG 2.1 AA, English, Canadian French and Brazilian Portuguese (ADR-0002).
+
+### FEAT-021: [cli] Administration CLI
+- **Priority**: high
+- **Epic**: EPIC-001
+- **Status**: done
+- **Found**: 2026-11-06, Phase 0, 2026-11-06
+- **Plan**: levix_admin_hub_foundations_v010
+- **Closed**: 2026-11-07, plan levix_admin_hub_foundations_v010
+- **Description**: Rust CLI over the public API for every administrative action, scripts and automation.
+
+### FEAT-040: [security] Threat model and security architecture document
+- **Priority**: high
+- **Epic**: EPIC-013
+- **Status**: done
+- **Found**: 2026-11-06, Phase 0, 2026-11-06
+- **Plan**: levix_admin_hub_foundations_v010
+- **Closed**: 2026-11-07, plan levix_admin_hub_foundations_v010
+- **Description**: Published threat model and security architecture of the Hub, kept current with each release.

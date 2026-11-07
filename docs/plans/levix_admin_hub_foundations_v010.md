@@ -4,10 +4,10 @@ project: levix-admin-hub
 title: Foundations v0.1.0
 kind: feature
 version: v0.1.0
-status: in_progress
+status: completed
 author: LeviGuilherme
 created_at: '2026-11-06T16:20:08'
-updated_at: '2026-11-07T00:27:18'
+updated_at: '2026-11-07T01:24:13'
 session_id: null
 tags: []
 supersedes: null
@@ -47,7 +47,9 @@ milestones:
   done_at: '2026-11-07'
   by: LeviGuilherme
 - name: M7 Release readiness
-  done: false
+  done: true
+  done_at: '2026-11-07'
+  by: LeviGuilherme
 status_log:
 - at: '2026-11-06T16:20:08'
   by: LeviGuilherme
@@ -79,6 +81,13 @@ status_log:
 - at: '2026-11-07T00:27:18'
   by: LeviGuilherme
   note: 'Milestone ''M6 Web console'' completed: Leptos console embedded in the binary under a strict CSP, every page in en, fr and es, inactivity sign-out, Playwright flows and axe-core on every page in CI'
+- at: '2026-11-07T01:24:13'
+  by: LeviGuilherme
+  note: 'Milestone ''M7 Release readiness'' completed: README, subsystem pages, manual test suite, release and promote workflows, threat model review; SC-002 and SC-003 measured'
+- at: '2026-11-07T01:24:13'
+  by: LeviGuilherme
+  status: completed
+  note: All milestones completed
 ---
 
 ---
