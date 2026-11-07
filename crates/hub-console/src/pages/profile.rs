@@ -62,7 +62,7 @@ pub fn Profile() -> impl IntoView {
         run(
             busy,
             password_error,
-            async move { api::post("/api/v1/me/password", Some(&body)).await },
+            async move { api::post_reauthenticated("/api/v1/me/password", &body).await },
             move |_| {
                 for field in [current, new, confirm, password_code] {
                     field.set(String::new());
@@ -83,7 +83,7 @@ pub fn Profile() -> impl IntoView {
         run(
             busy,
             codes_error,
-            async move { api::post("/api/v1/me/recovery-codes", Some(&body)).await },
+            async move { api::post_reauthenticated("/api/v1/me/recovery-codes", &body).await },
             move |v: Value| {
                 codes_password.set(String::new());
                 codes_code.set(String::new());

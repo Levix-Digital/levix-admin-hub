@@ -118,6 +118,19 @@ test('an API token is shown once', async () => {
   await expect(page.getByRole('cell', { name: 'ci', exact: true })).toBeVisible();
 });
 
+test('a wrong password on the profile does not end the session', async () => {
+  const page = ownerPage;
+  await page.getByRole('link', { name: 'Profile' }).click();
+  await page.getByLabel('Current password').fill('not my password at all');
+  await page.getByLabel('New password', { exact: true }).fill('another long passphrase 77');
+  await page.getByLabel('Repeat the new password').fill('another long passphrase 77');
+  await page.locator('#pw-code').fill('000000');
+  await page.getByRole('button', { name: 'Change the password' }).click();
+  await expect(page.getByText('The password or the authenticator code is wrong.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Profile', level: 1 })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Sign out' })).toBeVisible();
+});
+
 test('every page is accessible in every language', async ({ browser }) => {
   const page = ownerPage;
   const pages = [

@@ -137,6 +137,22 @@ pub async fn delete(path: &str) -> Result<Value, ApiError> {
     send(Method::DELETE, path, None, true).await
 }
 
+/// A write that re-checks the password and code (password change, new recovery codes). The
+/// Hub answers 401 when they are wrong, which does not end the session: only a session that
+/// really ended signs the console out.
+pub async fn post_reauthenticated(path: &str, body: &Value) -> Result<Value, ApiError> {
+    match send(Method::POST, path, Some(body), false).await {
+        Err(error) if error.status == 401 => match get("/api/v1/me").await {
+            Ok(_) => Err(ApiError {
+                code: "reauthentication_failed".to_owned(),
+                ..error
+            }),
+            Err(ended) => Err(ended),
+        },
+        other => other,
+    }
+}
+
 /// A call made before sign-in (instance status, sign-in, links).
 pub async fn public_get(path: &str) -> Result<Value, ApiError> {
     send(Method::GET, path, None, false).await

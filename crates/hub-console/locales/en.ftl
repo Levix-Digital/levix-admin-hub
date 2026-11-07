@@ -188,6 +188,7 @@ error-throttled = Too many attempts. Wait a moment and try again.
 error-internal = The Hub had an internal error; see its logs.
 error-bad-request = The request was not understood.
 error-network = The Hub cannot be reached.
+error-reauthentication-failed = The password or the authenticator code is wrong.
 error-password-mismatch = The two passwords differ.
 error-unexpected = Something went wrong.
 error-with-detail = { $message } ({ $detail })
