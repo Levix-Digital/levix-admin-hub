@@ -23,7 +23,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
   - Step 4 prints a SHA-256 fingerprint, a single-use link `https://localhost:8443/#/link/lvxl_...` and its expiry 24 hours later.
   - Step 6 answers `{"status":"ready"}` within 10 seconds of step 5.
   - Step 7 shows JSON log lines, one of them with the same fingerprint as step 4, and none with the setup link.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ### MT-INST-002: The release image runs on arm64
@@ -34,7 +34,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
   1. Run the steps of MT-INST-001 with the arm64 archive.
 - **Expected**:
   - The same results as MT-INST-001.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ### MT-INST-003: The Hub serves the customer's certificate
@@ -47,7 +47,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
   3. Open the printed link in the browser.
 - **Expected**:
   - The browser shows no certificate warning and the setup page opens.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ### MT-INST-004: Data survives removing and recreating the container
@@ -61,7 +61,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
 - **Expected**:
   - Sign-in works with the same password and authenticator, and the organization is listed.
   - On the Audit page, **Verify** reports an intact chain.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ## Claiming the Hub
@@ -81,7 +81,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
   - The app adds an entry named "Levix Admin Hub" with the owner's e-mail.
   - The code is accepted, 10 recovery codes are shown once, and the console opens on **Organizations** signed in as the owner.
   - Opening the setup link again shows that it is no longer valid.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ### MT-CLAIM-002: The host recovers a locked-out instance owner
@@ -96,7 +96,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
   - Step 1 prints a single-use link valid for 24 hours.
   - Step 2 ends signed in with new recovery codes.
   - Step 3 is refused; the Audit page lists the host recovery.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ## Console
@@ -112,7 +112,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
   4. Sign out.
 - **Expected**:
   - Every step works as in MT-CLAIM-001, with no layout broken and no error in the browser console.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ### MT-CON-002: The texts read naturally in French and Spanish
@@ -125,7 +125,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
 - **Expected**:
   - Every text is translated, grammatical and consistent; French uses French typography (non-breaking spaces before `:` `?` `!`).
   - No text is cut or overflows its button or table cell.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ### MT-CON-003: The console can be used with the keyboard and a screen reader
@@ -138,7 +138,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
 - **Expected**:
   - The focus is always visible and follows the reading order; no step needs a mouse.
   - The screen reader announces every field, button, error and the inactivity warning.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ## CLI
@@ -158,7 +158,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
   - Step 3 lists the organizations.
   - Step 4 shows `session.json` readable and writable by the user only (`-rw-------`).
   - On macOS, the binary runs after being allowed in System Settings, Privacy & Security, if Gatekeeper blocks it.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ### MT-CLI-002: The CLI works on Windows
@@ -174,7 +174,7 @@ How to record a run: in each test of the current run, mark exactly one box of th
   - Sign-in prompts without echoing the password, and the list is printed as JSON.
   - The session file is under the user's profile, and its access list grants no other ordinary user.
   - After logout, `org list` exits with code 3.
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
 
 ## Deployment behind a proxy
@@ -191,5 +191,5 @@ How to record a run: in each test of the current run, mark exactly one box of th
   - Step 2 shows a warning that the Hub serves plain HTTP.
   - Step 3 works: the session cookie is accepted through the proxy.
   - The Audit page shows the proxy's address as the source of every event (known limit, IMP-001).
-- **Result** (v0.1.0-rc.1): [ ] Pass [ ] Fail [ ] Blocked
+- **Result** (v0.1.0-rc.2): [ ] Pass [ ] Fail [ ] Blocked
 - **Notes**:
