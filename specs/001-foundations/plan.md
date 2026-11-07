@@ -134,5 +134,5 @@ FEAT-018, FEAT-001, FEAT-019, FEAT-020, FEAT-021, FEAT-040; release v0.1.0 Found
 3. **M3 Administrators, roles and TOTP** (FEAT-019): accounts, invitations, TOTP and recovery codes, sessions, API tokens, permission matrix, administrative audit, `recover-owner`.
 4. **M4 Public contract** (FEAT-018): complete `/api/v1`, OpenAPI committed and checked, channel specification v1, contract changelog.
 5. **M5 Administration CLI** (FEAT-021): `levix-hub-cli` over the public API only, every operation one command, JSON output and stable exit codes.
-6. **M6 Web console** (FEAT-020).
+6. **M6 Web console** (FEAT-020): Leptos console embedded in the binary under a strict CSP, every page in `en`, `fr-CA` and `pt-BR`, Playwright flows and axe-core in CI.
 7. **M7 Release readiness**: README, subsystem pages, manual test suite, release workflows; then Phase 8 (release candidate v0.1.0-rc.1).

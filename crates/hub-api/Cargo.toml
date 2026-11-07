@@ -9,9 +9,12 @@ publish.workspace = true
 
 [dependencies]
 axum.workspace = true
+data-encoding.workspace = true
 hub-core = { workspace = true, features = ["openapi"] }
+rust-embed.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+sha2.workspace = true
 tower.workspace = true
 time.workspace = true
 tower-http = { workspace = true, features = ["set-header"] }
@@ -21,7 +24,6 @@ uuid.workspace = true
 
 [dev-dependencies]
 jsonschema.workspace = true
-data-encoding.workspace = true
 hub-crypto.workspace = true
 hub-storage-sqlite.workspace = true
 tempfile.workspace = true

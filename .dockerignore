@@ -3,3 +3,6 @@ target/
 .specify/
 specs/
 docs/
+crates/hub-console/dist/
+console-tests/node_modules/
+console-tests/test-results/

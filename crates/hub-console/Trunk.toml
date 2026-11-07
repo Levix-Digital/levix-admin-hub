@@ -1,0 +1,9 @@
+[build]
+target = "index.html"
+dist = "dist"
+filehash = true
+# The Hub serves the console at its root.
+public_url = "/"
+
+[tools]
+# wasm-bindgen must match the version in Cargo.lock; trunk downloads it.

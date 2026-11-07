@@ -49,6 +49,40 @@ jobs:
             exit 1
           fi
 
+  console:
+    name: Console (build, browser flows, accessibility)
+    runs-on: ubuntu-latest
+    env:
+      TRUNK_VERSION: v0.22.1
+      TRUNK_SHA256: 2ab8d548fd5ed9cda50906f61fd8654204e7893bd52ebbfd90533862b7d71ee1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the toolchain from rust-toolchain.toml
+        run: rustup show active-toolchain || rustup toolchain install
+      - uses: Swatinem/rust-cache@v2
+      - name: Install trunk
+        run: |
+          curl -sSfL -o trunk.tar.gz "https://github.com/trunk-rs/trunk/releases/download/${TRUNK_VERSION}/trunk-x86_64-unknown-linux-gnu.tar.gz"
+          echo "${TRUNK_SHA256}  trunk.tar.gz" | sha256sum -c
+          tar xzf trunk.tar.gz -C /usr/local/bin trunk
+      - name: Clippy for the browser target
+        run: cargo clippy -p hub-console --target wasm32-unknown-unknown --locked -- -D warnings
+      - name: Build the console
+        working-directory: crates/hub-console
+        run: trunk build --release --locked
+      - name: Build the server with the console embedded
+        run: cargo build --locked -p hub-server
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install the browser test tools
+        working-directory: console-tests
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Browser flows and axe-core in en, fr-CA and pt-BR
+        run: console-tests/run.sh target/debug/levix-hub
+
   supply-chain:
     name: Supply chain (cargo-deny)
     runs-on: ubuntu-latest

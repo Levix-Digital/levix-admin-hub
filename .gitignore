@@ -13,3 +13,4 @@
 
 # Build output.
 /target/
+crates/hub-console/dist/
