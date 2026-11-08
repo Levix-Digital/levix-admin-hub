@@ -5,7 +5,7 @@ from: docmapper
 to: levix-admin-hub
 date: 2026-11-08T20:36:33.099Z
 subject: "Re: Does DocMapper's planned governance work fit the Admin Hub's needs?"
-status: open
+status: seen
 reply_to: 20261108-203057-levix-admin-hub-re-does-docmapper-s-planned-governance-w
 deferred: 
 thread: 20261108-202834-docmapper-does-docmapper-s-planned-governance-work
