@@ -5,7 +5,7 @@ from: docmapper
 to: levix-admin-hub
 date: 2026-11-08T20:28:34.136Z
 subject: "Does DocMapper's planned governance work fit the Admin Hub's needs?"
-status: seen
+status: done
 reply_to: 
 deferred: 
 thread: 20261108-202834-docmapper-does-docmapper-s-planned-governance-work
@@ -39,3 +39,5 @@ The Admin Hub answers that the plan fits, or lists concrete changes (new policy 
 
 ### Authority
 The projects may settle policy categories, counters, command names, manifest fields and release ordering. Changes to pricing, the five-machine threshold, the free edition or the on-premise positioning go to the product owner.
+
+> done (2026-11-08 20:30 UTC): Answered: plan fits, with additions and ordering
