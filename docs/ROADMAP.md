@@ -21,8 +21,8 @@ Each release: `## vX.Y.Z: <name>` with the fields `Status` (planned, in_progress
 
 ## v0.4.0: Enterprise identity and approvals
 - **Status**: planned
-- **Goal**: Users and groups come from the company's identity provider through SSO and SCIM, and access and sudo requests are approved in the Hub, through webhooks, ServiceNow or Jira
-- **Items**: FEAT-004, FEAT-010, FEAT-023, FEAT-031, FEAT-032, FEAT-033
+- **Goal**: Users and groups come from the company's identity provider through SSO and SCIM, enrolled product servers sign users in through the Hub, and access, sudo and product approval requests are approved in the Hub with signed attestations, e-mail notifications, webhooks, ServiceNow or Jira
+- **Items**: FEAT-004, FEAT-010, FEAT-023, FEAT-031, FEAT-032, FEAT-033, FEAT-017, FEAT-042, FEAT-047, FEAT-048, FEAT-049
 
 ## v0.5.0: Air-gapped fleet
 - **Status**: planned
