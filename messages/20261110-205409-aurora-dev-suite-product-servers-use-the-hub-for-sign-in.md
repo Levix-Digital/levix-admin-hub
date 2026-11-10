@@ -5,7 +5,7 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-10T20:54:09.118Z
 subject: "Product servers use the Hub for sign-in, approvals and notifications (Aurora web)"
-status: open
+status: seen
 reply_to: 
 deferred: 
 thread: 20261110-205409-aurora-dev-suite-product-servers-use-the-hub-for-sign-in
