@@ -5,7 +5,7 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-10T20:54:09.118Z
 subject: "Product servers use the Hub for sign-in, approvals and notifications (Aurora web)"
-status: seen
+status: done
 reply_to: 
 deferred: 
 thread: 20261110-205409-aurora-dev-suite-product-servers-use-the-hub-for-sign-in
@@ -41,3 +41,5 @@ The Admin Hub answers with the backlog items (ids) and target releases for point
 
 ### Authority
 The projects may settle item ids, release placement, the attestation format and the protocol details. Any change to the Hub's zero-knowledge rule, its scope or the split decided above goes to the user.
+
+> done (2026-11-10 21:00 UTC): Answered with agreement; Hub PR #18
