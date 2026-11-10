@@ -289,7 +289,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Description**: Contact channel, response deadlines and a public record of fixes.
 
 ### FEAT-042: [products] Manifests of Gedo, the Dev Cycle Protocol and Aurora
-- **Priority**: low
+- **Priority**: medium
 - **Epic**: EPIC-015
 - **Status**: open
 - **Found**: 2026-11-06, Phase 0, 2026-11-06
@@ -327,6 +327,30 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Found**: 2026-11-06, threat model, v0.1.0 plan
 - **Plan**: -
 - **Description**: Threat model T-41. Offline key ceremony for the Levix keys that sign product manifests and licenses, and a signed revocation list delivered in Hub updates and through the mirror, so a compromised key stops being accepted.
+
+### FEAT-047: [identity] Sign-in for enrolled product servers (the Hub as OIDC provider)
+- **Priority**: high
+- **Epic**: EPIC-002
+- **Status**: open
+- **Found**: 2026-11-10, aurora-dev-suite proposal, 2026-11-10
+- **Plan**: -
+- **Description**: Design: docs/architecture/admin-hub-design.md, section Data plane servers. The Hub acts as an OpenID Connect provider for product servers enrolled under FEAT-017, so a product server keeps no user table of its own. Users come from the Hub directory or from the company's identity provider (FEAT-003, FEAT-004); roles and groups travel in the token. Product-agnostic: any enrolled product server (Aurora first, AnyContext Server later) uses it the same way.
+
+### FEAT-048: [itsm] Approval requests from product servers with signed attestations
+- **Priority**: high
+- **Epic**: EPIC-006
+- **Status**: open
+- **Found**: 2026-11-10, aurora-dev-suite proposal, 2026-11-10
+- **Plan**: -
+- **Description**: Extends FEAT-010 from device sudo requests to any enrolled product server. The request carries metadata only (product id, request id, content digest, scopes concerned, approver group per scope), so the Hub stays zero knowledge (ADR-0004). The Hub notifies the approvers, requires a TOTP step-up to decide, records the decision in the metadata-only audit (FEAT-009) and returns an attestation signed with the Hub signing key (request id, digest, scope, approver, decision, time, key id). The attestation format is part of the public versioned contract (ADR-0006) and verifies offline against the Hub key fingerprint with standard signatures, with no Levix library required; key rotation follows FEAT-045.
+
+### FEAT-049: [itsm] E-mail notifications through the customer's SMTP server
+- **Priority**: medium
+- **Epic**: EPIC-006
+- **Status**: open
+- **Found**: 2026-11-10, aurora-dev-suite proposal, 2026-11-10
+- **Plan**: -
+- **Description**: One SMTP relay configured per Hub. Approvers receive approval requests and requesters receive their outcome, next to the generic webhooks (FEAT-031). Mails carry metadata and a link to the Hub, never product content, and go only to the customer's own relay (ADR-0004, no call home).
 
 ## Improvements
 
