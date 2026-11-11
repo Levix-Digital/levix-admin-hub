@@ -6,6 +6,13 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 
 ## Bugs
 
+### BUG-001: [storage] Bundled SQLite before 3.54.0 (RUSTSEC-2026-0459, CVE-2026-119375)
+- **Severity**: medium
+- **Status**: open
+- **Found**: 2026-11-11, cargo-deny, 2026-11-10, RUSTSEC-2026-0459
+- **Plan**: -
+- **Description**: hub-storage-sqlite links libsqlite3-sys 0.30.1 through sqlx-sqlite 0.8.6, which bundles SQLite 3.46. SQLite before 3.54.0 can return uninitialized page-cache memory when a database is opened with a crafted -wal file of a different page size. The Hub only opens its own database on its data volume, so the local attack path needs write access to that volume. The advisory is ignored in deny.toml until 2027-02-11; fix by moving to a sqlx release that allows libsqlite3-sys 0.39 or later (sqlx-sqlite 0.9.0 still caps it below 0.38), or to a system SQLite 3.54 or later in the container image, then remove the ignore. If neither exists by the review date, decide again before extending it.
+
 ## Features
 
 ### FEAT-002: [packaging] Container package with compact and scalable profiles
