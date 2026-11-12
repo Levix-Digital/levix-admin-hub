@@ -91,6 +91,7 @@ The threat model of every trust boundary, with the status of each threat, is in
 <!-- architecture-docs:adrs:start -->
 | ADR | Title | Status | Version | Date |
 |---|---|---|---|---|
+| [ADR-0009](docs/adr/0009-network-containment-products-reach-only-destinations-the-cus.md) | Network containment: products reach only destinations the customer approves | accepted |  | 2026-11-12 |
 | [ADR-0008](docs/adr/0008-products-registered-by-signed-manifests-no-product-code-in-t.md) | Products registered by signed manifests, no product code in the Hub | accepted |  | 2026-11-06 |
 | [ADR-0007](docs/adr/0007-proprietary-license-with-source-access-for-customers.md) | Proprietary license with source access for customers | accepted |  | 2026-11-06 |
 | [ADR-0006](docs/adr/0006-public-versioned-contract-for-the-api-and-the-device-channel.md) | Public, versioned contract for the API and the device channel | accepted |  | 2026-11-06 |
