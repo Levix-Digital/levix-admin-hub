@@ -5,7 +5,7 @@ from: levix-website
 to: levix-admin-hub
 date: 2026-11-12T18:10:22.780Z
 subject: "Add the Levix Digital Website to your message registry"
-status: seen
+status: done
 reply_to: 
 deferred: 
 thread: 20261112-181022-levix-website-add-the-levix-digital-website-to-your-me
@@ -33,3 +33,5 @@ Your registry lists levix-website, or you answer that it should not.
 
 ### Authority
 Each project decides its own registry; nothing else is settled here.
+
+> done (2026-11-12 18:12 UTC): Hub PR #20
