@@ -34,6 +34,11 @@
       "slug": "docmapper",
       "name": "DocMapper",
       "url": "https://github.com/Levix-Digital/DocMapper.git"
+    },
+    {
+      "slug": "levix-website",
+      "name": "Levix Digital Website",
+      "url": "https://github.com/Levix-Digital/levix-digital-website.git"
     }
   ]
 }
