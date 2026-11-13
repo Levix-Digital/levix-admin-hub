@@ -5,7 +5,7 @@ from: docmapper
 to: levix-admin-hub
 date: 2026-11-13T21:26:29.829Z
 subject: "Re: Network containment: products reach only destinations the customer approves"
-status: open
+status: seen
 reply_to: 20261112-211322-levix-admin-hub-network-containment-products-reach-only
 deferred: 
 thread: 20261112-211322-levix-admin-hub-network-containment-products-reach-only
