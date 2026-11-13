@@ -114,7 +114,9 @@ The complete product, as capabilities:
    device, seat enforcement with a hardware replacement flow.
 6. **Policies:** per-product policy schemas declared in the product manifests; editing, versioning,
    signing and distribution, with a company-set offline validity; quotas; secure
-   distribution of corporate model endpoints and keys to devices.
+   distribution of corporate model endpoints and keys to devices; network containment: products
+   reach only destinations inside the customer's perimeter or explicitly approved, with
+   compliance evidence per device and an allowlist export for the customer's network (ADR-0009).
 7. **Approvals and ITSM:** `sudo` and access requests become approvals in the Hub; generic
    webhooks to approve and revoke; ServiceNow and Jira adapters.
 8. **Break-glass and recovery:** per-device root password generated, rotated and revealed

@@ -102,6 +102,7 @@ Method: STRIDE per trust boundary (Spoofing, Tampering, Repudiation, Information
 | T-35 | D | A lost or stolen device keeps working | Kill-switch; short-lived device certificates (default 72 h offline). | Planned (FEAT-006, FEAT-025) |
 | T-36 | E | A cloned golden image enrolls many devices with one code | Single-use enrollment codes; request-access queue for pre-installed images. | Planned (FEAT-006, FEAT-023) |
 | T-37 | D | Connection floods from many devices | Per-identity limits; scalable profile with replicas. | Planned (FEAT-006, FEAT-002) |
+| T-38 | I | A product on a device or product server sends content to a model, database or API outside the customer's perimeter | Destinations checked against the declared perimeter, external ones only by explicit audited approval; egress declared in the manifest and reviewed at import; deny-by-default network policy enforced by the platform gateway; compliance and blocked attempts reported to the Hub; allowlist exported for the customer's network controls, which remain the last barrier (ADR-0009). | Planned (FEAT-050 to FEAT-054); network blocking Accepted (customer perimeter) |
 
 ### TB6: Levix artifacts
 

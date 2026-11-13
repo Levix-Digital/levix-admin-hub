@@ -359,6 +359,46 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Plan**: -
 - **Description**: One SMTP relay configured per Hub. Approvers receive approval requests and requesters receive their outcome, next to the generic webhooks (FEAT-031). Mails carry metadata and a link to the Hub, never product content, and go only to the customer's own relay (ADR-0004, no call home).
 
+### FEAT-050: [policy] Customer perimeter and approval of external destinations
+- **Priority**: high
+- **Epic**: EPIC-005
+- **Status**: open
+- **Found**: 2026-11-12, network containment review, 2026-11-12
+- **Plan**: -
+- **Description**: ADR-0009, layer 1. The customer declares its internal networks in the Hub (address ranges, DNS suffixes, private endpoints). Every destination set in a policy (corporate model endpoints of FEAT-030, databases, APIs, the update mirror) is checked against them; a destination outside is refused unless an administrator with the right role approves it with a TOTP step-up and a reason, recorded in the audit and marked as external in the console.
+
+### FEAT-051: [products] Egress declarations in product manifests reviewed at registration
+- **Priority**: high
+- **Epic**: EPIC-015
+- **Status**: open
+- **Found**: 2026-11-12, network containment review, 2026-11-12
+- **Plan**: -
+- **Description**: ADR-0009, layer 2. The manifest (levix-platform FEAT-025) declares the destinations the product needs: kinds the customer configures (model endpoint, database) and any fixed host. Import lists them; a product with a fixed destination outside the perimeter (FEAT-050) stays inactive until an administrator approves it or a policy turns the feature that needs it off.
+
+### FEAT-052: [policy] Network containment policy for devices and product servers
+- **Priority**: high
+- **Epic**: EPIC-005
+- **Status**: open
+- **Found**: 2026-11-12, network containment review, 2026-11-12
+- **Plan**: -
+- **Description**: ADR-0009, layer 3. The common network category of the shared policy model (levix-platform) edited, signed and distributed like any policy (FEAT-008): deny by default in the corporate environment, allowing only the Hub and the approved destinations; enforced on devices and product servers by the levix-platform network gateway.
+
+### FEAT-053: [devices] Containment compliance per device and drift alerts
+- **Priority**: high
+- **Epic**: EPIC-008
+- **Status**: open
+- **Found**: 2026-11-12, network containment review, 2026-11-12
+- **Plan**: -
+- **Description**: ADR-0009, layer 4. Devices and product servers report in the heartbeat the policy version in force and counters of blocked connections; blocked connections reach the metadata-only audit (FEAT-009) with rule, destination, when and device, never content. The console shows compliance per device and in the fleet inventory (FEAT-024) and alerts when a device runs an old policy past a threshold, reports blocked attempts or stops reporting; alerts also go to the SIEM export (FEAT-034).
+
+### FEAT-054: [policy] Allowlist export for the customer's network controls
+- **Priority**: medium
+- **Epic**: EPIC-005
+- **Status**: open
+- **Found**: 2026-11-12, network containment review, 2026-11-12
+- **Plan**: -
+- **Description**: ADR-0009, layer 4. The console, the CLI and the API export the approved destinations as an allowlist (JSON and CSV, with templates for a forward proxy and Kubernetes network policies) for IT to apply in its firewall, proxy or cluster. The Hub never configures the network and makes no outbound connection (ADR-0004); blocking at the network stays the customer's responsibility.
+
 ## Improvements
 
 ### IMP-001: [network] Trusted proxy addresses for per-client request limits and audit
@@ -401,7 +441,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Priority**: high
 - **Status**: open
 - **Found**: 2026-11-06
-- **Description**: Design: docs/product/VISION.md, Scope 5. Per-product policy schemas, signing and distribution, quotas, corporate endpoint and key distribution.
+- **Description**: Design: docs/product/VISION.md, Scope 5. Per-product policy schemas, signing and distribution, quotas, corporate endpoint and key distribution, network containment (ADR-0009).
 
 ### EPIC-006: Approvals and ITSM
 - **Priority**: high
