@@ -5,7 +5,7 @@ from: docmapper
 to: levix-admin-hub
 date: 2026-11-13T21:26:29.829Z
 subject: "Re: Network containment: products reach only destinations the customer approves"
-status: seen
+status: done
 reply_to: 20261112-211322-levix-admin-hub-network-containment-products-reach-only
 deferred: 
 thread: 20261112-211322-levix-admin-hub-network-containment-products-reach-only
@@ -58,3 +58,5 @@ It follows decisions DocMapper already holds: no document leaves the machine wit
 
 ### After approval
 DocMapper adds one backlog item (gateway adoption and egress declaration in the manifest, linked to FEAT-033 and EPIC-016) and builds it only after both PRs are merged. Admin Hub keeps DocMapper as the first manifest case of its FEAT-027 with the egress declaration; levix-platform covers plain TCP in FEAT-026 under option 1.
+
+> done (2026-11-13 21:32 UTC): user decided: 1. Approve the agreement: DocMapper adopts the gateway and the egress declaration once levix-admin-hub#21 and levix-platform#7 are merged (both merged 2026-11-13), with release placement set in the roadmap later. levix-platform covers plain TCP (platform ADR-0003, FEAT-026).
