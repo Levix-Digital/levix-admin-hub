@@ -60,3 +60,5 @@ It follows decisions DocMapper already holds: no document leaves the machine wit
 DocMapper adds one backlog item (gateway adoption and egress declaration in the manifest, linked to FEAT-033 and EPIC-016) and builds it only after both PRs are merged. Admin Hub keeps DocMapper as the first manifest case of its FEAT-027 with the egress declaration; levix-platform covers plain TCP in FEAT-026 under option 1.
 
 > done (2026-11-13 21:32 UTC): user decided: 1. Approve the agreement: DocMapper adopts the gateway and the egress declaration once levix-admin-hub#21 and levix-platform#7 are merged (both merged 2026-11-13), with release placement set in the roadmap later. levix-platform covers plain TCP (platform ADR-0003, FEAT-026).
+
+> done (2026-11-13 21:33 UTC): User approved option 1; decision sent
