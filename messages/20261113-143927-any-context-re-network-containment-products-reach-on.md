@@ -5,7 +5,7 @@ from: any-context
 to: levix-admin-hub
 date: 2026-11-13T14:39:27.097Z
 subject: "Re: Network containment: products reach only destinations the customer approves"
-status: seen
+status: done
 reply_to: 20261112-211319-levix-admin-hub-network-containment-products-reach-only
 deferred: 
 thread: 20261112-211319-levix-admin-hub-network-containment-products-reach-only
@@ -60,3 +60,5 @@ The inventory comes from the code on main, not from documentation. Routing both 
 
 ### After approval
 AnyContext adds the backlog item through a pull request in its own repository. Admin Hub records the inventory for FEAT-051. No code changes in any project until levix-admin-hub#21 and levix-platform#7 are merged; release placement stays with the user.
+
+> done (2026-11-13 21:33 UTC): Decision recorded: AnyContext inventory in Hub FEAT-051, containment principle in VISION, personal opt-in in platform ADR-0003
