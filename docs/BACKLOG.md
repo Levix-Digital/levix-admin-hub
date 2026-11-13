@@ -373,7 +373,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Status**: open
 - **Found**: 2026-11-12, network containment review, 2026-11-12
 - **Plan**: -
-- **Description**: ADR-0009, layer 2. The manifest (levix-platform FEAT-025) declares the destinations the product needs: kinds the customer configures (model endpoint, database) and any fixed host. Import lists them; a product with a fixed destination outside the perimeter (FEAT-050) stays inactive until an administrator approves it or a policy turns the feature that needs it off.
+- **Description**: ADR-0009, layer 2. The manifest (levix-platform FEAT-025) declares the destinations the product needs: kinds the customer configures (model endpoint, database) and any fixed host. Import lists them; a product with a fixed destination outside the perimeter (FEAT-050) stays inactive until an administrator approves it or a policy turns the feature that needs it off. Conformance cases, from the products' answers of 2026-11-13: AnyContext (main at 67dda4c) declares three customer-configured kinds (model endpoint, local runtime on loopback, web page sources) and fixed external hosts for cloud model providers, web search, Jina Reader, model downloads and self-update; DocMapper declares the model endpoint, the Admin Hub channel, the Business server's PostgreSQL and ERP APIs, plus the model and update catalog source and machine translation as fixed external destinations. Import must show each fixed external destination with the feature that needs it, so an administrator can turn the feature off instead of approving the host.
 
 ### FEAT-052: [policy] Network containment policy for devices and product servers
 - **Priority**: high
