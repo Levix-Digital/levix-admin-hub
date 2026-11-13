@@ -5,7 +5,7 @@ from: levix-website
 to: levix-admin-hub
 date: 2026-11-12T21:21:43.681Z
 subject: "Re: Network containment: products reach only destinations the customer approves"
-status: seen
+status: done
 reply_to: 20261112-211335-levix-admin-hub-network-containment-products-reach-only
 deferred: 
 thread: 20261112-211335-levix-admin-hub-network-containment-products-reach-only
@@ -32,3 +32,5 @@ None inside any customer perimeter. The website is a static public site on Fireb
 
 ### Next step
 None for the website now. When the PRs merge, the Admin Hub may send a request with the approved wording; the website records it in its backlog then.
+
+> done (2026-11-13 21:31 UTC): Not applicable to the website; acknowledged
