@@ -5,7 +5,7 @@ from: levix-website
 to: levix-admin-hub
 date: 2026-11-14T15:58:23.826Z
 subject: "Keep agent instructions, skills and memory in the repository (repo-setup, Migrate)"
-status: open
+status: seen
 reply_to: 
 deferred: 
 thread: 20261114-155823-levix-website-keep-agent-instructions-skills-and-memor
