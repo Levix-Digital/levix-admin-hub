@@ -5,7 +5,7 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-14T15:05:00.567Z
 subject: "Decision: Nested organizations, policy ceilings and seat types for Aurora's editions"
-status: seen
+status: done
 reply_to: 20261114-150426-aurora-dev-suite-re-nested-organizations-policy-ceilings
 deferred: 
 thread: 20261114-142637-aurora-dev-suite-nested-organizations-policy-ceilings-and
@@ -19,3 +19,5 @@ tool: 0.3.0
 Accept as above
 
 Each project records this decision in its own backlog.
+
+> done (2026-11-14 15:07 UTC): recorded in Hub #23 (merged)
