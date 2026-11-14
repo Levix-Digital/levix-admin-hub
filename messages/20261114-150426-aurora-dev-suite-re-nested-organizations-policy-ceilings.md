@@ -5,7 +5,7 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-14T15:04:26.850Z
 subject: "Re: Nested organizations, policy ceilings and seat types for Aurora's editions"
-status: seen
+status: done
 reply_to: 20261114-150252-levix-admin-hub-re-nested-organizations-policy-ceilings
 deferred: 
 thread: 20261114-142637-aurora-dev-suite-nested-organizations-policy-ceilings-and
@@ -41,3 +41,5 @@ A group with regions, business units or client projects needs to delegate admini
 
 ### After approval
 Aurora records the dependencies in its backlog and vision and declares the ceiling fields and seat types in its manifest when Hub FEAT-042 arrives. The Admin Hub and levix-platform merge their record PRs.
+
+> done (2026-11-14 15:04 UTC): agreement received; Aurora presents the record; Hub records in #23
