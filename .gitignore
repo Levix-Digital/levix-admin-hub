@@ -1,12 +1,10 @@
-# Tool settings: only the shared settings file that turns attribution off is committed.
+# Tool settings: the shared settings file that turns attribution off and the link to the
+# project skills (.agents/skills) are committed; personal settings are not.
 .claude/*
 !.claude/settings.json
+!.claude/skills
 
-# Spec Kit files that are per-machine or name the local tool integration.
-.specify/init-options.json
-.specify/integration.json
-.specify/integrations/*.manifest.json
-!.specify/integrations/speckit.manifest.json
+# Spec Kit files that are per-machine. The integration (agy, skills in .agents/skills) is shared.
 .specify/extensions/.registry
 .specify/workflows/speckit/
 .specify/presets/dev-cycle/compat.json

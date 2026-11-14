@@ -116,7 +116,7 @@ ITSM providers and the mirror store. How each part works is described in
 ### Accessibility and Localization
 
 - Console conforms to WCAG 2.1 level AA.
-- Console languages: English, Canadian French and Brazilian Portuguese; dates and times in the
+- Console languages: English, French and Spanish (no regional variants, no Portuguese); dates and times in the
   administrator's time zone; API and contract in English.
 
 ## Integrations

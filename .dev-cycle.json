@@ -36,6 +36,7 @@
   "speckit": {
     "enabled": true,
     "version": "v1.2.3",
+    "integration": "agy",
     "script": "sh",
     "branch_prefix": "feat"
   },
