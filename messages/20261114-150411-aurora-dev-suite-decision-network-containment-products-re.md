@@ -5,7 +5,7 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-14T15:04:11.927Z
 subject: "Decision: Network containment: products reach only destinations the customer approves"
-status: open
+status: seen
 reply_to: 20261114-150245-levix-admin-hub-re-network-containment-products-reach-on
 deferred: 
 thread: 20261112-211329-levix-admin-hub-network-containment-products-reach-only
