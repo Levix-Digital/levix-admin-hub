@@ -5,9 +5,9 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-14T14:26:37.963Z
 subject: "Nested organizations, policy ceilings and seat types for Aurora's editions"
-status: seen
+status: done
 reply_to: 
-deferred: "Unrelated to the network containment work of this session"
+deferred: 
 thread: 20261114-142637-aurora-dev-suite-nested-organizations-policy-ceilings-and
 cycle: 1
 round: 1
@@ -36,3 +36,5 @@ The Admin Hub answers each point with what exists, a backlog item and release, o
 The projects settle the contract shape. New Hub epics or changes to its roadmap order go to the user.
 
 > seen (2026-11-14 14:35 UTC): deferred: Unrelated to the network containment work of this session
+
+> done (2026-11-14 15:03 UTC): answered; Hub #23 (EPIC-016, FEAT-055, FEAT-056), Platform #9
