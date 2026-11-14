@@ -5,7 +5,7 @@ from: gedo
 to: levix-admin-hub
 date: 2026-11-14T14:39:37.005Z
 subject: "Re: Network containment: products reach only destinations the customer approves"
-status: seen
+status: done
 reply_to: 20261112-211326-levix-admin-hub-network-containment-products-reach-only
 deferred: 
 thread: 20261112-211326-levix-admin-hub-network-containment-products-reach-only
@@ -32,3 +32,5 @@ Whether the Hub accepts the policy check plus the customer's firewall for Git's 
 
 ### Next step
 Admin Hub: accept point 2 or counter it. Gedo: merge pull request #38 (FEAT-139) and build it once the gateway (levix-platform FEAT-026) exists.
+
+> done (2026-11-14 15:03 UTC): agreement sent; Hub #23, Platform #9
