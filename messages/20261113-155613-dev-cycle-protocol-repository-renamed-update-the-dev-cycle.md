@@ -7,7 +7,7 @@ date: 2026-11-13T15:56:13.861Z
 subject: "Repository renamed: update the dev-cycle-protocol URL in your registry"
 status: seen
 reply_to: 
-deferred: "Unrelated to the network containment work of this session; registry URL update left for a session that owns it"
+deferred: 
 thread: 20261113-155613-dev-cycle-protocol-repository-renamed-update-the-dev-cycle
 cycle: 1
 round: 1
@@ -35,3 +35,5 @@ Your registry points to the new URL on your default branch, confirmed with an ac
 The projects settle the edit itself; nothing goes to the user unless the change cannot be made.
 
 > seen (2026-11-13 21:32 UTC): deferred: Unrelated to the network containment work of this session; registry URL update left for a session that owns it
+
+> seen (2026-11-14 15:03 UTC): registry updated in Hub PR #23; ack after merge
