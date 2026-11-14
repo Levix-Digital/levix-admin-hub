@@ -1,7 +1,7 @@
 <!-- dev-cycle-constitution
 generated-by: dev-cycle-protocol/constitution.py (do not edit; change a source and regenerate)
-sources-sha256: 0547feed517709e9067adc125533fe4f178f43daa5fd3eac17c673c42939eeb6
-content-sha256: c03ebb6ce33d13e42ba203712814ecd0bdcaba71028109b3b91043d5f79c9933
+sources-sha256: 50d688c4ed2134e416c072c84a46de4a8e82ac37f2ebcce6aeaf0dbc68a7e5df
+content-sha256: 887006de37aade7d8a1e4c58e80831d56db0f674553110112e091c0f99e67258
 -->
 # levix-admin-hub Constitution
 
@@ -183,7 +183,7 @@ Adapters depend on the core; the core depends on nothing outside itself except p
 #### Accessibility and Localization
 
 - Console conforms to WCAG 2.1 level AA.
-- Console languages: English, Canadian French and Brazilian Portuguese; dates and times in the
+- Console languages: English, French and Spanish (no regional variants, no Portuguese); dates and times in the
   administrator's time zone; API and contract in English.
 
 ### Constraints
@@ -219,4 +219,4 @@ Accepted decisions; a plan that contradicts one needs a new ADR that supersedes 
 - Amendments change the source, not this file: an ADR for decisions, the technical specification for requirements and constraints, `.dev-cycle.json` for the architecture style, the skills for principles. Then run `constitution.py generate` and commit the result with the change.
 - Gate 3 of the development cycle blocks a plan while this file is stale or edited by hand.
 
-**Version**: 1.2.0 | **Ratified**: 2026-11-06 | **Last Amended**: 2026-11-14
+**Version**: 1.3.0 | **Ratified**: 2026-11-06 | **Last Amended**: 2026-11-14
