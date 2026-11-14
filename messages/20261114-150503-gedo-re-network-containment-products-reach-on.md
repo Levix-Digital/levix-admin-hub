@@ -5,7 +5,7 @@ from: gedo
 to: levix-admin-hub
 date: 2026-11-14T15:05:03.236Z
 subject: "Re: Network containment: products reach only destinations the customer approves"
-status: open
+status: seen
 reply_to: 20261114-150242-levix-admin-hub-re-network-containment-products-reach-on
 deferred: 
 thread: 20261112-211326-levix-admin-hub-network-containment-products-reach-only
