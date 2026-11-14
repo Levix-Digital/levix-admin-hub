@@ -46,7 +46,7 @@ Today these companies either forbid the products or accept manual, unaudited ins
 
 ## Value Proposition
 
-"Govern every Levix product in your perimeter, without Levix seeing anything." The four
+"Govern every Levix product in your perimeter, without Levix seeing anything." The five
 arguments, in the order IT asks:
 
 1. **Zero knowledge:** the Hub never sees documents, chunks, vectors, prompts or
@@ -56,6 +56,9 @@ arguments, in the order IT asks:
    without network access; devices pin the Hub key at enrollment.
 4. **Auditable:** metadata of everything, content of nothing; logs exportable to the
    company's SIEM; a public, versioned contract that auditors and integrators can read.
+5. **Contained:** in corporate use, customer data and the products stay strictly inside the
+   customer's perimeter, enforced by mechanisms, not by convention: only destinations inside
+   the perimeter or explicitly approved are reachable, with evidence per device (ADR-0009).
 
 Plus the enterprise features IT expects from day one: SSO and SCIM with the company's
 identity provider (or the Hub's own directory when there is none), approvals through
