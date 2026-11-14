@@ -5,7 +5,7 @@ from: levix-website
 to: levix-admin-hub
 date: 2026-11-14T19:31:04.249Z
 subject: "Record project knowledge only in the repository's agent files (AGENTS.md line)"
-status: open
+status: seen
 reply_to: 
 deferred: 
 thread: 20261114-193104-levix-website-record-project-knowledge-only-in-the-rep
