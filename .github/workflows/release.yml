@@ -1,5 +1,6 @@
 # Release workflow: builds and publishes a release for a version tag.
-# - vX.Y.Z-rc.N tags (pushed on main for a release candidate) publish a PRE-RELEASE.
+# - vX.Y.Z-rc.N tags (cut by candidate.yml after a green Tests run on main, or pushed by hand)
+#   publish a PRE-RELEASE.
 # - vX.Y.Z final tags are created by promote.yml (Levi's release gate), which calls this
 #   workflow directly (a tag pushed with GITHUB_TOKEN would not trigger it).
 # Assets: the container image for x86_64 and arm64 (OCI archives, for air-gapped hosts too),
@@ -136,6 +137,26 @@ jobs:
           merge-multiple: true
       - name: Checksums
         run: (cd dist && sha256sum * > SHA256SUMS.txt && cat SHA256SUMS.txt)
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+          sparse-checkout: docs/releases
+      - name: Release notes
+        id: notes
+        run: |
+          # docs/releases/README.md: a candidate takes its own notes, or the notes shared by the
+          # candidates of its version; read from main so they can be fixed after the tag.
+          paths=("main/docs/releases/$TAG.md")
+          case "$TAG" in *-rc.*) paths+=("main/docs/releases/${TAG%-rc.*}-rc.md") ;; esac
+          for path in "${paths[@]}"; do
+            if [ -s "$path" ]; then
+              cp "$path" release-notes.md
+              echo "path=release-notes.md" >> "$GITHUB_OUTPUT"
+              echo "Release notes: ${path#main/}"; exit 0
+            fi
+          done
+          echo "No notes file for $TAG; generated notes are used"
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
@@ -143,5 +164,6 @@ jobs:
           name: ${{ env.TAG }}
           prerelease: ${{ contains(env.TAG, '-rc') }}
           make_latest: ${{ contains(env.TAG, '-rc') && 'false' || 'legacy' }}
-          generate_release_notes: true
+          body_path: ${{ steps.notes.outputs.path }}
+          generate_release_notes: ${{ steps.notes.outputs.path == '' }}
           files: dist/*
