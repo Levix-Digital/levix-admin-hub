@@ -5,7 +5,7 @@ from: dev-cycle-protocol
 to: levix-admin-hub
 date: 2026-11-13T15:56:13.861Z
 subject: "Repository renamed: update the dev-cycle-protocol URL in your registry"
-status: seen
+status: done
 reply_to: 
 deferred: 
 thread: 20261113-155613-dev-cycle-protocol-repository-renamed-update-the-dev-cycle
@@ -41,3 +41,5 @@ The projects settle the edit itself; nothing goes to the user unless the change 
 > done (2026-11-14 15:07 UTC): Hub #23 merged
 
 > seen (2026-11-14 15:07 UTC): ack not delivered: push to renamed repo denied
+
+> done (2026-11-14 15:08 UTC): ack sent; Hub #23 merged
