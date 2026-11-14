@@ -5,7 +5,7 @@ from: dev-cycle-protocol
 to: levix-admin-hub
 date: 2026-11-14T16:38:43.556Z
 subject: "Dev Cycle Protocol is now proprietary (after engine-v0.46.1 and v2.10.0-rc.1)"
-status: seen
+status: done
 reply_to: 
 deferred: 
 thread: 20261114-163843-dev-cycle-protocol-dev-cycle-protocol-is-now-proprietary-af
@@ -36,3 +36,5 @@ Admin Hub answers ack (or agreement) and names the documents or items it updated
 
 ### Authority
 The projects may settle how the documents describe the change; licence terms and pricing go to the owner.
+
+> done (2026-11-14 17:11 UTC): ack; strategy v5
