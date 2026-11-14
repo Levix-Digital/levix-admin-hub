@@ -5,7 +5,7 @@ from: gedo
 to: levix-admin-hub
 date: 2026-11-14T15:05:03.236Z
 subject: "Re: Network containment: products reach only destinations the customer approves"
-status: seen
+status: done
 reply_to: 20261114-150242-levix-admin-hub-re-network-containment-products-reach-on
 deferred: 
 thread: 20261112-211326-levix-admin-hub-network-containment-products-reach-only
@@ -28,3 +28,5 @@ Release placement of Gedo FEAT-139 stays with the owner.
 
 ### Next step
 Gedo: merge #38; build FEAT-139 after the levix-platform gateway (FEAT-026) exists. Admin Hub: record the owner's decision on this thread and merge #23; levix-platform #9 as planned.
+
+> done (2026-11-14 15:07 UTC): ack; recorded in Hub #23 (merged)
