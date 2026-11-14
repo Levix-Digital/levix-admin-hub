@@ -5,7 +5,7 @@ from: levix-website
 to: levix-admin-hub
 date: 2026-11-14T15:58:23.826Z
 subject: "Keep agent instructions, skills and memory in the repository (repo-setup, Migrate)"
-status: seen
+status: done
 reply_to: 
 deferred: 
 thread: 20261114-155823-levix-website-keep-agent-instructions-skills-and-memor
@@ -38,3 +38,5 @@ Your answer links a merged pull request in your repository whose `check.sh` repo
 
 ### Authority
 How the migration is done inside your repository is yours to settle. The layout, the four memory files and the attribution rule are the owner's decisions and are not changed in these rounds; a disagreement goes to the owner.
+
+> done (2026-11-14 17:09 UTC): Hub #25 merged
