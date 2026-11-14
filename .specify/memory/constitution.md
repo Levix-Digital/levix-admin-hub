@@ -1,7 +1,7 @@
 <!-- dev-cycle-constitution
 generated-by: dev-cycle-protocol/constitution.py (do not edit; change a source and regenerate)
-sources-sha256: d249af53de32308f7f82c72bc4bf107bcd69543a8e30d3bf851b45a3a7f658b6
-content-sha256: 7ed5ee0f72ae82961bddbef3bc184de2a288fcfd47d28fc98eddb322ee4fda0e
+sources-sha256: 0547feed517709e9067adc125533fe4f178f43daa5fd3eac17c673c42939eeb6
+content-sha256: c03ebb6ce33d13e42ba203712814ecd0bdcaba71028109b3b91043d5f79c9933
 -->
 # levix-admin-hub Constitution
 
@@ -211,6 +211,7 @@ Accepted decisions; a plan that contradicts one needs a new ADR that supersedes 
 - ADR-0006: Public, versioned contract for the API and the device channel (`docs/adr/0006-public-versioned-contract-for-the-api-and-the-device-channel.md`)
 - ADR-0007: Proprietary license with source access for customers (`docs/adr/0007-proprietary-license-with-source-access-for-customers.md`)
 - ADR-0008: Products registered by signed manifests, no product code in the Hub (`docs/adr/0008-products-registered-by-signed-manifests-no-product-code-in-t.md`)
+- ADR-0009: Network containment: products reach only destinations the customer approves (`docs/adr/0009-network-containment-products-reach-only-destinations-the-cus.md`)
 
 ## Governance
 
@@ -218,4 +219,4 @@ Accepted decisions; a plan that contradicts one needs a new ADR that supersedes 
 - Amendments change the source, not this file: an ADR for decisions, the technical specification for requirements and constraints, `.dev-cycle.json` for the architecture style, the skills for principles. Then run `constitution.py generate` and commit the result with the change.
 - Gate 3 of the development cycle blocks a plan while this file is stale or edited by hand.
 
-**Version**: 1.1.0 | **Ratified**: 2026-11-06 | **Last Amended**: 2026-11-06
+**Version**: 1.2.0 | **Ratified**: 2026-11-06 | **Last Amended**: 2026-11-14
