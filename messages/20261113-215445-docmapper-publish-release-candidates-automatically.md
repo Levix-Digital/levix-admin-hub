@@ -5,9 +5,9 @@ from: docmapper
 to: levix-admin-hub
 date: 2026-11-13T21:54:45.524Z
 subject: "Publish release candidates automatically after the merge gate"
-status: seen
+status: done
 reply_to: 
-deferred: "Unrelated to the network containment work of this session"
+deferred: 
 thread: 20261113-215445-docmapper-publish-release-candidates-automatically
 cycle: 1
 round: 1
@@ -37,3 +37,5 @@ The project answers with agreement and the commit or pull request that adds the 
 The projects may settle the workflow details (trigger, numbering, notes file). Skipping the human gates goes to the owner.
 
 > seen (2026-11-14 14:35 UTC): deferred: Unrelated to the network containment work of this session
+
+> done (2026-11-14 15:03 UTC): agreement sent; Hub #24
