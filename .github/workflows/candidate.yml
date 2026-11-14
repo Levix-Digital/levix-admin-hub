@@ -1,0 +1,74 @@
+# Candidate: cuts a release candidate after every green Tests run on main.
+# Tags the commit vX.Y.Z-rc.N, with X.Y.Z the workspace version of Cargo.toml and N the next
+# candidate number of that version, and runs the release workflow for it in the same run
+# (a tag pushed with GITHUB_TOKEN would not trigger it).
+# Skips, with a note in the summary, when vX.Y.Z is already released (bump the version first),
+# when the commit already has a candidate, when main has moved on, or when the candidate notes
+# are missing (docs/releases/README.md). A candidate tag pushed by hand still works.
+# The final release keeps its own gate: promote.yml, run by the owner.
+name: Candidate
+
+on:
+  workflow_run:
+    workflows: [Tests]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: candidate
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    name: Tag the candidate
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.target.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+
+      - name: Resolve the candidate
+        id: target
+        env:
+          COMMIT: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          skip() { echo "No candidate: $1" | tee -a "$GITHUB_STEP_SUMMARY"; exit 0; }
+          git fetch -q origin main
+          if [ "$(git rev-parse origin/main)" != "$COMMIT" ]; then
+            skip "$COMMIT is no longer the head of main"
+          fi
+          VERSION="$(sed -n '/^\[workspace.package\]/,/^\[/s/^version = "\(.*\)"/\1/p' Cargo.toml)"
+          [ -n "$VERSION" ] || { echo "::error::no version in [workspace.package] of Cargo.toml"; exit 1; }
+          if git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null; then
+            skip "v$VERSION is already released; bump the version in Cargo.toml for the next candidate"
+          fi
+          existing=$(git tag --points-at "$COMMIT" "v$VERSION-rc.*")
+          if [ -n "$existing" ]; then
+            skip "$COMMIT is already the candidate $existing"
+          fi
+          last=$(git tag -l "v$VERSION-rc.*" | sed "s/^v$VERSION-rc\.//" | grep -E '^[0-9]+$' | sort -n | tail -1 || true)
+          TAG="v$VERSION-rc.$(( ${last:-0} + 1 ))"
+          if [ ! -f "docs/releases/$TAG.md" ] && [ ! -f "docs/releases/v$VERSION-rc.md" ]; then
+            skip "no notes for $TAG (docs/releases/$TAG.md or docs/releases/v$VERSION-rc.md)"
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" "$COMMIT" -m "Release candidate $TAG"
+          git push origin "$TAG"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Candidate $TAG on $COMMIT" | tee -a "$GITHUB_STEP_SUMMARY"
+
+  release:
+    needs: tag
+    if: needs.tag.outputs.tag != ''
+    uses: ./.github/workflows/release.yml
+    with:
+      tag: ${{ needs.tag.outputs.tag }}
+    secrets: inherit
