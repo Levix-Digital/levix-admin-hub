@@ -61,7 +61,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Status**: open
 - **Found**: 2026-10-23, initial backlog, from the AnyContext v2 rebuild
 - **Plan**: -
-- **Description**: Design: docs/architecture/admin-hub-design.md, section Common core, License and seats per product. A license signed by Levix per product (seats, validity), verified offline by the Admin Hub. Seats per device or per user is an open commercial decision; both are supported.
+- **Description**: Design: docs/architecture/admin-hub-design.md, section Common core, License and seats per product. A license signed by Levix per product (seats, validity), verified offline by the Admin Hub. Seats per device or per user is an open commercial decision; both are supported. A product's manifest may declare seat types (for example Aurora's contributor, approver and reader seats, 2026-11-14); the license sets a count per type and each type is counted separately (FEAT-026).
 
 ### FEAT-008: [policy] Policy schema registry, signing and distribution
 - **Priority**: high
@@ -301,7 +301,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Status**: open
 - **Found**: 2026-11-06, Phase 0, 2026-11-06
 - **Plan**: -
-- **Description**: The development line products registered by their manifests, maintained by each project: gate policies and human approval audit governed by the Hub.
+- **Description**: The development line products registered by their manifests, maintained by each project: gate policies and human approval audit governed by the Hub. Each manifest carries the egress declaration of FEAT-051 with the destinations the products listed on 2026-11-14 (see FEAT-051).
 
 ### FEAT-043: [products] Product registration by signed manifests
 - **Priority**: high
@@ -373,7 +373,7 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Status**: open
 - **Found**: 2026-11-12, network containment review, 2026-11-12
 - **Plan**: -
-- **Description**: ADR-0009, layer 2. The manifest (levix-platform FEAT-025) declares the destinations the product needs: kinds the customer configures (model endpoint, database) and any fixed host. Import lists them; a product with a fixed destination outside the perimeter (FEAT-050) stays inactive until an administrator approves it or a policy turns the feature that needs it off. Conformance cases, from the products' answers of 2026-11-13: AnyContext (main at 67dda4c) declares three customer-configured kinds (model endpoint, local runtime on loopback, web page sources) and fixed external hosts for cloud model providers, web search, Jina Reader, model downloads and self-update; DocMapper declares the model endpoint, the Admin Hub channel, the Business server's PostgreSQL and ERP APIs, plus the model and update catalog source and machine translation as fixed external destinations. Import must show each fixed external destination with the feature that needs it, so an administrator can turn the feature off instead of approving the host.
+- **Description**: ADR-0009, layer 2. The manifest (levix-platform FEAT-025) declares the destinations the product needs: kinds the customer configures (model endpoint, database) and any fixed host. Import lists them; a product with a fixed destination outside the perimeter (FEAT-050) stays inactive until an administrator approves it or a policy turns the feature that needs it off. Conformance cases, from the products' answers of 2026-11-13: AnyContext (main at 67dda4c) declares three customer-configured kinds (model endpoint, local runtime on loopback, web page sources) and fixed external hosts for cloud model providers, web search, Jina Reader, model downloads and self-update; DocMapper declares the model endpoint, the Admin Hub channel, the Business server's PostgreSQL and ERP APIs, plus the model and update catalog source and machine translation as fixed external destinations. Import must show each fixed external destination with the feature that needs it, so an administrator can turn the feature off instead of approving the host. From the answers of 2026-11-14: Gedo (Gedo FEAT-139) declares only customer-configured kinds (the repositories' Git remotes over SSH, HTTPS or file, the optional self-hosted relay and peers in the local network) and no fixed host; Aurora declares the Git remotes of the followed repositories, the customer's Admin Hub and an optional SMTP server, and no fixed host; the Dev Cycle Protocol (DCP IMP-016, dcp v2.12.0) declares the project's Git host, the registry repositories and the staging targets of the release candidate security assessment as customer-configured kinds, and the engine download, the embedding model download and the Spec Kit setup (until DCP IMP-011) as fixed external hosts, each replaceable by a customer mirror. A public Git host configured as a remote is shown as external. Git and other command line tools a product starts (git, gh, glab, uv) open their own connections outside the product's process: the product checks the destination against the network policy before it starts them, starts them with the proxy settings of the levix-platform gateway once the gateway offers a local proxy, and the customer's firewall or proxy, fed by the allowlist export (FEAT-054), contains the rest.
 
 ### FEAT-052: [policy] Network containment policy for devices and product servers
 - **Priority**: high
@@ -398,6 +398,22 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Found**: 2026-11-12, network containment review, 2026-11-12
 - **Plan**: -
 - **Description**: ADR-0009, layer 4. The console, the CLI and the API export the approved destinations as an allowlist (JSON and CSV, with templates for a forward proxy and Kubernetes network policies) for IT to apply in its firewall, proxy or cluster. The Hub never configures the network and makes no outbound connection (ADR-0004); blocking at the network stays the customer's responsibility.
+
+### FEAT-055: [admin] Account above nested organizations
+- **Priority**: high
+- **Epic**: EPIC-016
+- **Status**: open
+- **Found**: 2026-11-14, aurora-dev-suite proposal, 2026-11-14
+- **Plan**: -
+- **Description**: One account per Hub holds the license, the identity configuration (directory, SSO, SCIM) and the central audit. Organizations form a tree under it: an organization may contain others (region, business unit, subsidiary, client project), each with its own administrators, groups, policies and enrolled product servers. An owner of an organization holds owner rights in its descendants; an administrator of a child sees nothing above or beside it. Audit is readable per organization and, for account owners and auditors, across the tree. Moving or deleting an organization is audited and refused while it would orphan devices or seats. The tree reaches the products through the channel contract (ADR-0006) as metadata only.
+
+### FEAT-056: [policy] Policy ceilings and defaults across the organization tree
+- **Priority**: high
+- **Epic**: EPIC-016
+- **Status**: open
+- **Found**: 2026-11-14, aurora-dev-suite proposal, 2026-11-14
+- **Plan**: -
+- **Description**: A product's policy schema (levix-platform FEAT-012, FEAT-025) marks each field as a ceiling or a default. A ceiling set at an organization binds its descendants and the product's projects, which can only tighten it; a default may be chosen at a lower level inside the ceilings. The Hub validates every policy against the ceilings it inherits, refuses one that loosens them, and shows for each value the level that set it. Aurora's first ceilings: projects that require approval, allowed coding agents and model endpoints, and the most an agent may do in a project without a person.
 
 ## Improvements
 
@@ -496,6 +512,12 @@ Each item: `### <ID>: <title>` with the fields `Severity` (bugs: critical, high,
 - **Status**: open
 - **Found**: 2026-11-06
 - **Description**: Design: docs/product/VISION.md, Scope 1. Every product, current or future, Levix or third party, registered by a manifest signed by Levix; no product-specific code in the Hub (ADR-0008).
+
+### EPIC-016: Account and nested organizations
+- **Priority**: high
+- **Status**: open
+- **Found**: 2026-11-14, aurora-dev-suite proposal, 2026-11-14
+- **Description**: Decided by the owner on 2026-11-14 (v0.4.0), from Aurora's editions (Aurora ADR-0018). One account per Hub (license, identity configuration, central audit) above organizations that can contain others (region, business unit, subsidiary, client project), each with its own administrators, groups, policies and product servers; policies flow down as ceilings that lower levels can only tighten. Metadata only (ADR-0004), no product code (ADR-0008).
 
 ## Closed
 
