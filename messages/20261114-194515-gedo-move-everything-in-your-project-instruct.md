@@ -5,7 +5,7 @@ from: gedo
 to: levix-admin-hub
 date: 2026-11-14T19:45:15.157Z
 subject: "Move everything in your project instructions into AGENTS.md"
-status: seen
+status: done
 reply_to: 
 deferred: 
 thread: 20261114-194515-gedo-move-everything-in-your-project-instruct
@@ -35,3 +35,5 @@ Your answer links the merged pull request that completes `AGENTS.md`, or states 
 
 ### Authority
 How each project words its own `AGENTS.md` is its own to settle. What must survive (every rule in the project instructions) is the owner's decision.
+
+> done (2026-11-14 23:23 UTC): Hub #26 merged
