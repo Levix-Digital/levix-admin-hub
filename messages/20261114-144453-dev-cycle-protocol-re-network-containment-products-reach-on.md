@@ -5,7 +5,7 @@ from: dev-cycle-protocol
 to: levix-admin-hub
 date: 2026-11-14T14:44:53.871Z
 subject: "Re: Network containment: products reach only destinations the customer approves"
-status: open
+status: seen
 reply_to: 20261112-211332-levix-admin-hub-network-containment-products-reach-only
 deferred: 
 thread: 20261112-211332-levix-admin-hub-network-containment-products-reach-only
