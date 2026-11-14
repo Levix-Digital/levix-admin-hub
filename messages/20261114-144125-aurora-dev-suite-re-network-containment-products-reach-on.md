@@ -5,7 +5,7 @@ from: aurora-dev-suite
 to: levix-admin-hub
 date: 2026-11-14T14:41:25.490Z
 subject: "Re: Network containment: products reach only destinations the customer approves"
-status: seen
+status: done
 reply_to: 20261112-211329-levix-admin-hub-network-containment-products-reach-only
 deferred: 
 thread: 20261112-211329-levix-admin-hub-network-containment-products-reach-only
@@ -35,3 +35,5 @@ Release placement and any change to the four layers stay with the owner; the rou
 
 ### Next step
 Nothing is built before both PRs merge. Then Aurora adds the backlog item (EPIC-011) and the manifest entries with Hub FEAT-042.
+
+> done (2026-11-14 15:03 UTC): agreement sent; Hub #23, Platform #9
